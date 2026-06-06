@@ -1,7 +1,6 @@
-======================================
-  D&A Couture – Mini Site E-Commerce
-  Projet Web – L2 Informatique – UMMTO
-======================================
+
+  Dia-mina Chic – Mini Site E-Commerce
+  Projet Web – L2 Informatique UMMTO
 
 DESCRIPTION :
   Mini site e-commerce thématique "Robes de Soirée".
@@ -16,7 +15,7 @@ INSTRUCTIONS D'UTILISATION :
   4. Ou créer un nouveau compte via "Inscription"
 
 STRUCTURE DU PROJET :
-  DA_Couture/
+  Dia-mina Chic/
   ├── index.html                  → Page d'accueil
   ├── readme.txt                  → Ce fichier
   ├── content/
@@ -42,12 +41,14 @@ STRUCTURE DU PROJET :
   └── images/                     → (dossier pour vos images)
 
 MEMBRES DU GROUPE :
-  - Dihia A. (L2 Informatique – UMMTO)
+  - Dihia Bendou
+  -Amina Tadjadit  
+(L2 Informatique – UMMTO)
 
 CONTACT :
   📞 +213 555 123 456
-  📧 contact@dacouture.dz
+  📧 contact@diaminaChic.dz
   📍 Tizi-Ouzou, Algérie
   Instagram / Facebook / TikTok / Pinterest / WhatsApp
 
-© 2025 D&A Couture. Projet Web L2 – Université Mouloud MAMMERI de Tizi-Ouzou.
+© 2026 Dia-mina Chic. Projet Web L2 – Université Mouloud MAMMERI de Tizi-Ouzou.
