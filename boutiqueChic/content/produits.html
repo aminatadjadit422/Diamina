@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalogue – D&A Couture</title>
+  <link rel="stylesheet" href="../style/global.css" />
+  <link rel="stylesheet" href="../style/navbar.css" />
+  <link rel="stylesheet" href="../style/products.css" />
+  <link rel="stylesheet" href="../style/footer.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-logo"><img src="../images/logo.svg" alt="Diaa-mina Chic" class="nav-logo-img"></div>
+    <ul class="nav-links">
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="produits.html" class="active">Produits</a></li>
+      <li><a href="inscription.html">Inscription</a></li>
+      <li><a href="connexion.html">Connexion</a></li>
+      <li><a href="commande.html">Commande</a></li>
+      <li><a href="apropos.html">À Propos</a></li>
+    </ul>
+    <div class="nav-icons">
+      <button class="search-toggle" id="searchToggle"><i class="fas fa-search"></i></button>
+      <a href="connexion.html"><i class="fas fa-user"></i></a>
+      <a href="commande.html"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCount">0</span></a>
+    </div>
+  </nav>
+
+  <div class="search-bar-wrapper" id="searchBar">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Rechercher une robe…" autocomplete="off" />
+      <button id="searchBtn"><i class="fas fa-search"></i></button>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+
+  <section class="page-wrapper">
+    <h2 class="section-title">Notre Catalogue</h2>
+
+    <!-- Filtres par catégorie -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-cat="Tous">Toutes</button>
+      <button class="filter-btn" data-cat="Collection Royale">Collection Royale</button>
+      <button class="filter-btn" data-cat="Féerie Moderne">Féerie Moderne</button>
+      <button class="filter-btn" data-cat="Glamour Absolu">Glamour Absolu</button>
+      <button class="filter-btn" data-cat="Élégance Intemporelle">Élégance Intemporelle</button>
+      <button class="filter-btn" data-cat="Tendances 2026">Tendances 2026</button>
+      <button class="filter-btn" data-cat="Chaussures">Chaussures</button>
+      <button class="filter-btn" data-cat="Accessoires">Accessoires</button>
+    </div>
+
+    <!-- Sous-filtres Accessoires (visible uniquement quand Accessoires est actif) -->
+    <div class="filter-bar" id="accessoires-sous-bar" style="display:none; margin-top:0.5rem; padding-top:0.5rem; border-top: 1px solid var(--rose-doux);">
+      <span style="font-size:0.8rem;color:var(--texte-doux);align-self:center;margin-right:0.5rem;">Sous-catégorie :</span>
+      <button class="filter-btn active" data-souscat="Tous">Tous</button>
+      <button class="filter-btn" data-souscat="Boucles d'Oreilles">Boucles d'Oreilles</button>
+      <button class="filter-btn" data-souscat="Chaînes &amp; Colliers">Chaînes &amp; Colliers</button>
+      <button class="filter-btn" data-souscat="Sacs &amp; Pochettes">Sacs &amp; Pochettes</button>
+      <button class="filter-btn" data-souscat="Ceintures">Ceintures</button>
+      <button class="filter-btn" data-souscat="Voiles &amp; Coiffes">Voiles &amp; Coiffes</button>
+    </div>
+
+    <div class="product-grid" id="productsGrid"></div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2>D<span>&</span>A Couture</h2>
+        <p>Créatrice de robes de soirée depuis 2020.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="../index.html">Accueil</a></li>
+          <li><a href="produits.html">Produits</a></li>
+          <li><a href="inscription.html">Inscription</a></li>
+          <li><a href="commande.html">Commande</a></li>
+          <li><a href="apropos.html">À Propos</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Nous contacter</h4>
+        <p><i class="fas fa-phone"></i> +213 555 123 456</p>
+        <p><i class="fas fa-envelope"></i> contact@dacouture.dz</p>
+        <p><i class="fas fa-map-marker-alt"></i> Tizi-Ouzou, Algérie</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 D&A Couture. Tous droits réservés. | Projet Web – L2 Informatique – UMMTO</p>
+    </div>
+  </footer>
+
+  <script src="../javascript/data.js"></script>
+  <script src="../javascript/search.js"></script>
+  <script src="../javascript/produits.js"></script>
+</body>
+</html>

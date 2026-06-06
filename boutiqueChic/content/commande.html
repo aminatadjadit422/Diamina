@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commande – D&A Couture</title>
+  <link rel="stylesheet" href="../style/global.css" />
+  <link rel="stylesheet" href="../style/navbar.css" />
+  <link rel="stylesheet" href="../style/commande.css" />
+  <link rel="stylesheet" href="../style/footer.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-logo"><img src="../images/logo.svg" alt="Diaa-mina Chic" class="nav-logo-img"></div>
+    <ul class="nav-links">
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="produits.html">Produits</a></li>
+      <li><a href="inscription.html">Inscription</a></li>
+      <li><a href="connexion.html">Connexion</a></li>
+      <li><a href="commande.html" class="active">Commande</a></li>
+    </ul>
+    <div class="nav-icons">
+      <a href="connexion.html"><i class="fas fa-user"></i></a>
+      <a href="commande.html"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCount">0</span></a>
+    </div>
+  </nav>
+
+  <section class="commande-section">
+    <div class="commande-wrapper">
+      <h2 class="section-title">Mon Panier</h2>
+      <div id="cartContent"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2>Dia-mina Chic</h2>
+        <p>Créatrice de robes de soirée depuis 2020.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="../index.html">Accueil</a></li>
+          <li><a href="produits.html">Produits</a></li>
+          <li><a href="inscription.html">Inscription</a></li>
+          <li><a href="commande.html">Commande</a></li>
+          <li><a href="apropos.html">À Propos</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Nous contacter</h4>
+        <p><i class="fas fa-phone"></i> +213 555 123 456</p>
+        <p><i class="fas fa-envelope"></i> contact@dacouture.dz</p>
+        <p><i class="fas fa-map-marker-alt"></i> Tizi-Ouzou, Algérie</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 D&A Couture. Tous droits réservés. | Projet Web – L2 Informatique – UMMTO</p>
+    </div>
+  </footer>
+
+  <script src="../javascript/data.js"></script>
+  <script src="../javascript/commande.js"></script>
+</body>
+</html>

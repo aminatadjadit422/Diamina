@@ -1,0 +1,276 @@
+/* ========================================
+   global.css — Variables & Base Styles
+   D&A Couture – Projet Web L2
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+
+/* --- CSS Variables --- */
+:root {
+  --rose-pale:    #fce4ec;
+  --rose-doux:    #f8bbd0;
+  --rose-vif:     #e91e8c;
+  --rose-fonce:   #c2185b;
+  --rose-nude:    #f5c2d1;
+  --or:           #d4a0b0;
+  --blanc:        #fff9fb;
+  --gris-clair:   #f8f0f3;
+  --texte:        #3d1a2b;
+  --texte-doux:   #8c5a6e;
+
+  --font-titre:   'Cormorant Garamond', serif;
+  --font-corps:   'Jost', sans-serif;
+
+  --radius:       14px;
+  --shadow:       0 8px 32px rgba(233,30,140,0.10);
+  --shadow-hover: 0 16px 48px rgba(233,30,140,0.18);
+  --transition:   0.3s ease;
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-corps);
+  background: var(--blanc);
+  color: var(--texte);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--rose-pale); }
+::-webkit-scrollbar-thumb { background: var(--rose-vif); border-radius: 4px; }
+
+/* --- Typography --- */
+h1, h2, h3, h4 {
+  font-family: var(--font-titre);
+  color: var(--texte);
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* --- Buttons --- */
+.btn-primary {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--rose-vif), var(--rose-fonce));
+  color: #fff;
+  padding: 14px 36px;
+  border-radius: 40px;
+  font-family: var(--font-corps);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  transition: var(--transition);
+  box-shadow: 0 4px 20px rgba(233,30,140,0.30);
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(233,30,140,0.45);
+}
+
+.btn-outline {
+  display: inline-block;
+  border: 2px solid var(--rose-vif);
+  color: var(--rose-vif);
+  padding: 12px 32px;
+  border-radius: 40px;
+  font-family: var(--font-corps);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.btn-outline:hover {
+  background: var(--rose-vif);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* --- Section Title --- */
+.section-title {
+  font-family: var(--font-titre);
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: var(--texte);
+  position: relative;
+}
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rose-vif), var(--rose-nude));
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* --- Center Button wrapper --- */
+.center-btn {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+/* --- Page wrapper for inner pages --- */
+.page-wrapper {
+  min-height: calc(100vh - 80px);
+  padding: 120px 5% 60px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .page-wrapper { padding: 100px 4% 40px; }
+}
+
+
+/* ========================================
+   MODE SOMBRE
+   ======================================== */
+
+body.dark {
+  --rose-pale:    #2a1020;
+  --rose-doux:    #3d1a2b;
+  --rose-vif:     #e91e8c;
+  --rose-fonce:   #c2185b;
+  --rose-nude:    #a0486a;
+  --or:           #8a4060;
+  --blanc:        #0f0810;
+  --gris-clair:   #1a0d14;
+  --texte:        #f5e6ed;
+  --texte-doux:   #c49ab0;
+  --shadow:       0 8px 32px rgba(0,0,0,0.45);
+  --shadow-hover: 0 16px 48px rgba(233,30,140,0.25);
+
+  background: #0f0810;
+  color: #f5e6ed;
+}
+
+/* Navbar sombre */
+body.dark .navbar {
+  background: rgba(15, 8, 16, 0.95);
+  border-bottom-color: #3d1a2b;
+}
+
+/* Search bar */
+body.dark .search-bar-wrapper {
+  background: #1a0d14;
+  border-bottom-color: #3d1a2b;
+}
+body.dark .search-container input {
+  background: #2a1020;
+  color: #f5e6ed;
+  border-color: #3d1a2b;
+}
+body.dark .search-results {
+  background: #1a0d14;
+  border-color: #3d1a2b;
+}
+body.dark .search-result-item:hover {
+  background: #2a1020;
+}
+
+/* Hero */
+body.dark .hero {
+  background: linear-gradient(135deg, #0f0810 0%, #1e0a18 60%, #2a1020 100%);
+}
+body.dark .hero-visual::before {
+  background: linear-gradient(to right, #0f0810 0%, transparent 30%);
+}
+
+/* Sections */
+body.dark .nouveautes-section,
+body.dark .categories-section {
+  background: #0f0810;
+}
+body.dark .testimonials-section {
+  background: linear-gradient(135deg, #0f0810 0%, #1a0d14 100%);
+}
+body.dark .engagements-section {
+  background: #0f0810;
+}
+
+/* Cards produits */
+body.dark .product-card {
+  background: #1a0d14;
+  border: 1px solid #3d1a2b;
+}
+body.dark .product-img {
+  background: #2a1020;
+}
+body.dark .product-wishlist {
+  background: #2a1020;
+  color: #c49ab0;
+}
+body.dark .product-cat { color: var(--rose-vif); }
+body.dark .product-name { color: #f5e6ed; }
+body.dark .product-desc { color: #c49ab0; }
+
+/* Témoignages */
+body.dark .testi-card {
+  background: #1a0d14;
+  border-color: #3d1a2b;
+}
+body.dark .testi-text { color: #c49ab0; }
+body.dark .testi-author { color: #f5e6ed; }
+
+/* Engagements */
+body.dark .eng-card {
+  background: #1a0d14;
+  border-color: #3d1a2b;
+}
+body.dark .eng-card h4 { color: #f5e6ed; }
+body.dark .eng-card p { color: #c49ab0; }
+
+/* Footer */
+body.dark .footer {
+  background: #07040a;
+  border-top-color: #3d1a2b;
+}
+body.dark .footer-bottom {
+  border-top-color: #3d1a2b;
+  color: #8a5070;
+}
+
+/* Promo banner — inchangé */
+body.dark .promo-banner { /* déjà rose, ok */ }
+
+/* Scrollbar */
+body.dark ::-webkit-scrollbar-track { background: #1a0d14; }
+
+/* Bouton dark mode toggle */
+.dark-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.15rem;
+  color: var(--texte-doux);
+  transition: color var(--transition), transform var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+.dark-toggle:hover {
+  color: var(--rose-vif);
+  transform: rotate(20deg);
+}
+body.dark .dark-toggle {
+  color: #f0c040;
+}
+body.dark .dark-toggle:hover {
+  color: #ffd700;
+  transform: rotate(20deg);
+}

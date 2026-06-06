@@ -1,0 +1,259 @@
+/* ========================================
+   hero.css — Hero & Categories
+   D&A Couture – Projet Web L2
+   ======================================== */
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100px 5% 60px;
+  background: linear-gradient(135deg, #fff9fb 0%, #fce4ec 60%, #f8bbd0 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(233,30,140,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  max-width: 520px;
+  z-index: 1;
+  animation: fadeSlideUp 0.9s ease forwards;
+}
+
+.hero-sub {
+  font-family: var(--font-corps);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose-vif);
+  margin-bottom: 1rem;
+}
+
+.hero-content h1 {
+  font-family: var(--font-titre);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 1.1;
+  font-weight: 300;
+  color: var(--texte);
+  margin-bottom: 1.2rem;
+}
+.hero-content h1 em {
+  font-style: italic;
+  color: var(--rose-vif);
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  color: var(--texte-doux);
+  margin-bottom: 2rem;
+  max-width: 400px;
+}
+
+/* Decorative circles */
+.hero-deco {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.hero-circle {
+  position: absolute;
+  border-radius: 50%;
+}
+.c1 {
+  width: 320px; height: 320px;
+  background: linear-gradient(135deg, var(--rose-pale), var(--rose-doux));
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+.c2 {
+  width: 220px; height: 220px;
+  background: linear-gradient(135deg, var(--rose-doux), var(--rose-nude));
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 4s ease-in-out infinite;
+}
+.c3 {
+  width: 80px; height: 80px;
+  background: var(--rose-vif);
+  opacity: 0.15;
+  bottom: 30px; right: 20px;
+}
+
+.hero-img-placeholder {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6rem;
+  color: var(--rose-vif);
+  opacity: 0.6;
+  z-index: 2;
+}
+
+/* ===== CATEGORIES ===== */
+.categories-section {
+  padding: 80px 5%;
+  background: #fff;
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.cat-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  height: 220px;
+  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow);
+}
+.cat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Photo de fond */
+.cat-card .cat-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.cat-card:hover .cat-bg {
+  transform: scale(1.07);
+}
+
+/* Overlay sombre en bas */
+.cat-card .cat-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.15) 55%, transparent 100%);
+  transition: background 0.3s;
+}
+.cat-card:hover .cat-overlay {
+  background: linear-gradient(to top, rgba(233,30,140,0.75) 0%, rgba(0,0,0,0.18) 60%, transparent 100%);
+}
+
+/* Texte centré en bas */
+.cat-card .cat-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.2rem 1rem;
+  text-align: center;
+  color: #fff;
+}
+.cat-card h3 {
+  font-family: var(--font-titre);
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 0 0 0.2rem;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  color: #fff;
+}
+.cat-card .cat-count {
+  display: block;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.88);
+  letter-spacing: 0.08em;
+  margin-top: 0;
+}
+/* Masquer l'ancienne icône si elle reste */
+.cat-icon { display: none; }
+.cat-card p { display: none; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50%       { transform: translate(-50%, -50%) scale(1.08); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+  .hero-deco { width: 280px; height: 280px; margin-top: 2rem; }
+  .c1 { width: 240px; height: 240px; }
+  .c2 { width: 160px; height: 160px; }
+}
+
+/* ===== ENGAGEMENTS ===== */
+.engagements-section {
+  padding: 60px 5%;
+  background: linear-gradient(135deg, #fff9fb 0%, #fce4ec 100%);
+}
+.eng-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.eng-card {
+  background: #fff;
+  border: 1px solid var(--rose-doux);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.eng-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.eng-card i {
+  font-size: 2rem;
+  color: var(--rose-vif);
+  margin-bottom: 0.8rem;
+}
+.eng-card h4 {
+  font-family: var(--font-titre);
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+  color: var(--texte);
+}
+.eng-card p {
+  font-size: 0.85rem;
+  color: var(--texte-doux);
+  font-style: italic;
+}
+
+/* ===== CATEGORIES GRID - 6 items responsive ===== */
+.cat-grid {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+
+/* ========================================
+   DARK MODE — hero.css overrides
+   ======================================== */
+body.dark .engagements-section {
+  background: linear-gradient(135deg, #0f0810 0%, #1a0d14 100%);
+}
+body.dark .eng-card {
+  background: #1a0d14;
+  border-color: #3d1a2b;
+}

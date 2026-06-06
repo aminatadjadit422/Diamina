@@ -1,0 +1,110 @@
+/* ========================================
+   footer.css — Footer & Contact
+   D&A Couture – Projet Web L2
+   ======================================== */
+
+.footer {
+  background: linear-gradient(135deg, lab(25.22% 30.17 -2.9) 0%, #9b3b70 100%);
+  color: #f0c0d0;
+  padding: 0;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  gap: 3rem;
+  padding: 60px 5% 40px;
+}
+
+/* Brand */
+.footer-brand h2 {
+  font-family: var(--font-titre);
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 0.8rem;
+}
+.footer-brand h2 span { color: var(--rose-vif); }
+
+.footer-brand p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #c08090;
+  max-width: 300px;
+}
+
+/* Links */
+.footer-links h4,
+.footer-contact h4 {
+  font-family: var(--font-titre);
+  font-size: 1.2rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+.footer-links ul li + li { margin-top: 0.5rem; }
+.footer-links a {
+  color: #c08090;
+  font-size: 0.9rem;
+  transition: color var(--transition);
+}
+.footer-links a:hover { color: var(--rose-vif); }
+
+/* Contact */
+.footer-contact p {
+  font-size: 0.9rem;
+  color: #c08090;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.footer-contact p i {
+  color: var(--rose-vif);
+  width: 16px;
+  flex-shrink: 0;
+}
+
+/* Social links */
+.social-links {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+.social-links a {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(233,30,140,0.15);
+  border: 1px solid rgba(233,30,140,0.30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rose-vif);
+  font-size: 0.9rem;
+  transition: background var(--transition), transform var(--transition);
+}
+.social-links a:hover {
+  background: var(--rose-vif);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+/* Bottom bar */
+.footer-bottom {
+  border-top: 1px solid rgba(233,30,140,0.15);
+  padding: 20px 5%;
+  text-align: center;
+}
+.footer-bottom p {
+  font-size: 0.8rem;
+  color: #8a5060;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 40px 5% 30px;
+  }
+}

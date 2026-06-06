@@ -1,0 +1,198 @@
+/* ========================================
+   navbar.css — Navigation & Search Bar
+   D&A Couture – Projet Web L2
+   ======================================== */
+
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  height: 70px;
+  background: rgba(255, 249, 251, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rose-doux);
+  box-shadow: 0 2px 20px rgba(233,30,140,0.07);
+}
+
+/* Logo */
+.nav-logo {
+  font-family: var(--font-titre);
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--texte);
+  letter-spacing: 0.04em;
+}
+.nav-logo span {
+  color: var(--rose-vif);
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+.nav-links a {
+  font-family: var(--font-corps);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--texte-doux);
+  position: relative;
+  transition: color var(--transition);
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--rose-vif);
+  transition: width var(--transition);
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--rose-vif);
+}
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* Icons */
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+.nav-icons a,
+.nav-icons button {
+  color: var(--texte-doux);
+  font-size: 1.1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition);
+  position: relative;
+}
+.nav-icons a:hover,
+.nav-icons button:hover {
+  color: var(--rose-vif);
+}
+.cart-count {
+  position: absolute;
+  top: -8px; right: -8px;
+  background: var(--rose-vif);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== SEARCH BAR ===== */
+.search-bar-wrapper {
+  position: fixed;
+  top: 70px; left: 0; right: 0;
+  z-index: 999;
+  background: var(--rose-pale);
+  border-bottom: 1px solid var(--rose-doux);
+  padding: 12px 5%;
+  transform: translateY(-120%);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+.search-bar-wrapper.open {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.search-container {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+}
+.search-container input {
+  flex: 1;
+  padding: 12px 20px;
+  border: 2px solid var(--rose-doux);
+  border-right: none;
+  border-radius: 30px 0 0 30px;
+  font-family: var(--font-corps);
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--texte);
+  outline: none;
+  transition: border-color var(--transition);
+}
+.search-container input:focus {
+  border-color: var(--rose-vif);
+}
+.search-container button {
+  padding: 12px 20px;
+  background: var(--rose-vif);
+  color: #fff;
+  border: none;
+  border-radius: 0 30px 30px 0;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background var(--transition);
+}
+.search-container button:hover {
+  background: var(--rose-fonce);
+}
+
+/* Dropdown results */
+.search-results {
+  position: absolute;
+  top: 110%;
+  left: 0; right: 0;
+  background: #fff;
+  border: 1px solid var(--rose-doux);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 100;
+  display: none;
+}
+.search-results.visible { display: block; }
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background var(--transition);
+  font-size: 0.9rem;
+}
+.search-result-item:hover {
+  background: var(--rose-pale);
+}
+.search-result-item .result-cat {
+  font-size: 0.75rem;
+  color: var(--rose-vif);
+  margin-left: auto;
+  font-style: italic;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .navbar { padding: 0 4%; }
+}
+
+/* Logo image */
+.nav-logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
+}

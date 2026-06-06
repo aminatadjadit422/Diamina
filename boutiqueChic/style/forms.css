@@ -1,0 +1,166 @@
+/* ========================================
+   forms.css — Formulaires Inscription & Connexion
+   D&A Couture – Projet Web L2
+   ======================================== */
+
+.form-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 5% 60px;
+  background: linear-gradient(135deg, #fff9fb, #fce4ec);
+}
+
+.form-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 3rem 3.5rem;
+  box-shadow: 0 20px 60px rgba(233,30,140,0.12);
+  width: 100%;
+  max-width: 460px;
+  animation: fadeSlideUp 0.7s ease;
+}
+
+.form-logo {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-titre);
+  font-size: 1.6rem;
+  color: var(--texte);
+}
+.form-logo span { color: var(--rose-vif); }
+
+.form-title {
+  font-family: var(--font-titre);
+  font-size: 1.9rem;
+  text-align: center;
+  margin-bottom: 0.3rem;
+  font-weight: 400;
+}
+.form-subtitle {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--texte-doux);
+  margin-bottom: 2rem;
+}
+
+/* Fields */
+.form-group {
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--texte-doux);
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+}
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--rose-doux);
+  border-radius: 10px;
+  font-family: var(--font-corps);
+  font-size: 0.95rem;
+  color: var(--texte);
+  background: var(--rose-pale);
+  outline: none;
+  transition: border-color var(--transition), background var(--transition);
+}
+.form-group input:focus {
+  border-color: var(--rose-vif);
+  background: #fff;
+}
+.form-group .error-msg {
+  font-size: 0.78rem;
+  color: #e53935;
+  margin-top: 0.3rem;
+  display: none;
+}
+.form-group.invalid input {
+  border-color: #e53935;
+}
+.form-group.invalid .error-msg { display: block; }
+
+/* Submit */
+.form-submit {
+  width: 100%;
+  padding: 14px;
+  margin-top: 0.5rem;
+  background: linear-gradient(135deg, var(--rose-vif), var(--rose-fonce));
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  font-family: var(--font-corps);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(233,30,140,0.30);
+  transition: opacity var(--transition), transform var(--transition);
+}
+.form-submit:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+/* Messages feedback */
+.form-message {
+  text-align: center;
+  font-size: 0.88rem;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: none;
+}
+.form-message.success {
+  background: #fce4ec;
+  color: var(--rose-fonce);
+  display: block;
+}
+.form-message.error {
+  background: #ffebee;
+  color: #c62828;
+  display: block;
+}
+
+.form-switch {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--texte-doux);
+  margin-top: 1.2rem;
+}
+.form-switch a {
+  color: var(--rose-vif);
+  font-weight: 500;
+}
+.form-switch a:hover { text-decoration: underline; }
+
+/* Password toggle */
+.input-icon {
+  position: relative;
+}
+.input-icon input { padding-right: 44px; }
+.toggle-pw {
+  position: absolute;
+  right: 14px; top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--texte-doux);
+  font-size: 0.9rem;
+}
+
+/* Animation */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 500px) {
+  .form-card { padding: 2rem 1.5rem; }
+}

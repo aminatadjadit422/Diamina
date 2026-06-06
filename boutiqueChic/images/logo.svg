@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" width="480" height="160">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&amp;display=swap');
+      .ls { font-family: 'Great Vibes', cursive, Georgia, serif; }
+    </style>
+  </defs>
+
+  <!-- Robe silhouette -->
+  <g transform="translate(68, 82)">
+    <!-- Tête -->
+    <circle cx="0" cy="-62" r="6" fill="#3d1a2b"/>
+    <!-- Petites fleurs/papillons -->
+    <ellipse cx="-5" cy="-70" rx="3.5" ry="1.8" fill="#3d1a2b" transform="rotate(-30,-5,-70)"/>
+    <ellipse cx="2" cy="-72" rx="3.5" ry="1.8" fill="#3d1a2b" transform="rotate(20,2,-72)"/>
+    <ellipse cx="6" cy="-68" rx="2.5" ry="1.4" fill="#3d1a2b" transform="rotate(50,6,-68)"/>
+    <!-- Cou -->
+    <rect x="-2" y="-56" width="4" height="6" fill="#3d1a2b"/>
+    <!-- Buste / corset -->
+    <path d="M-12,-50 Q-14,-43 -13,-36 L-6,-36 L-6,-50 Z" fill="#3d1a2b"/>
+    <path d="M12,-50 Q14,-43 13,-36 L6,-36 L6,-50 Z" fill="#3d1a2b"/>
+    <path d="M-6,-50 Q0,-46 6,-50 L6,-36 Q0,-33 -6,-36 Z" fill="#3d1a2b"/>
+    <!-- Taille -->
+    <path d="M-13,-36 Q-8,-29 -5,-22 L5,-22 Q8,-29 13,-36 Z" fill="#3d1a2b"/>
+    <!-- Jupe longue évasée -->
+    <path d="M-5,-22 Q-24,14 -42,56 Q-22,60 0,60 Q22,60 42,56 Q24,14 5,-22 Z" fill="#3d1a2b"/>
+    <!-- Reflet jupe -->
+    <path d="M-2,-19 Q-10,8 -17,44 Q-7,42 0,42 Q4,42 6,41 Q3,8 2,-19 Z" fill="#5a2a3d" opacity="0.35"/>
+    <!-- Traîne -->
+    <path d="M-42,56 Q-48,61 -46,66 Q-22,62 0,62 Q22,62 46,66 Q48,61 42,56 Q22,60 0,60 Q-22,60 -42,56 Z" fill="#3d1a2b"/>
+  </g>
+
+  <!-- Nom calligraphique -->
+  <text x="116" y="96" class="ls" font-size="60" fill="#3d1a2b" letter-spacing="1">diaa-mina</text>
+
+  <!-- Ligne fine -->
+  <line x1="116" y1="104" x2="462" y2="104" stroke="#e91e8c" stroke-width="0.6" opacity="0.5"/>
+
+  <!-- Sous-titre chic -->
+  <text x="290" y="130" class="ls" font-size="26" fill="#e91e8c" text-anchor="middle" letter-spacing="3">chic</text>
+</svg>

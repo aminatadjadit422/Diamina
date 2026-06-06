@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dia-mina Chic – Robes de Soirée</title>
+  <link rel="stylesheet" href="style/global.css" />
+  <link rel="stylesheet" href="style/navbar.css" />
+  <link rel="stylesheet" href="style/hero.css" />
+  <link rel="stylesheet" href="style/products.css" />
+  <link rel="stylesheet" href="style/footer.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ===== HERO AMÉLIORÉ ===== */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0;
+      background: linear-gradient(135deg, #fff9fb 0%, #fce4ec 60%, #f8bbd0 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('images/robe55.jpg') center/cover no-repeat;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+    .hero-content {
+      padding: 120px 5% 80px 8%;
+      z-index: 2;
+      animation: fadeSlideUp 0.9s ease forwards;
+    }
+    .hero-visual {
+      position: relative;
+      height: 150vh;
+      overflow: hidden;
+    }
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, #fff9fb 0%, transparent 30%);
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(233,30,140,0.1);
+      border: 1px solid rgba(233,30,140,0.25);
+      border-radius: 2rem;
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rose-vif);
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge i { font-size: 0.7rem; }
+    .hero-content h1 {
+      font-family: var(--font-titre);
+      font-size: clamp(3rem, 5.5vw, 5.2rem);
+      line-height: 1.05;
+      font-weight: 300;
+      color: var(--texte);
+      margin-bottom: 1.4rem;
+    }
+    .hero-content h1 em {
+      font-style: italic;
+      color: var(--rose-vif);
+    }
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--texte-doux);
+      margin-bottom: 2.2rem;
+      max-width: 400px;
+      line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(233,30,140,0.15);
+    }
+    .stat-item { text-align: left; }
+    .stat-num {
+      font-family: var(--font-titre);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--rose-vif);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--texte-doux);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ===== BANNIÈRE PROMOTIONNELLE ===== */
+    .promo-banner {
+      background: linear-gradient(90deg, #e91e8c, #c2185b, #e91e8c);
+      background-size: 200% auto;
+      animation: shimmer 3s linear infinite;
+      color: #fff;
+      text-align: center;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+    }
+    @keyframes shimmer { to { background-position: 200% center; } }
+
+    /* ===== SECTION NOUVEAUTÉS ===== */
+    .nouveautes-section {
+      padding: 80px 5%;
+      background: #fff;
+    }
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .section-header .section-title { margin-bottom: 0; }
+    .voir-plus-link {
+      font-size: 0.88rem;
+      color: var(--rose-vif);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+    .voir-plus-link:hover { opacity: 0.7; }
+
+    /* ===== TÉMOIGNAGES ===== */
+    .testimonials-section {
+      padding: 80px 5%;
+      background: linear-gradient(135deg, #fff9fb 0%, #fce4ec 100%);
+    }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .testi-card {
+      background: #fff;
+      border: 1px solid var(--rose-doux);
+      border-radius: var(--radius);
+      padding: 2rem;
+      position: relative;
+    }
+    .testi-stars {
+      color: var(--rose-vif);
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .testi-text {
+      font-style: italic;
+      color: var(--texte-doux);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+    .testi-author {
+      font-weight: 500;
+      font-size: 0.88rem;
+      color: var(--texte);
+    }
+    .testi-ville { color: var(--texte-doux); font-size: 0.8rem; }
+    .quote-icon {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      font-size: 2.5rem;
+      color: var(--rose-pale);
+      line-height: 1;
+      font-family: Georgia, serif;
+    }
+
+
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { height: 50vh; }
+      .hero-visual::before { background: linear-gradient(to bottom, #fff9fb 0%, transparent 30%); }
+      .hero-content { padding: 120px 5% 40px; text-align: center; }
+      .hero-desc { margin: 0 auto 2rem; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { justify-content: center; }
+    }
+
+    /* ===== GRILLE ACCUEIL : 4 COLONNES ===== */
+    #featuredProducts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.8rem;
+    }
+    @media (max-width: 1100px) {
+      #featuredProducts { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 750px) {
+      #featuredProducts { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    }
+    @media (max-width: 400px) {
+      #featuredProducts { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== BANNIÈRE PROMO ===== -->
+  <div class="promo-banner">
+    ✨ Nouvelle Collection 2025 — Livraison gratuite à partir de 15 000 DA ✨
+  </div>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="nav-logo"><img src="images/logo.svg" alt="D&A Chic" class="nav-logo-img"></div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="content/produits.html">Produits</a></li>
+      <li><a href="content/inscription.html">Inscription</a></li>
+      <li><a href="content/connexion.html">Connexion</a></li>
+      <li><a href="content/commande.html">Commande</a></li>
+      <li><a href="content/apropos.html">À Propos</a></li>
+    </ul>
+    <div class="nav-icons">
+      <button class="search-toggle" id="searchToggle"><i class="fas fa-search"></i></button>
+      <button class="dark-toggle" id="darkToggle" title="Mode sombre"><i class="fas fa-moon"></i></button>
+      <a href="content/connexion.html"><i class="fas fa-user"></i></a>
+      <a href="content/commande.html"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCount">0</span></a>
+    </div>
+  </nav>
+
+  <!-- SEARCH BAR -->
+  <div class="search-bar-wrapper" id="searchBar">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Rechercher une robe…" autocomplete="off" />
+      <button id="searchBtn"><i class="fas fa-search"></i></button>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-star"></i> Nouvelle Collection 2025</div>
+      <h1>L'Élégance<br /><em>à son sommet</em></h1>
+      <p class="hero-desc">Des robes pensées pour les femmes qui rayonnent — chaque soirée devient un souvenir inoubliable.</p>
+      <div class="hero-actions">
+        <a href="content/produits.html" class="btn-primary">Découvrir la Collection</a>
+        <a href="content/apropos.html" class="btn-outline">Notre Histoire</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">30+</span>
+          <span class="stat-label">Modèles exclusifs</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">500+</span>
+          <span class="stat-label">Clientes satisfaites</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">5 ans</span>
+          <span class="stat-label">D'expertise couture</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="images/robe54.jpg" alt="Robe D&A Couture Collection 2025" />
+    </div>
+  </section>
+
+  <!-- ===== CATEGORIES ===== -->
+  <section class="categories-section">
+    <h2 class="section-title">Nos Catégories</h2>
+    <div class="cat-grid">
+
+      <div class="cat-card" onclick="filterAndGo('Collection Royale')">
+        <img class="cat-bg" src="images/robe3.jpg" alt="Collection Royale" />
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <h3>Collection Royale</h3>
+          <span class="cat-count">8 modèles</span>
+        </div>
+      </div>
+
+      <div class="cat-card" onclick="filterAndGo('Féerie Moderne')">
+        <img class="cat-bg" src="images/robe9.jpg" alt="Féerie Moderne" />
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <h3>Féerie Moderne</h3>
+          <span class="cat-count">8 modèles</span>
+        </div>
+      </div>
+
+      <div class="cat-card" onclick="filterAndGo('Glamour Absolu')">
+        <img class="cat-bg" src="images/robe17.jpg" alt="Glamour Absolu" />
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <h3>Glamour Absolu</h3>
+          <span class="cat-count">8 modèles</span>
+        </div>
+      </div>
+
+      <div class="cat-card" onclick="filterAndGo('Élégance Intemporelle')">
+        <img class="cat-bg" src="images/robe25.jpg" alt="Élégance Intemporelle" />
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <h3>Élégance Intemporelle</h3>
+          <span class="cat-count">8 modèles</span>
+        </div>
+      </div>
+
+      <div class="cat-card" onclick="filterAndGo('Tendances 2026')">
+        <img class="cat-bg" src="images/robe33.jpg" alt="Tendances 2026" />
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <h3>Tendances 2026</h3>
+          <span class="cat-count">8 modèles</span>
+        </div>
+      </div>
+
+      <div class="cat-card" onclick="filterAndGo('Chaussures')">
+        <img class="cat-bg" src="images/talon1.jpg" alt="Chaussures" />
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <h3>Chaussures</h3>
+          <span class="cat-count">5 modèles</span>
+        </div>
+      </div>
+
+      <div class="cat-card" onclick="filterAndGo('Accessoires')">
+        <img class="cat-bg" src="images/collier1.jpg" alt="Accessoires" />
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <h3>Accessoires</h3>
+          <span class="cat-count">9 modèles</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== PRODUITS PAR CATÉGORIE ===== -->
+  <section class="nouveautes-section">
+    <div class="section-header">
+      <h2 class="section-title">Nos Produits Vedettes</h2>
+      <a href="content/produits.html" class="voir-plus-link">Voir tout le catalogue →</a>
+    </div>
+    <div id="featuredProducts"></div>
+  </section>
+
+  <!-- ===== ENGAGEMENTS ===== -->
+  <section class="engagements-section">
+    <div class="eng-grid">
+      <div class="eng-card">
+        <i class="fas fa-shipping-fast"></i>
+        <h4>Livraison rapide</h4>
+        <p>Partout en Algérie sous 48h</p>
+      </div>
+      <div class="eng-card">
+        <i class="fas fa-undo-alt"></i>
+        <h4>Retour facile</h4>
+        <p>7 jours pour changer d'avis</p>
+      </div>
+      <div class="eng-card">
+        <i class="fas fa-lock"></i>
+        <h4>Paiement sécurisé</h4>
+        <p>Transaction 100% protégée</p>
+      </div>
+      <div class="eng-card">
+        <i class="fas fa-headset"></i>
+        <h4>Support client</h4>
+        <p>Disponible 7j/7 par WhatsApp</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TÉMOIGNAGES ===== -->
+  <section class="testimonials-section">
+    <h2 class="section-title" style="text-align:center;margin-bottom:0">Ce que disent nos clientes</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <span class="quote-icon">"</span>
+        <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testi-text">La robe était absolument magnifique pour mon mariage. Chaque détail était parfait, je me suis sentie comme une vraie princesse.</p>
+        <div class="testi-author">Yasmine B.</div>
+        <div class="testi-ville">Tizi-Ouzou</div>
+      </div>
+      <div class="testi-card">
+        <span class="quote-icon">"</span>
+        <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <p class="testi-text">Service exceptionnel et qualité irréprochable. La livraison était rapide et l'emballage soigné. Je recommande vivement D&A Couture !</p>
+        <div class="testi-author">Nadia M.</div>
+        <div class="testi-ville">Alger</div>
+      </div>
+      <div class="testi-card">
+        <span class="quote-icon">"</span>
+        <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+        <p class="testi-text">J'ai commandé une robe de soirée et j'ai reçu exactement ce que j'attendais. Les photos correspondent parfaitement au produit réel.</p>
+        <div class="testi-author">Amira K.</div>
+        <div class="testi-ville">Oran</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/logo.svg" alt="D&A Chic" class="footer-logo-img" style="width:200px;margin-bottom:0.5rem;">
+        <p>Créatrice de robes de soirée depuis 2020.<br />Chaque robe raconte votre histoire.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="content/produits.html">Produits</a></li>
+          <li><a href="content/inscription.html">Inscription</a></li>
+          <li><a href="content/commande.html">Commande</a></li>
+          <li><a href="content/apropos.html">À Propos</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Nous contacter</h4>
+        <p><i class="fas fa-phone"></i> +213 555 123 456</p>
+        <p><i class="fas fa-envelope"></i> contact@diaminaChic.dz</p>
+        <p><i class="fas fa-map-marker-alt"></i> Tizi-Ouzou, Algérie</p>
+        <div class="social-links">
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+          <a href="#" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+          <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Dia-mina Chic. Tous droits réservés. | Projet Web – L2 Informatique – UMMTO</p>
+    </div>
+  </footer>
+
+  <script src="javascript/data.js"></script>
+  <script src="javascript/search.js"></script>
+  <script src="javascript/main.js"></script>
+
+  <!-- ===== DARK MODE ===== -->
+  <script>
+    (function() {
+      // Appliquer le thème sauvegardé au chargement (évite le flash)
+      if (localStorage.getItem('da_theme') === 'dark') {
+        document.body.classList.add('dark');
+      }
+    })();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('darkToggle');
+      if (!btn) return;
+
+      function updateIcon() {
+        const isDark = document.body.classList.contains('dark');
+        btn.innerHTML = isDark
+          ? '<i class="fas fa-sun"></i>'
+          : '<i class="fas fa-moon"></i>';
+        btn.title = isDark ? 'Mode clair' : 'Mode sombre';
+      }
+
+      // Init icon
+      updateIcon();
+
+      btn.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        const isDark = document.body.classList.contains('dark');
+        localStorage.setItem('da_theme', isDark ? 'dark' : 'light');
+        updateIcon();
+      });
+    });
+  </script>
+
+</body>
+</html>

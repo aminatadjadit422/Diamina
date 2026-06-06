@@ -1,0 +1,314 @@
+/* ========================================
+   apropos.css — Page À Propos
+   D&A Couture – Projet Web L2
+   ======================================== */
+
+/* ===== HERO ===== */
+.apropos-hero {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 140px 5% 80px;
+  background: linear-gradient(135deg, #fff9fb 0%, #fce4ec 60%, #f8bbd0 100%);
+  position: relative;
+  overflow: hidden;
+}
+.apropos-hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(233,30,140,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.apropos-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(233,30,140,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.apropos-hero-content {
+  z-index: 1;
+  animation: fadeSlideUp 0.9s ease forwards;
+}
+.apropos-hero-content h1 {
+  font-family: var(--font-titre);
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 300;
+  color: var(--texte);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+.apropos-hero-content h1 em {
+  font-style: italic;
+  color: var(--rose-vif);
+}
+.apropos-tagline {
+  font-size: 1.1rem;
+  color: var(--texte-doux);
+  max-width: 550px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ===== NOTRE HISTOIRE ===== */
+.apropos-section {
+  padding: 90px 5%;
+  background: #fff;
+}
+.apropos-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+}
+.apropos-text {
+  flex: 1;
+}
+.apropos-label {
+  display: inline-block;
+  font-family: var(--font-corps);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose-vif);
+  margin-bottom: 1rem;
+}
+.apropos-text h2 {
+  font-family: var(--font-titre);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  color: var(--texte);
+  margin-bottom: 1.5rem;
+}
+.apropos-text p {
+  color: var(--texte-doux);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.apropos-visual {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.apropos-circle-deco {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose-pale), var(--rose-doux));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  color: var(--rose-vif);
+  opacity: 0.8;
+  box-shadow: 0 20px 60px rgba(233, 30, 140, 0.15);
+}
+
+/* ===== VALEURS ===== */
+.valeurs-section {
+  padding: 80px 5%;
+  background: var(--rose-pale);
+}
+.valeurs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.valeur-card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.valeur-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+.valeur-icon {
+  font-size: 2.2rem;
+  color: var(--rose-vif);
+  margin-bottom: 1rem;
+}
+.valeur-card h3 {
+  font-family: var(--font-titre);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 0.8rem;
+  color: var(--texte);
+}
+.valeur-card p {
+  font-size: 0.9rem;
+  color: var(--texte-doux);
+  line-height: 1.7;
+}
+
+/* ===== CHIFFRES CLÉS ===== */
+.chiffres-section {
+  padding: 70px 5%;
+  background: linear-gradient(135deg, var(--rose-vif) 0%, #c2185b 100%);
+}
+.chiffres-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.chiffre-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chiffre-num {
+  font-family: var(--font-titre);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  color: #fff;
+  line-height: 1;
+}
+.chiffre-label {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.8);
+  margin-top: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+/* ===== ÉQUIPE ===== */
+.equipe-section {
+  padding: 80px 5%;
+  background: #fff;
+}
+.equipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.equipe-card {
+  background: var(--rose-pale);
+  border: 1px solid var(--rose-doux);
+  border-radius: var(--radius);
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.equipe-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+.equipe-avatar {
+  font-size: 4rem;
+  color: var(--rose-vif);
+  margin-bottom: 1.2rem;
+  opacity: 0.7;
+}
+.equipe-card h3 {
+  font-family: var(--font-titre);
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--texte);
+  margin-bottom: 0.3rem;
+}
+.equipe-role {
+  font-size: 0.85rem;
+  color: var(--rose-vif);
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+.equipe-desc {
+  font-size: 0.9rem;
+  color: var(--texte-doux);
+  line-height: 1.7;
+}
+
+/* ===== CONTACT CTA ===== */
+.contact-cta {
+  padding: 80px 5%;
+  background: linear-gradient(135deg, #fff9fb 0%, #fce4ec 100%);
+  text-align: center;
+}
+.contact-cta-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.contact-cta h2 {
+  font-family: var(--font-titre);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  color: var(--texte);
+  margin-bottom: 1rem;
+}
+.contact-cta p {
+  font-size: 1rem;
+  color: var(--texte-doux);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+.cta-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.8rem;
+  border: 1.5px solid var(--rose-vif);
+  border-radius: 50px;
+  color: var(--rose-vif);
+  font-family: var(--font-corps);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition);
+}
+.cta-btn:hover {
+  background: var(--rose-vif);
+  color: #fff;
+}
+.cta-whatsapp {
+  border-color: #25d366;
+  color: #25d366;
+}
+.cta-whatsapp:hover {
+  background: #25d366;
+  color: #fff;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .apropos-container {
+    flex-direction: column;
+    gap: 3rem;
+    text-align: center;
+  }
+  .apropos-circle-deco {
+    width: 180px;
+    height: 180px;
+    font-size: 3.5rem;
+  }
+}

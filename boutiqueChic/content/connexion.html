@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion – D&A Couture</title>
+  <link rel="stylesheet" href="../style/global.css" />
+  <link rel="stylesheet" href="../style/navbar.css" />
+  <link rel="stylesheet" href="../style/forms.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-logo"><img src="../images/logo.svg" alt="Diaa-mina Chic" class="nav-logo-img"></div>
+    <ul class="nav-links">
+      <li><a href="../index.html">Accueil</a></li>
+      <li><a href="produits.html">Produits</a></li>
+      <li><a href="inscription.html">Inscription</a></li>
+      <li><a href="connexion.html" class="active">Connexion</a></li>
+      <li><a href="commande.html">Commande</a></li>
+      <li><a href="apropos.html">À Propos</a></li>
+    </ul>
+    <div class="nav-icons">
+      <a href="connexion.html"><i class="fas fa-user"></i></a>
+      <a href="commande.html"><i class="fas fa-shopping-bag"></i><span class="cart-count" id="cartCount">0</span></a>
+    </div>
+  </nav>
+
+  <section class="form-section">
+    <div class="form-card">
+      <div class="form-logo">Dia-mina Chic</div>
+      <h1 class="form-title">Se connecter</h1>
+      <p class="form-subtitle">Bon retour parmi nous 🌸</p>
+
+      <div class="form-message" id="formMessage"></div>
+
+      <!-- Compte de test -->
+      <div style="background:var(--rose-pale);border-radius:10px;padding:10px 14px;margin-bottom:1.2rem;font-size:0.82rem;color:var(--texte-doux);border:1px dashed var(--rose-doux);">
+        <strong>Compte de test :</strong><br/>
+        Email : <code>dihia@ummto.dz</code> &nbsp;|&nbsp; Mdp : <code>Dihia2025!</code>
+      </div>
+
+      <form id="formConnexion" onsubmit="handleConnexion(event)" novalidate>
+
+        <div class="form-group" id="g-email">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="email@exemple.com" autocomplete="email" />
+          <span class="error-msg"></span>
+        </div>
+
+        <div class="form-group" id="g-mdp">
+          <label for="mdp">Mot de passe</label>
+          <div class="input-icon">
+            <input type="password" id="mdp" placeholder="Votre mot de passe" autocomplete="current-password" />
+            <button type="button" class="toggle-pw" onclick="togglePassword('mdp', this)">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+          <span class="error-msg"></span>
+        </div>
+
+        <button type="submit" class="form-submit">Se connecter</button>
+      </form>
+
+      <p class="form-switch">Pas encore de compte ? <a href="inscription.html">S'inscrire</a></p>
+    </div>
+  </section>
+
+  <script src="../javascript/data.js"></script>
+  <script src="../javascript/auth.js"></script>
+</body>
+</html>
