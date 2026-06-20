@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold Phone - Connexion / Inscription</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ==============================
+   PAGE AUTH
+============================== */
+.auth-section {
+  min-height: calc(100vh - 120px);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.auth-wrapper {
+  width: 100%;
+  max-width: 460px;
+}
+
+/* Tabs switcher */
+.auth-tabs {
+  display: flex;
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px 16px 0 0;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-bottom: none;
+  overflow: hidden;
+}
+.auth-tab-btn {
+  flex: 1;
+  padding: 16px;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.auth-tab-btn.active {
+  background: #e91e8c;
+  color: white;
+}
+.auth-tab-btn:hover:not(.active) {
+  background: rgba(233,30,140,0.1);
+  color: white;
+}
+
+/* Card */
+.auth-card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 0 0 20px 20px;
+  padding: 36px 36px 30px;
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.auth-logo .logo-circle {
+  width: 72px;
+  height: 72px;
+  border: 2px solid #f5c518;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  background: rgba(245,197,24,0.08);
+}
+.auth-logo .logo-circle span {
+  color: #f5c518;
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+}
+.auth-logo h2 {
+  color: white;
+  font-size: 20px;
+  font-weight: 800;
+}
+.auth-logo p {
+  color: #888;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Form panels */
+.auth-panel { display: none; }
+.auth-panel.active { display: block; }
+
+/* Fields */
+.field-group {
+  margin-bottom: 18px;
+}
+.field-group label {
+  display: block;
+  color: #ccc;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 7px;
+  letter-spacing: 0.5px;
+}
+.field-group input {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+  transition: 0.3s;
+  outline: none;
+}
+.field-group input::placeholder { color: #555; }
+.field-group input:focus {
+  border-color: #e91e8c;
+  background: rgba(233,30,140,0.06);
+  box-shadow: 0 0 0 3px rgba(233,30,140,0.12);
+}
+.field-group input.error {
+  border-color: #ff5252;
+}
+
+.input-icon-wrap {
+  position: relative;
+}
+.input-icon-wrap .field-icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  pointer-events: none;
+}
+.input-icon-wrap input {
+  padding-left: 40px;
+}
+.input-icon-wrap .toggle-pw {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 15px;
+  color: #666;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: 0.2s;
+}
+.input-icon-wrap .toggle-pw:hover { color: #e91e8c; }
+
+/* Row 2 cols */
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Options */
+.auth-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+  margin-top: 4px;
+}
+.auth-remember {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
+.auth-remember input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #e91e8c;
+  cursor: pointer;
+}
+.auth-remember span {
+  color: #aaa;
+  font-size: 13px;
+}
+.auth-forgot {
+  color: #e91e8c;
+  font-size: 13px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+.auth-forgot:hover { color: #f5c518; text-decoration: underline; }
+
+/* Buttons */
+.btn-auth-submit {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #e91e8c, #c2185b);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.3s;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 20px rgba(233,30,140,0.35);
+  text-transform: uppercase;
+}
+.btn-auth-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(233,30,140,0.55);
+}
+.btn-auth-submit:active { transform: translateY(0); }
+
+/* Divider */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0;
+}
+.auth-divider::before, .auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+}
+.auth-divider span { color: #555; font-size: 12px; white-space: nowrap; }
+
+/* Social login */
+.social-auth { display: flex; gap: 12px; }
+.btn-social {
+  flex: 1;
+  padding: 11px 10px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: #ccc;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-social:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.25);
+  color: white;
+}
+
+/* Terms */
+.terms-text {
+  color: #555;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 18px;
+  text-align: center;
+}
+.terms-text a { color: #e91e8c; text-decoration: none; }
+.terms-text a:hover { text-decoration: underline; }
+
+/* Strength bar */
+.strength-bar {
+  margin-top: 8px;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.strength-bar-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 4px;
+  transition: 0.4s;
+}
+.strength-label {
+  font-size: 11px;
+  margin-top: 4px;
+  color: #777;
+  text-align: right;
+}
+
+/* Alert */
+.auth-alert {
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 18px;
+  display: none;
+}
+.auth-alert.success {
+  background: rgba(46,125,50,0.2);
+  border: 1px solid #2e7d32;
+  color: #81c784;
+}
+.auth-alert.error {
+  background: rgba(229,57,53,0.15);
+  border: 1px solid #c62828;
+  color: #ef9a9a;
+}
+
+/* Section avantages */
+.auth-benefits {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+.benefit-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(245,197,24,0.08);
+  border: 1px solid rgba(245,197,24,0.2);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 12px;
+  color: #f5c518;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .auth-card { padding: 24px 20px 20px; }
+  .field-row { grid-template-columns: 1fr; }
+  .auth-wrapper { max-width: 100%; }
+  .social-auth { flex-direction: column; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-header">
+    <span class="logo-text">Gold<br>Phone</span>
+  </div>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque..." onkeyup="rechercherProduit()">
+    <span class="search-icon">🔍</span>
+  </div>
+  <div class="account-menu">
+    <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
+    <div id="dropdown" class="dropdown">
+      <a href="connexion.html">Créer un compte</a>
+      <a href="connexion.html">Se connecter</a>
+    </div>
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="menu">
+  <a href="index.html">ACCUEIL</a>
+  <a href="produits.html">NOS PRODUITS</a>
+  <a href="#">ACCESSOIRES</a>
+  <a href="commande.html">COMMANDE</a>
+  <a href="#">À PROPOS</a>
+</nav>
+
+<!-- AUTH SECTION -->
+<div class="auth-section">
+  <div class="auth-wrapper">
+
+    <!-- Logo -->
+    <div class="auth-logo">
+      <div class="logo-circle"><span>Gold<br>Phone</span></div>
+      <h2>Bienvenue chez Gold Phone</h2>
+      <p>Connectez-vous ou créez votre compte</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="auth-tab-btn active" onclick="switchTab('login')">🔐 Connexion</button>
+      <button class="auth-tab-btn" onclick="switchTab('register')">✨ Inscription</button>
+    </div>
+
+    <!-- Card -->
+    <div class="auth-card">
+
+      <!-- PANEL: Connexion -->
+      <div class="auth-panel active" id="panel-login">
+
+        <div id="login-alert" class="auth-alert"></div>
+
+        <div class="field-group">
+          <label>Adresse email ou téléphone</label>
+          <div class="input-icon-wrap">
+            <span class="field-icon">📧</span>
+            <input type="text" id="login-email" placeholder="exemple@gmail.com ou 0542 96 05 03">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Mot de passe</label>
+          <div class="input-icon-wrap">
+            <span class="field-icon">🔒</span>
+            <input type="password" id="login-password" placeholder="Votre mot de passe">
+            <button class="toggle-pw" onclick="togglePassword('login-password', this)">👁️</button>
+          </div>
+        </div>
+
+        <div class="auth-options">
+          <label class="auth-remember">
+            <input type="checkbox" id="remember-me">
+            <span>Se souvenir de moi</span>
+          </label>
+          <a href="#" class="auth-forgot">Mot de passe oublié ?</a>
+        </div>
+
+        <button class="btn-auth-submit" onclick="handleLogin()">Se connecter</button>
+
+        <div class="auth-divider"><span>ou continuer avec</span></div>
+
+        <div class="social-auth">
+          <button class="btn-social">
+            <span>🌐</span> Google
+          </button>
+          <button class="btn-social">
+            <span>f</span> Facebook
+          </button>
+        </div>
+
+        <p class="terms-text">
+          En vous connectant, vous acceptez nos <a href="#">Conditions d'utilisation</a> et notre <a href="#">Politique de confidentialité</a>.
+        </p>
+      </div>
+
+      <!-- PANEL: Inscription -->
+      <div class="auth-panel" id="panel-register">
+
+        <div class="auth-benefits">
+          <div class="benefit-chip">🚚 Livraison rapide</div>
+          <div class="benefit-chip">💳 Paiement sécurisé</div>
+          <div class="benefit-chip">🎁 Offres exclusives</div>
+        </div>
+
+        <div id="register-alert" class="auth-alert"></div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label>Prénom</label>
+            <div class="input-icon-wrap">
+              <span class="field-icon">👤</span>
+              <input type="text" id="reg-prenom" placeholder="Votre prénom">
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Nom</label>
+            <div class="input-icon-wrap">
+              <span class="field-icon">👤</span>
+              <input type="text" id="reg-nom" placeholder="Votre nom">
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Adresse email</label>
+          <div class="input-icon-wrap">
+            <span class="field-icon">📧</span>
+            <input type="email" id="reg-email" placeholder="exemple@gmail.com">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Numéro de téléphone</label>
+          <div class="input-icon-wrap">
+            <span class="field-icon">📞</span>
+            <input type="tel" id="reg-tel" placeholder="05XX XX XX XX">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Wilaya</label>
+          <div class="input-icon-wrap">
+            <span class="field-icon">📍</span>
+            <input type="text" id="reg-wilaya" placeholder="Ex: Alger, Tizi Ouzou, Oran...">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Mot de passe</label>
+          <div class="input-icon-wrap">
+            <span class="field-icon">🔒</span>
+            <input type="password" id="reg-password" placeholder="Minimum 8 caractères" oninput="checkStrength(this.value)">
+            <button class="toggle-pw" onclick="togglePassword('reg-password', this)">👁️</button>
+          </div>
+          <div class="strength-bar"><div class="strength-bar-fill" id="strength-fill"></div></div>
+          <div class="strength-label" id="strength-label"></div>
+        </div>
+
+        <div class="field-group">
+          <label>Confirmer le mot de passe</label>
+          <div class="input-icon-wrap">
+            <span class="field-icon">🔒</span>
+            <input type="password" id="reg-confirm" placeholder="Répétez votre mot de passe">
+            <button class="toggle-pw" onclick="togglePassword('reg-confirm', this)">👁️</button>
+          </div>
+        </div>
+
+        <button class="btn-auth-submit" onclick="handleRegister()" style="margin-top:4px;">Créer mon compte</button>
+
+        <p class="terms-text">
+          En créant un compte, vous acceptez nos <a href="#">Conditions Générales de Vente</a> et confirmez avoir lu notre <a href="#">Politique de confidentialité</a>.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="logo-footer">Gold<br>Phone</div>
+      <a href="tel:0542960503" class="tel">📞 0542 96 05 03</a><br><br>
+      <a href="#" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
+      <p>📍 Tizi Ouzou, Alger, Algérie</p>
+    </div>
+    <div class="footer-middle">
+      <h3>CATÉGORIES</h3>
+      <ul>
+        <li><a href="produits.html">Téléphones portables</a></li>
+        <li><a href="produits.html?marque=Iphone">iPhone</a></li>
+        <li><a href="produits.html?marque=Samsung">Samsung</a></li>
+        <li><a href="#">Accessoires</a></li>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <h3>SUIVEZ-NOUS</h3>
+      <div class="social-links">
+        <a href="#" class="social-btn fb">f Facebook</a>
+        <a href="#" class="social-btn ig">📷 Instagram</a>
+        <a href="#" class="social-btn tk">🎵 TikTok</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Gold Phone — Tous droits réservés</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+// ---- Tab Switch ----
+function switchTab(tab) {
+  document.querySelectorAll('.auth-tab-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && tab === 'login') || (i === 1 && tab === 'register'));
+  });
+  document.getElementById('panel-login').classList.toggle('active', tab === 'login');
+  document.getElementById('panel-register').classList.toggle('active', tab === 'register');
+  // Clear alerts
+  document.getElementById('login-alert').style.display = 'none';
+  document.getElementById('register-alert').style.display = 'none';
+}
+
+// ---- Toggle Password Visibility ----
+function togglePassword(inputId, btn) {
+  const input = document.getElementById(inputId);
+  const isText = input.type === 'text';
+  input.type = isText ? 'password' : 'text';
+  btn.textContent = isText ? '👁️' : '🙈';
+}
+
+// ---- Password Strength ----
+function checkStrength(val) {
+  const fill = document.getElementById('strength-fill');
+  const label = document.getElementById('strength-label');
+  let score = 0;
+  if (val.length >= 8) score++;
+  if (/[A-Z]/.test(val)) score++;
+  if (/[0-9]/.test(val)) score++;
+  if (/[^A-Za-z0-9]/.test(val)) score++;
+
+  const levels = [
+    { w: '0%', color: '#e91e8c', text: '' },
+    { w: '25%', color: '#e53935', text: 'Faible' },
+    { w: '50%', color: '#ff9800', text: 'Moyen' },
+    { w: '75%', color: '#2196f3', text: 'Fort' },
+    { w: '100%', color: '#4caf50', text: 'Très fort' },
+  ];
+  const lvl = levels[score];
+  fill.style.width = lvl.w;
+  fill.style.background = lvl.color;
+  label.textContent = lvl.text;
+  label.style.color = lvl.color;
+}
+
+// ---- Show Alert ----
+function showAlert(id, type, msg) {
+  const el = document.getElementById(id);
+  el.className = `auth-alert ${type}`;
+  el.textContent = msg;
+  el.style.display = 'block';
+  setTimeout(() => { el.style.display = 'none'; }, 4000);
+}
+
+// ---- Login Handler ----
+function handleLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pw = document.getElementById('login-password').value;
+  if (!email || !pw) {
+    showAlert('login-alert', 'error', '⚠️ Veuillez remplir tous les champs.');
+    return;
+  }
+  // Simulation succès
+  showAlert('login-alert', 'success', '✅ Connexion réussie ! Redirection en cours...');
+  setTimeout(() => { window.location.href = 'index.html'; }, 1800);
+}
+
+// ---- Register Handler ----
+function handleRegister() {
+  const prenom = document.getElementById('reg-prenom').value.trim();
+  const nom = document.getElementById('reg-nom').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const tel = document.getElementById('reg-tel').value.trim();
+  const pw = document.getElementById('reg-password').value;
+  const confirm = document.getElementById('reg-confirm').value;
+
+  if (!prenom || !nom || !email || !tel || !pw || !confirm) {
+    showAlert('register-alert', 'error', '⚠️ Veuillez remplir tous les champs obligatoires.');
+    return;
+  }
+  if (pw.length < 8) {
+    showAlert('register-alert', 'error', '⚠️ Le mot de passe doit contenir au moins 8 caractères.');
+    return;
+  }
+  if (pw !== confirm) {
+    showAlert('register-alert', 'error', '⚠️ Les mots de passe ne correspondent pas.');
+    return;
+  }
+  // Simulation succès
+  showAlert('register-alert', 'success', `✅ Compte créé avec succès ! Bienvenue, ${prenom} 🎉`);
+  setTimeout(() => { window.location.href = 'index.html'; }, 2200);
+}
+
+// ---- Dropdown ----
+function toggleMenu() {
+  const menu = document.getElementById('dropdown');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.account-menu')) {
+    document.getElementById('dropdown').style.display = 'none';
+  }
+});
+
+// ---- Recherche ----
+function rechercherProduit() {
+  const val = document.getElementById('searchInput').value.toLowerCase();
+  if (val.length > 1) window.location.href = 'produits.html?q=' + encodeURIComponent(val);
+}
+
+// Si URL contient ?tab=register, ouvrir l'onglet inscription
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('tab') === 'register') switchTab('register');
+</script>
+</body>
+</html>

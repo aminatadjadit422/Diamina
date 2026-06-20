@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold Phone - Fiche Produit</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-header">
+    <span class="logo-text">Gold<br>Phone</span>
+  </div>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque...">
+    <span class="search-icon">🔍</span>
+  </div>
+  <div class="account-menu">
+    <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
+    <div id="dropdown" class="dropdown">
+      <a href="inscription.html">Créer un compte</a>
+      <a href="connexion.html">Se connecter</a>
+    </div>
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="menu">
+  <a href="index.html">ACCUEIL</a>
+  <a href="produits.html">NOS PRODUITS</a>
+  <a href="accessoires.html">ACCESSOIRES</a>
+  <a href="commande.html">COMMANDE</a>
+  <a href="a propos.html">À PROPOS</a>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="index.html">Accueil</a>
+  <span>›</span>
+  <a href="produits.html">Produits</a>
+  <span>›</span>
+  <span id="breadNom">Fiche produit</span>
+</div>
+
+<!-- FICHE PRODUIT -->
+<div class="fiche-container">
+
+  <!-- GALERIE IMAGE (gauche) -->
+  <div class="fiche-galerie">
+    <div class="img-principale-wrapper">
+      <img id="imgPrincipale" src="" alt="" class="img-principale">
+    </div>
+    <div class="img-thumbnails" id="thumbnails">
+      <!-- générées par JS -->
+    </div>
+  </div>
+
+  <!-- INFOS PRODUIT (droite) -->
+  <div class="fiche-info">
+    <div class="fiche-marque" id="ficheMarque"></div>
+    <h1 class="fiche-nom" id="ficheNom">Chargement...</h1>
+
+    <div class="fiche-stars" id="ficheStars">⭐⭐⭐⭐⭐</div>
+
+    <div class="fiche-prix-wrapper">
+      <span class="fiche-prix" id="fichePrix"></span>
+      <span class="fiche-dispo">✅ En stock</span>
+    </div>
+
+    <!-- SPECS RAPIDES -->
+    <div class="fiche-specs-rapides" id="specsRapides">
+      <!-- générées par JS -->
+    </div>
+
+    <!-- COULEURS -->
+    <div class="fiche-couleurs" id="ficheCouleurs">
+      <!-- générées par JS -->
+    </div>
+
+    <!-- QUANTITE + ACTIONS -->
+    <div class="fiche-achat">
+      <div class="quantite-wrapper">
+        <span>Quantité :</span>
+        <button class="qty-btn" onclick="changeQty(-1)">−</button>
+        <input type="number" id="qtyInput" value="1" min="1" max="99" class="qty-input">
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+      <div class="achat-btns">
+        <button class="btn-acheter-main" onclick="acheter()">🛒 Ajouter au panier</button>
+        <a href="tel:0542960503" class="btn-appeler">📞 Appeler</a>
+      </div>
+    </div>
+
+    <!-- CONTACT WHATSAPP -->
+    <a id="btnWhatsapp" href="#" class="btn-whatsapp" target="_blank">
+      💬 Commander via WhatsApp
+    </a>
+
+    <!-- GARANTIES -->
+    <div class="fiche-garanties">
+      <div class="garantie"><span>🚚</span> Livraison partout en Algérie</div>
+      <div class="garantie"><span>✅</span> Garantie officielle incluse</div>
+      <div class="garantie"><span>🔄</span> Retour sous 7 jours</div>
+      <div class="garantie"><span>🔒</span> Paiement 100% sécurisé</div>
+    </div>
+  </div>
+</div>
+
+<!-- DESCRIPTION DÉTAILLÉE -->
+<div class="fiche-details">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('specs')">📊 Caractéristiques</button>
+    <button class="tab" onclick="showTab('desc')">📝 Description</button>
+    <button class="tab" onclick="showTab('avis')">💬 Avis clients</button>
+  </div>
+
+  <div id="tab-specs" class="tab-content active">
+    <table class="specs-table" id="specsTable">
+      <!-- générée par JS -->
+    </table>
+  </div>
+
+  <div id="tab-desc" class="tab-content">
+    <div class="description-text" id="descText">
+      <!-- générée par JS -->
+    </div>
+  </div>
+
+  <div id="tab-avis" class="tab-content">
+    <div class="avis-list">
+      <div class="avis-item">
+        <div class="avis-header"><strong>Mohammed B.</strong> <span>⭐⭐⭐⭐⭐</span></div>
+        <p>Excellent produit, livré rapidement. Très satisfait de mon achat chez Gold Phone !</p>
+        <small>Acheté il y a 2 semaines</small>
+      </div>
+      <div class="avis-item">
+        <div class="avis-header"><strong>Karima L.</strong> <span>⭐⭐⭐⭐⭐</span></div>
+        <p>Super qualité, exactement comme décrit. Je recommande vivement ce vendeur.</p>
+        <small>Acheté il y a 1 mois</small>
+      </div>
+      <div class="avis-item">
+        <div class="avis-header"><strong>Youcef A.</strong> <span>⭐⭐⭐⭐</span></div>
+        <p>Bon rapport qualité/prix. Le téléphone fonctionne parfaitement, emballage soigné.</p>
+        <small>Acheté il y a 3 semaines</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUITS SIMILAIRES -->
+<section class="similaires">
+  <h2>📦 Produits similaires</h2>
+  <div class="grid" id="similairesGrid">
+    <!-- générés par JS -->
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="logo-footer">Gold<br>Phone</div>
+      <a href="tel:0542960503" class="tel">📞 0542 96 05 03</a><br><br>
+      <a href="#" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
+      <p>📍 Tizi Ouzou, Alger, Algérie</p>
+    </div>
+    <div class="footer-middle">
+      <h3>CATÉGORIES</h3>
+      <ul>
+        <li><a href="produits.html">Téléphones portables</a></li>
+        <li><a href="produits.html?marque=Iphone">iPhone</a></li>
+        <li><a href="produits.html?marque=Samsung">Samsung</a></li>
+        <li><a href="#">Accessoires</a></li>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <h3>SUIVEZ-NOUS</h3>
+      <div class="social-links">
+        <a href="#" class="social-btn fb">f Facebook</a>
+        <a href="#" class="social-btn ig">📷 Instagram</a>
+        <a href="#" class="social-btn tk">🎵 TikTok</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Gold Phone — Tous droits réservés</p>
+  </div>
+</footer>
+
+<script>
+// ===== LIRE LES PARAMS URL =====
+const params = new URLSearchParams(window.location.search);
+const produit = {
+  id: params.get('id') || '',
+  nom: params.get('nom') || 'Smartphone',
+  prix: parseInt(params.get('prix') || '0'),
+  img: params.get('img') || '',
+  marque: params.get('marque') || '',
+  specs: params.get('specs') || '',
+  ram: params.get('ram') || '',
+  stockage: params.get('stockage') || '',
+  couleurs: params.get('couleurs') ? params.get('couleurs').split('|') : []
+};
+
+// ===== IMAGES DISPONIBLES PAR PRODUIT =====
+const galeries = {
+  'samsungs25': ['samsungs25.jpg','samsung6.jpg','samsung3.jpg'],
+  'iphone16promax': ['iphone16promax.jpg','iphone15.1.jpg','iphone15.2.jpg'],
+  'iphone17orange': ['iphone17orange.jpg','iphone17.jpg','iphone16.1.jpg'],
+  'iphone15pro': ['iphone 15 pro.jpg','iphone15.2.jpg','iphone15.3.jpg'],
+  'iphone14promax': ['iphone14pro.jpg','iphone14.2.jpg___.jpg'],
+  'iphone13pro': ['iphone13pro.jpg','iphone 13.2.jpg.jpg'],
+  'oppo1': ['oppo1.jpg','oppo2.jpg','oppo3.jpg'],
+  'oppo9': ['oppo9.jpg','oppo11.jpg','oppo12.jpg'],
+  'honor2': ['honor2.jpg','honor3.jpg','honor4.jpg'],
+  'xiomi5': ['xiomi5.jpg','xiomi4.jpg','xiomi7.jpg'],
+  'xiomi1': ['xiomi1.jpg','xiomi3.jpg','xiomi6.jpg'],
+  'infinix1': ['infinix1.jpg','infinix2.jpg','infinix4.jpg'],
+};
+const imagesGalerie = galeries[produit.id] || [produit.img];
+
+// ===== REMPLIR LA PAGE =====
+document.title = `Gold Phone - ${produit.nom}`;
+document.getElementById('breadNom').textContent = produit.nom;
+document.getElementById('ficheMarque').textContent = produit.marque;
+document.getElementById('ficheNom').textContent = produit.nom;
+document.getElementById('fichePrix').textContent = produit.prix.toLocaleString('fr-DZ') + ' DA';
+
+// Image principale
+const imgPrinc = document.getElementById('imgPrincipale');
+imgPrinc.src = 'image/' + produit.img;
+imgPrinc.alt = produit.nom;
+
+// Thumbnails
+const thumbsDiv = document.getElementById('thumbnails');
+imagesGalerie.forEach((imgName, i) => {
+  const t = document.createElement('img');
+  t.src = 'image/' + imgName;
+  t.alt = `Vue ${i+1}`;
+  t.className = 'thumbnail' + (i === 0 ? ' active' : '');
+  t.onclick = () => {
+    imgPrinc.src = 'image/' + imgName;
+    imgPrinc.alt = `Vue ${i+1}`;
+    document.querySelectorAll('.thumbnail').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+  };
+  thumbsDiv.appendChild(t);
+});
+
+// Couleurs
+const couleursDiv = document.getElementById('ficheCouleurs');
+if (produit.couleurs.length > 0) {
+  couleursDiv.innerHTML = `<p class="couleurs-label">Couleur disponible :</p><div class="couleurs-list">${
+    produit.couleurs.map((c, i) => `<button class="couleur-btn${i===0?' active':''}" onclick="selectCouleur(this)" title="${c}">${c}</button>`).join('')
+  }</div>`;
+}
+
+// Specs rapides
+const specsArr = produit.specs.split(',').map(s => s.trim()).filter(Boolean);
+const specsRapides = document.getElementById('specsRapides');
+const icones = ['⚙️','🖥️','📷','📡','🔋'];
+specsRapides.innerHTML = specsArr.map((s, i) => `
+  <div class="spec-chip"><span>${icones[i] || '•'}</span> ${s}</div>
+`).join('');
+
+// Table specs détaillée
+const specsTableData = [
+  ['Modèle', produit.nom],
+  ['Marque', produit.marque],
+  ['Processeur', specsArr[0] || '-'],
+  ['Écran', specsArr[1] || '-'],
+  ['Appareil photo', specsArr[2] || '-'],
+  ['Connectivité', specsArr[3] || '-'],
+  ['RAM', produit.ram || '-'],
+  ['Stockage', produit.stockage || '-'],
+  ['Autre', specsArr[4] || '-'],
+  ['Prix', produit.prix.toLocaleString('fr-DZ') + ' DA'],
+  ['Garantie', '12 mois officielle'],
+  ['Disponibilité', '✅ En stock'],
+];
+document.getElementById('specsTable').innerHTML = specsTableData.map(([k, v]) => `
+  <tr><td class="spec-key">${k}</td><td class="spec-val">${v}</td></tr>
+`).join('');
+
+// Description
+document.getElementById('descText').innerHTML = `
+  <h3>${produit.nom}</h3>
+  <p>Découvrez le <strong>${produit.nom}</strong> de la marque <strong>${produit.marque}</strong>, 
+  disponible exclusivement chez <strong>Gold Phone</strong>. Ce modèle offre des performances 
+  exceptionnelles avec ${produit.specs}.</p>
+  <p>Livraison disponible partout en Algérie. Garantie officielle de 12 mois incluse avec 
+  chaque appareil vendu chez Gold Phone. Produit 100% original, non reconditionné.</p>
+  ${produit.couleurs.length > 0 ? `<p>Disponible en : <strong>${produit.couleurs.join(', ')}</strong></p>` : ''}
+  <p>Pour toute question sur ce produit, n'hésitez pas à nous contacter au <a href="tel:0542960503">0542 96 05 03</a> 
+  ou via WhatsApp.</p>
+`;
+
+// WhatsApp
+const msgWA = encodeURIComponent(`Bonjour, je suis intéressé par : ${produit.nom} à ${produit.prix.toLocaleString('fr-DZ')} DA. Merci`);
+document.getElementById('btnWhatsapp').href = `https://wa.me/213542960503?text=${msgWA}`;
+
+// ===== PRODUITS SIMILAIRES =====
+const tousProduits = [
+  { id:'iphone16promax', nom:'iPhone 16 Pro Max 256GB', prix:290000, img:'iphone16promax.jpg', marque:'Iphone', specs:'A18 Pro, 6.9" OLED, Triple 48MP, 5G, Titane Desert' },
+  { id:'iphone17orange', nom:'iPhone 17 Pro Max 256GB', prix:375000, img:'iphone17orange.jpg', marque:'Iphone', specs:'A19 Pro, 6.9" ProMotion OLED, 5G' },
+  { id:'samsungs25', nom:'Samsung Galaxy S25 Ultra', prix:260000, img:'samsungs25.jpg', marque:'Samsung', specs:'Snapdragon 8 Elite, 200MP, S Pen, 5G' },
+  { id:'honor2', nom:'Honor Magic 8 Pro 12GB 512GB', prix:240000, img:'honor2.jpg', marque:'Honor', specs:'Kirin 9010, 6.8" OLED, Triple 50MP, 5G' },
+  { id:'iphone15pro', nom:'iPhone 15 Pro 128GB', prix:225000, img:'iphone 15 pro.jpg', marque:'Iphone', specs:'A17 Pro, Triple 48MP, 5G' },
+  { id:'iphone14promax', nom:'iPhone 14 Pro Max 128GB', prix:156000, img:'iphone14pro.jpg', marque:'Iphone', specs:'A16 Bionic, Dynamic Island, 5G' },
+  { id:'infinix1', nom:'Infinix GT30 Pro 12GB 256GB', prix:60000, img:'infinix1.jpg', marque:'Infinix', specs:'Dimensity 8200, 144Hz AMOLED, 5G' },
+  { id:'xiomi1', nom:'Redmi Note 14 8GB 256GB', prix:41000, img:'xiomi1.jpg', marque:'Xiaomi', specs:'Snapdragon 7s Gen 3, 50MP, 5G' },
+  { id:'oppo1', nom:'Oppo Find X9 Pro 16GB 512GB', prix:228000, img:'oppo1.jpg', marque:'Oppo', specs:'Snapdragon 8 Elite, Hasselblad, 5G' },
+];
+
+const similaires = tousProduits.filter(p => p.marque === produit.marque && p.id !== produit.id).slice(0, 4);
+if (similaires.length === 0) {
+  const autres = tousProduits.filter(p => p.id !== produit.id).slice(0, 4);
+  afficherSimilaires(autres);
+} else {
+  afficherSimilaires(similaires);
+}
+
+function afficherSimilaires(liste) {
+  document.getElementById('similairesGrid').innerHTML = liste.map(p => `
+    <div class="card" onclick="voirFiche('${p.id}', '${p.nom.replace(/'/g,"\\'")}', '${p.prix}', '${p.img}', '${p.marque}', '${p.specs.replace(/'/g,"\\'")}', '', '', '')">
+      <img src="image/${p.img}" class="imgg" alt="${p.nom}" onerror="this.src='data:image/svg+xml,<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"185\\" height=\\"200\\"><rect width=\\"185\\" height=\\"200\\" fill=\\"%23f0f0f0\\"/><text x=\\"50%\\" y=\\"50%\\" text-anchor=\\"middle\\" fill=\\"%23aaa\\" dy=\\".35em\\">📱</text></svg>'">
+      <a href="produits.html?marque=${p.marque}" class="mrq" onclick="event.stopPropagation()">${p.marque}</a>
+      <h5>${p.nom}</h5>
+      <p class="price">${p.prix.toLocaleString('fr-DZ')} DA</p>
+      <div class="card-actions">
+        <button class="btn btn-buy" onclick="event.stopPropagation()">🛒 Acheter</button>
+        <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== FONCTIONS =====
+function voirFiche(id, nom, prix, img, marque, specs, ram, stockage, couleurs) {
+  const p = new URLSearchParams({ id, nom, prix, img, marque, specs, ram, stockage, couleurs });
+  window.location.href = 'fiche-produit.html?' + p.toString();
+}
+
+function changeQty(d) {
+  const input = document.getElementById('qtyInput');
+  const val = Math.max(1, Math.min(99, parseInt(input.value) + d));
+  input.value = val;
+}
+
+function acheter() {
+  const qty = document.getElementById('qtyInput').value;
+  alert(`✅ ${qty}x ${produit.nom} ajouté au panier!\nPrix total : ${(produit.prix * qty).toLocaleString('fr-DZ')} DA\n\nPour finaliser votre commande, appelez le 0542 96 05 03`);
+}
+
+function selectCouleur(btn) {
+  document.querySelectorAll('.couleur-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function showTab(tab) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.tab[onclick="showTab('${tab}')"]`).classList.add('active');
+  document.getElementById(`tab-${tab}`).classList.add('active');
+}
+
+function toggleMenu() {
+  const menu = document.getElementById('dropdown');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.account-menu')) {
+    const d = document.getElementById('dropdown');
+    if (d) d.style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>

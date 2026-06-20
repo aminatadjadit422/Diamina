@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold Phone - Passer Commande</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ==============================
+   PAGE COMMANDE
+============================== */
+.commande-section {
+  background: #f4f4f8;
+  min-height: calc(100vh - 120px);
+  padding: 32px 40px 60px;
+}
+
+.commande-section h1 {
+  font-size: 24px;
+  color: #1a1a2e;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+.commande-section .cmd-subtitle {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+
+/* Steps indicator */
+.steps-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 32px;
+  background: white;
+  border-radius: 14px;
+  padding: 18px 24px;
+  border: 1.5px solid #ececec;
+}
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  position: relative;
+}
+.step-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(100% - 160px);
+  height: 2px;
+  background: #eee;
+  left: 160px;
+}
+.step-item.done:not(:last-child)::after { background: #e91e8c; }
+.step-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  color: #aaa;
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: 0.3s;
+}
+.step-item.active .step-num { background: #e91e8c; color: white; box-shadow: 0 4px 12px rgba(233,30,140,0.35); }
+.step-item.done .step-num { background: #4caf50; color: white; }
+.step-info .step-label { font-size: 12px; color: #aaa; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.step-info .step-title { font-size: 13px; color: #333; font-weight: 700; }
+.step-item.active .step-info .step-title { color: #e91e8c; }
+.step-item.done .step-info .step-title { color: #4caf50; }
+
+/* Layout */
+.commande-layout {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Form block */
+.form-block {
+  background: white;
+  border-radius: 16px;
+  border: 1.5px solid #ececec;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.form-block-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 22px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+.form-block-header .block-icon { font-size: 18px; }
+.form-block-header h2 { color: #f5c518; font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-block-body { padding: 24px 22px; }
+
+/* Fields */
+.field-group-cmd {
+  margin-bottom: 16px;
+}
+.field-group-cmd label {
+  display: block;
+  font-size: 13px;
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.field-group-cmd input,
+.field-group-cmd select,
+.field-group-cmd textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #222;
+  background: white;
+  outline: none;
+  transition: 0.3s;
+  font-family: Arial, sans-serif;
+}
+.field-group-cmd input:focus,
+.field-group-cmd select:focus,
+.field-group-cmd textarea:focus {
+  border-color: #e91e8c;
+  box-shadow: 0 0 0 3px rgba(233,30,140,0.1);
+}
+.field-group-cmd textarea { resize: vertical; min-height: 80px; }
+.field-group-cmd .req { color: #e91e8c; }
+
+.field-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+/* Wilaya select */
+.wilaya-select option { color: #222; }
+
+/* Livraison options */
+.livraison-options { display: flex; flex-direction: column; gap: 12px; }
+.livraison-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.livraison-option:hover { border-color: #e91e8c50; background: #fff5fb; }
+.livraison-option.selected { border-color: #e91e8c; background: #fce4f420; }
+.livraison-option input[type="radio"] { accent-color: #e91e8c; }
+.liv-icon { font-size: 26px; }
+.liv-info { flex: 1; }
+.liv-info strong { display: block; font-size: 14px; color: #1a1a2e; }
+.liv-info span { font-size: 12px; color: #888; }
+.liv-price {
+  font-size: 15px;
+  font-weight: 900;
+  color: #e91e8c;
+  white-space: nowrap;
+}
+.liv-price.free { color: #4caf50; }
+
+/* Paiement options */
+.paiement-options { display: flex; flex-direction: column; gap: 12px; }
+.paiement-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.paiement-option:hover { border-color: #e91e8c50; background: #fff5fb; }
+.paiement-option.selected { border-color: #e91e8c; background: #fce4f420; }
+.paiement-option input[type="radio"] { accent-color: #e91e8c; }
+.pay-icon { font-size: 26px; }
+.pay-info { flex: 1; }
+.pay-info strong { display: block; font-size: 14px; color: #1a1a2e; }
+.pay-info span { font-size: 12px; color: #888; }
+
+/* Résumé commande droite */
+.cmd-resume {
+  background: white;
+  border-radius: 16px;
+  border: 1.5px solid #ececec;
+  overflow: hidden;
+  position: sticky;
+  top: 80px;
+}
+.cmd-resume-header {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  padding: 18px 22px;
+}
+.cmd-resume-header h2 { color: #f5c518; font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+.cmd-resume-body { padding: 20px; }
+
+/* Mini items */
+.cmd-mini-items { margin-bottom: 16px; }
+.cmd-mini-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.cmd-mini-item:last-child { border-bottom: none; }
+.cmd-mini-item img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #f5f5f5;
+  padding: 4px;
+}
+.cmd-mini-info { flex: 1; min-width: 0; }
+.cmd-mini-info .mini-name { font-size: 12px; font-weight: 700; color: #1a1a2e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cmd-mini-info .mini-qte { font-size: 11px; color: #aaa; }
+.cmd-mini-price { font-size: 13px; font-weight: 800; color: #e91e8c; white-space: nowrap; }
+
+/* Lines */
+.cmd-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #666;
+  padding: 6px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+.cmd-line:last-of-type { border-bottom: none; }
+.cmd-line .val { font-weight: 700; color: #222; }
+.cmd-line.free .val { color: #4caf50; }
+
+.cmd-total-box {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 14px 0;
+}
+.cmd-total-box .t-lbl { color: #ccc; font-size: 13px; }
+.cmd-total-box .t-val { color: #f5c518; font-size: 20px; font-weight: 900; }
+
+.btn-cmd-submit {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #e91e8c, #c2185b);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 20px rgba(233,30,140,0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.btn-cmd-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(233,30,140,0.55); }
+
+.cmd-secure { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 11px; color: #aaa; margin-top: 10px; }
+
+.cmd-garanties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #f0f0f0;
+}
+.cmd-garantie {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #666;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 7px 10px;
+}
+
+/* Confirmation modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.show { display: flex; }
+.modal-box {
+  background: white;
+  border-radius: 20px;
+  padding: 40px 36px;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes popIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.modal-success-icon { font-size: 64px; margin-bottom: 16px; display: block; }
+.modal-box h2 { font-size: 22px; font-weight: 900; color: #1a1a2e; margin-bottom: 10px; }
+.modal-box p { color: #666; font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+.modal-order-num {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #f5c518;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+.modal-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-modal-home {
+  flex: 1;
+  padding: 13px 20px;
+  background: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn-modal-home:hover { background: #0f3460; }
+.btn-modal-continue {
+  flex: 1;
+  padding: 13px 20px;
+  background: linear-gradient(135deg, #e91e8c, #c2185b);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn-modal-continue:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Alert inline */
+.cmd-alert {
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: none;
+}
+.cmd-alert.error { background: rgba(229,57,53,0.1); border: 1px solid #c62828; color: #e53935; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .commande-layout { grid-template-columns: 1fr; }
+  .cmd-resume { position: static; }
+  .steps-bar { overflow-x: auto; }
+}
+@media (max-width: 768px) {
+  .commande-section { padding: 20px 16px 40px; }
+  .field-row-2, .field-row-3 { grid-template-columns: 1fr; }
+  .step-item:not(:last-child)::after { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-header">
+    <span class="logo-text">Gold<br>Phone</span>
+  </div>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque..." onkeyup="rechercherProduit()">
+    <span class="search-icon">🔍</span>
+  </div>
+  <div class="account-menu">
+    <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
+    <div id="dropdown" class="dropdown">
+      <a href="connexion.html">Créer un compte</a>
+      <a href="connexion.html">Se connecter</a>
+    </div>
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="menu">
+  <a href="index.html">ACCUEIL</a>
+  <a href="produits.html">NOS PRODUITS</a>
+  <a href="#">ACCESSOIRES</a>
+  <a href="commande.html" class="active">COMMANDE</a>
+  <a href="#">À PROPOS</a>
+</nav>
+
+<!-- COMMANDE SECTION -->
+<section class="commande-section">
+  <h1>📦 Passer Commande</h1>
+  <p class="cmd-subtitle">Remplissez vos informations pour finaliser votre achat</p>
+
+  <!-- Steps -->
+  <div class="steps-bar">
+    <div class="step-item done">
+      <div class="step-num">✓</div>
+      <div class="step-info">
+        <div class="step-label">Étape 1</div>
+        <div class="step-title">Panier</div>
+      </div>
+    </div>
+    <div class="step-item active">
+      <div class="step-num">2</div>
+      <div class="step-info">
+        <div class="step-label">Étape 2</div>
+        <div class="step-title">Livraison</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-info">
+        <div class="step-label">Étape 3</div>
+        <div class="step-title">Paiement</div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-info">
+        <div class="step-label">Étape 4</div>
+        <div class="step-title">Confirmation</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="commande-layout">
+
+    <!-- Colonne formulaire -->
+    <div>
+      <div id="cmd-alert" class="cmd-alert error"></div>
+
+      <!-- Infos personnelles -->
+      <div class="form-block">
+        <div class="form-block-header">
+          <span class="block-icon">👤</span>
+          <h2>Informations personnelles</h2>
+        </div>
+        <div class="form-block-body">
+          <div class="field-row-2">
+            <div class="field-group-cmd">
+              <label>Prénom <span class="req">*</span></label>
+              <input type="text" id="cmd-prenom" placeholder="Votre prénom">
+            </div>
+            <div class="field-group-cmd">
+              <label>Nom <span class="req">*</span></label>
+              <input type="text" id="cmd-nom" placeholder="Votre nom">
+            </div>
+          </div>
+          <div class="field-row-2">
+            <div class="field-group-cmd">
+              <label>Téléphone <span class="req">*</span></label>
+              <input type="tel" id="cmd-tel" placeholder="05XX XX XX XX">
+            </div>
+            <div class="field-group-cmd">
+              <label>Téléphone secondaire</label>
+              <input type="tel" id="cmd-tel2" placeholder="(optionnel)">
+            </div>
+          </div>
+          <div class="field-group-cmd">
+            <label>Adresse email</label>
+            <input type="email" id="cmd-email" placeholder="Pour le reçu de commande (optionnel)">
+          </div>
+        </div>
+      </div>
+
+      <!-- Adresse livraison -->
+      <div class="form-block">
+        <div class="form-block-header">
+          <span class="block-icon">📍</span>
+          <h2>Adresse de livraison</h2>
+        </div>
+        <div class="form-block-body">
+          <div class="field-row-2">
+            <div class="field-group-cmd">
+              <label>Wilaya <span class="req">*</span></label>
+              <select id="cmd-wilaya" class="wilaya-select">
+                <option value="">Choisir une wilaya...</option>
+                <option>01 - Adrar</option><option>02 - Chlef</option><option>03 - Laghouat</option>
+                <option>04 - Oum El Bouaghi</option><option>05 - Batna</option><option>06 - Béjaïa</option>
+                <option>07 - Biskra</option><option>08 - Béchar</option><option>09 - Blida</option>
+                <option>10 - Bouira</option><option>11 - Tamanrasset</option><option>12 - Tébessa</option>
+                <option>13 - Tlemcen</option><option>14 - Tiaret</option><option>15 - Tizi Ouzou</option>
+                <option>16 - Alger</option><option>17 - Djelfa</option><option>18 - Jijel</option>
+                <option>19 - Sétif</option><option>20 - Saïda</option><option>21 - Skikda</option>
+                <option>22 - Sidi Bel Abbès</option><option>23 - Annaba</option><option>24 - Guelma</option>
+                <option>25 - Constantine</option><option>26 - Médéa</option><option>27 - Mostaganem</option>
+                <option>28 - M'Sila</option><option>29 - Mascara</option><option>30 - Ouargla</option>
+                <option>31 - Oran</option><option>32 - El Bayadh</option><option>33 - Illizi</option>
+                <option>34 - Bordj Bou Arréridj</option><option>35 - Boumerdès</option>
+                <option>36 - El Tarf</option><option>37 - Tindouf</option><option>38 - Tissemsilt</option>
+                <option>39 - El Oued</option><option>40 - Khenchela</option><option>41 - Souk Ahras</option>
+                <option>42 - Tipaza</option><option>43 - Mila</option><option>44 - Aïn Defla</option>
+                <option>45 - Naâma</option><option>46 - Aïn Témouchent</option><option>47 - Ghardaïa</option>
+                <option>48 - Relizane</option>
+              </select>
+            </div>
+            <div class="field-group-cmd">
+              <label>Commune / Ville <span class="req">*</span></label>
+              <input type="text" id="cmd-commune" placeholder="Ex: Tizi Ouzou, Bab El Oued...">
+            </div>
+          </div>
+          <div class="field-group-cmd">
+            <label>Adresse complète <span class="req">*</span></label>
+            <input type="text" id="cmd-adresse" placeholder="N° rue, quartier, lotissement...">
+          </div>
+          <div class="field-group-cmd">
+            <label>Informations complémentaires</label>
+            <textarea id="cmd-info" placeholder="Point de repère, instructions pour le livreur, étage..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode de livraison -->
+      <div class="form-block">
+        <div class="form-block-header">
+          <span class="block-icon">🚚</span>
+          <h2>Mode de livraison</h2>
+        </div>
+        <div class="form-block-body">
+          <div class="livraison-options">
+            <div class="livraison-option selected" onclick="selectLivraison(this, 0)">
+              <input type="radio" name="livraison" checked>
+              <span class="liv-icon">🏠</span>
+              <div class="liv-info">
+                <strong>Livraison à domicile</strong>
+                <span>Livraison en 2-5 jours ouvrables partout en Algérie</span>
+              </div>
+              <span class="liv-price">500 DA</span>
+            </div>
+            <div class="livraison-option" onclick="selectLivraison(this, 0)">
+              <input type="radio" name="livraison">
+              <span class="liv-icon">🏪</span>
+              <div class="liv-info">
+                <strong>Retrait en point relais (Yalidine / Zaki)</strong>
+                <span>Disponible sous 24-48h. Récupérez à votre convenance.</span>
+              </div>
+              <span class="liv-price free">Gratuite</span>
+            </div>
+            <div class="livraison-option" onclick="selectLivraison(this, 0)">
+              <input type="radio" name="livraison">
+              <span class="liv-icon">⚡</span>
+              <div class="liv-info">
+                <strong>Livraison express (Alger + banlieue)</strong>
+                <span>Livraison le jour même ou J+1 (zone Alger uniquement)</span>
+              </div>
+              <span class="liv-price">1 200 DA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode de paiement -->
+      <div class="form-block">
+        <div class="form-block-header">
+          <span class="block-icon">💳</span>
+          <h2>Mode de paiement</h2>
+        </div>
+        <div class="form-block-body">
+          <div class="paiement-options">
+            <div class="paiement-option selected" onclick="selectPaiement(this)">
+              <input type="radio" name="paiement" checked>
+              <span class="pay-icon">💵</span>
+              <div class="pay-info">
+                <strong>Paiement à la livraison (contre remboursement)</strong>
+                <span>Payez en espèces à la réception de votre colis</span>
+              </div>
+            </div>
+            <div class="paiement-option" onclick="selectPaiement(this)">
+              <input type="radio" name="paiement">
+              <span class="pay-icon">🏦</span>
+              <div class="pay-info">
+                <strong>Virement bancaire / CCP</strong>
+                <span>Transférez le montant total sur notre compte CCP</span>
+              </div>
+            </div>
+            <div class="paiement-option" onclick="selectPaiement(this)">
+              <input type="radio" name="paiement">
+              <span class="pay-icon">💳</span>
+              <div class="pay-info">
+                <strong>Carte Edahabia / CIB</strong>
+                <span>Paiement en ligne sécurisé via Satim</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Note spéciale -->
+      <div class="form-block">
+        <div class="form-block-header">
+          <span class="block-icon">📝</span>
+          <h2>Note de commande (optionnel)</h2>
+        </div>
+        <div class="form-block-body">
+          <div class="field-group-cmd">
+            <label>Remarques particulières</label>
+            <textarea id="cmd-note" placeholder="Souhaitez-vous une couleur précise, un emballage cadeau, une inscription..."></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Colonne résumé commande -->
+    <div>
+      <div class="cmd-resume">
+        <div class="cmd-resume-header">
+          <h2>🛒 Votre Commande</h2>
+        </div>
+        <div class="cmd-resume-body">
+
+          <!-- Mini items list -->
+          <div class="cmd-mini-items" id="cmd-mini-items">
+            <!-- Généré par JS -->
+          </div>
+
+          <!-- Ligne calculs -->
+          <div class="cmd-line">
+            <span>Sous-total</span>
+            <span class="val" id="cmd-sous-total">0 DA</span>
+          </div>
+          <div class="cmd-line free">
+            <span>🚚 Livraison</span>
+            <span class="val" id="cmd-livraison">500 DA</span>
+          </div>
+
+          <div class="cmd-total-box">
+            <span class="t-lbl">Total TTC</span>
+            <span class="t-val" id="cmd-total">0 DA</span>
+          </div>
+
+          <button class="btn-cmd-submit" onclick="validerCommande()">
+            ✅ Confirmer la commande
+          </button>
+          <div class="cmd-secure">🔒 Commande 100% sécurisée</div>
+
+          <div class="cmd-garanties">
+            <div class="cmd-garantie">🚚 Livraison rapide</div>
+            <div class="cmd-garantie">✅ Garantie officielle</div>
+            <div class="cmd-garantie">🔄 Retour 7 jours</div>
+            <div class="cmd-garantie">📞 SAV disponible</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODAL CONFIRMATION -->
+<div class="modal-overlay" id="modal-confirmation">
+  <div class="modal-box">
+    <span class="modal-success-icon">🎉</span>
+    <h2>Commande confirmée !</h2>
+    <p>Merci pour votre commande chez <strong>Gold Phone</strong>. Notre équipe vous contactera dans les plus brefs délais pour confirmer la livraison.</p>
+    <div class="modal-order-num" id="modal-order-num">#GP-XXXXXX</div>
+    <p style="font-size:13px;color:#888;margin-bottom:20px;">📞 Un conseiller vous appellera au numéro indiqué dans les 24h.</p>
+    <div class="modal-btns">
+      <a href="index.html" class="btn-modal-home">🏠 Retour accueil</a>
+      <a href="produits.html" class="btn-modal-continue">📱 Continuer achats</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="logo-footer">Gold<br>Phone</div>
+      <a href="tel:0542960503" class="tel">📞 0542 96 05 03</a><br><br>
+      <a href="#" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
+      <p>📍 Tizi Ouzou, Alger, Algérie</p>
+    </div>
+    <div class="footer-middle">
+      <h3>CATÉGORIES</h3>
+      <ul>
+        <li><a href="produits.html">Téléphones portables</a></li>
+        <li><a href="produits.html?marque=Iphone">iPhone</a></li>
+        <li><a href="produits.html?marque=Samsung">Samsung</a></li>
+        <li><a href="#">Accessoires</a></li>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <h3>SUIVEZ-NOUS</h3>
+      <div class="social-links">
+        <a href="#" class="social-btn fb">f Facebook</a>
+        <a href="#" class="social-btn ig">📷 Instagram</a>
+        <a href="#" class="social-btn tk">🎵 TikTok</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Gold Phone — Tous droits réservés</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+// ---- Load cart ----
+let cart = JSON.parse(localStorage.getItem('goldphone_cart') || '[]');
+let livraisonCost = 500;
+
+// Demo items si panier vide
+if (cart.length === 0) {
+  cart = [
+    { id: 'iphone16promax', nom: 'iPhone 16 Pro Max 256GB', prix: 290000, img: 'image/iphone16promax.jpg', marque: 'Apple', qte: 1 },
+    { id: 'samsungs25', nom: 'Samsung Galaxy S25 Ultra', prix: 260000, img: 'image/samsungs25.jpg', marque: 'Samsung', qte: 1 },
+  ];
+}
+
+function formatPrix(n) {
+  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+// Render mini cart
+function renderMiniCart() {
+  const container = document.getElementById('cmd-mini-items');
+  container.innerHTML = '';
+  cart.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'cmd-mini-item';
+    el.innerHTML = `
+      <img src="${item.img || ''}" onerror="this.style.display='none'" alt="${item.nom}">
+      <div class="cmd-mini-info">
+        <div class="mini-name">${item.nom}</div>
+        <div class="mini-qte">Qté : ${item.qte}</div>
+      </div>
+      <div class="cmd-mini-price">${formatPrix(item.prix * item.qte)} DA</div>
+    `;
+    container.appendChild(el);
+  });
+  updateTotal();
+}
+
+function updateTotal() {
+  const sousTotal = cart.reduce((s, i) => s + i.prix * i.qte, 0);
+  const total = sousTotal + livraisonCost;
+  document.getElementById('cmd-sous-total').textContent = formatPrix(sousTotal) + ' DA';
+  document.getElementById('cmd-total').textContent = formatPrix(total) + ' DA';
+}
+
+// Livraison
+function selectLivraison(el, cost) {
+  document.querySelectorAll('.livraison-option').forEach(o => {
+    o.classList.remove('selected');
+    o.querySelector('input').checked = false;
+  });
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+  // Update cost from option
+  const priceEl = el.querySelector('.liv-price');
+  if (priceEl.classList.contains('free')) {
+    livraisonCost = 0;
+    document.getElementById('cmd-livraison').textContent = 'Gratuite';
+  } else {
+    livraisonCost = parseInt(priceEl.textContent.replace(/\s/g, '')) || 500;
+    document.getElementById('cmd-livraison').textContent = priceEl.textContent;
+  }
+  updateTotal();
+}
+
+// Paiement
+function selectPaiement(el) {
+  document.querySelectorAll('.paiement-option').forEach(o => {
+    o.classList.remove('selected');
+    o.querySelector('input').checked = false;
+  });
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+}
+
+// Validation et confirmation
+function validerCommande() {
+  const prenom = document.getElementById('cmd-prenom').value.trim();
+  const nom = document.getElementById('cmd-nom').value.trim();
+  const tel = document.getElementById('cmd-tel').value.trim();
+  const wilaya = document.getElementById('cmd-wilaya').value;
+  const commune = document.getElementById('cmd-commune').value.trim();
+  const adresse = document.getElementById('cmd-adresse').value.trim();
+  const alert = document.getElementById('cmd-alert');
+
+  if (!prenom || !nom || !tel || !wilaya || !commune || !adresse) {
+    alert.textContent = '⚠️ Veuillez remplir tous les champs obligatoires (*).';
+    alert.style.display = 'block';
+    alert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+  if (!/^0[5-7]\d{8}$/.test(tel.replace(/\s/g, ''))) {
+    alert.textContent = '⚠️ Numéro de téléphone invalide. Format : 05XX XX XX XX';
+    alert.style.display = 'block';
+    return;
+  }
+  alert.style.display = 'none';
+
+  // Générer numéro de commande
+  const orderNum = '#GP-' + Date.now().toString().slice(-6);
+  document.getElementById('modal-order-num').textContent = orderNum;
+
+  // Vider le panier
+  localStorage.removeItem('goldphone_cart');
+
+  // Afficher modal
+  document.getElementById('modal-confirmation').classList.add('show');
+}
+
+// Header
+function toggleMenu() {
+  const menu = document.getElementById('dropdown');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.account-menu')) document.getElementById('dropdown').style.display = 'none';
+});
+function rechercherProduit() {
+  const val = document.getElementById('searchInput').value.toLowerCase();
+  if (val.length > 1) window.location.href = 'produits.html?q=' + encodeURIComponent(val);
+}
+
+// Init
+renderMiniCart();
+</script>
+</body>
+</html>

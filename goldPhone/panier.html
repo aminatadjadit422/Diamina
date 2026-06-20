@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold Phone - Mon Panier</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ==============================
+   PAGE PANIER
+============================== */
+.panier-section {
+  background: #f4f4f8;
+  min-height: calc(100vh - 120px);
+  padding: 30px 40px 60px;
+}
+
+.panier-section h1 {
+  font-size: 24px;
+  color: #1a1a2e;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+.panier-section .panier-subtitle {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+
+/* Layout */
+.panier-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Empty State */
+.panier-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 40px;
+  background: white;
+  border-radius: 18px;
+  border: 2px dashed #e0e0e0;
+}
+.panier-empty .empty-icon { font-size: 64px; margin-bottom: 18px; }
+.panier-empty h2 { color: #1a1a2e; font-size: 20px; margin-bottom: 10px; }
+.panier-empty p { color: #888; font-size: 14px; margin-bottom: 24px; }
+.btn-empty-shop {
+  display: inline-block;
+  padding: 13px 32px;
+  background: linear-gradient(135deg, #e91e8c, #c2185b);
+  color: white;
+  border-radius: 30px;
+  font-weight: 800;
+  font-size: 15px;
+  text-decoration: none;
+  transition: 0.3s;
+  box-shadow: 0 4px 16px rgba(233,30,140,0.35);
+}
+.btn-empty-shop:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(233,30,140,0.5); }
+
+/* Items list */
+.panier-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Item card */
+.panier-item {
+  background: white;
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border: 1.5px solid #ececec;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.panier-item:hover { border-color: #e91e8c50; box-shadow: 0 6px 20px rgba(233,30,140,0.1); }
+
+.panier-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(135deg, #e91e8c, #f5c518);
+  border-radius: 4px 0 0 4px;
+}
+
+.item-img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #f8f8f8;
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+.item-info { flex: 1; min-width: 0; }
+.item-brand { font-size: 11px; color: #e91e8c; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+.item-name { font-size: 15px; font-weight: 800; color: #1a1a2e; margin: 3px 0 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item-variant { font-size: 12px; color: #888; }
+
+.item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.item-price {
+  font-size: 18px;
+  font-weight: 900;
+  color: #e91e8c;
+  white-space: nowrap;
+}
+.item-price-unit { font-size: 11px; color: #bbb; font-weight: 400; }
+
+/* Qty control */
+.qty-control {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.qty-ctrl-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: #f5f5f5;
+  color: #333;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.qty-ctrl-btn:hover { background: #e91e8c; color: white; }
+.qty-display {
+  width: 44px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #1a1a2e;
+  border: none;
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  background: white;
+  padding: 0;
+  height: 34px;
+}
+
+.btn-delete-item {
+  background: none;
+  border: 1.5px solid #ffcdd2;
+  border-radius: 8px;
+  padding: 5px 10px;
+  color: #e53935;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 600;
+}
+.btn-delete-item:hover { background: #e53935; color: white; border-color: #e53935; }
+
+/* Header bar */
+.panier-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: 14px;
+  padding: 14px 20px;
+  border: 1px solid #ececec;
+  margin-bottom: 4px;
+}
+.panier-count { font-size: 14px; color: #555; }
+.panier-count strong { color: #1a1a2e; }
+.btn-clear-cart {
+  background: none;
+  border: 1px solid #ffcdd2;
+  color: #e53935;
+  font-size: 13px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+.btn-clear-cart:hover { background: #e53935; color: white; border-color: #e53935; }
+
+/* Résumé commande */
+.panier-resume {
+  background: white;
+  border-radius: 18px;
+  border: 1.5px solid #ececec;
+  overflow: hidden;
+  position: sticky;
+  top: 80px;
+}
+.resume-header {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  padding: 18px 22px;
+}
+.resume-header h2 {
+  color: #f5c518;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.resume-body { padding: 22px; }
+
+.resume-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  color: #555;
+}
+.resume-line:last-of-type { border-bottom: none; }
+.resume-line .label { }
+.resume-line .val { font-weight: 700; color: #222; }
+.resume-line.livraison .val { color: #4caf50; font-weight: 700; }
+
+.resume-total {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 16px 0;
+}
+.resume-total .t-label { color: #ccc; font-size: 14px; font-weight: 600; }
+.resume-total .t-val { color: #f5c518; font-size: 22px; font-weight: 900; }
+
+/* Promo code */
+.promo-section {
+  margin-bottom: 16px;
+}
+.promo-section label {
+  display: block;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 6px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.promo-input-row {
+  display: flex;
+  gap: 8px;
+}
+.promo-input-row input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 13px;
+  outline: none;
+  transition: 0.3s;
+}
+.promo-input-row input:focus { border-color: #e91e8c; }
+.btn-promo {
+  padding: 10px 16px;
+  background: #1a1a2e;
+  color: #f5c518;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+  white-space: nowrap;
+}
+.btn-promo:hover { background: #e91e8c; color: white; }
+.promo-msg { font-size: 12px; margin-top: 6px; }
+.promo-msg.ok { color: #4caf50; }
+.promo-msg.err { color: #e53935; }
+
+/* Paiement methods */
+.paiement-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.paiement-methods label {
+  display: block;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.pay-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 13px;
+  color: #444;
+}
+.pay-option:hover { border-color: #e91e8c; background: #fce4f410; }
+.pay-option input[type="radio"] { accent-color: #e91e8c; }
+.pay-option.selected { border-color: #e91e8c; background: #fce4f420; color: #e91e8c; font-weight: 600; }
+
+/* Btn commander */
+.btn-commander {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #e91e8c, #c2185b);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 20px rgba(233,30,140,0.35);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.btn-commander:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(233,30,140,0.55);
+}
+
+.secure-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 12px;
+}
+
+/* Cross-sell */
+.panier-cross {
+  background: white;
+  border-radius: 16px;
+  padding: 22px 20px;
+  border: 1.5px solid #ececec;
+  margin-top: 4px;
+}
+.panier-cross h3 {
+  color: #1a1a2e;
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e91e8c;
+  display: inline-block;
+}
+.cross-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cross-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.cross-item:hover { border-color: #e91e8c50; background: #fff5fb; }
+.cross-item img { width: 50px; height: 50px; object-fit: contain; border-radius: 6px; background: #f8f8f8; }
+.cross-item-info { flex: 1; }
+.cross-item-info .cross-name { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+.cross-item-info .cross-price { font-size: 13px; color: #e91e8c; font-weight: 700; }
+.btn-add-cross {
+  padding: 6px 14px;
+  background: #1a1a2e;
+  color: #f5c518;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+.btn-add-cross:hover { background: #e91e8c; color: white; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .panier-layout { grid-template-columns: 1fr; }
+  .panier-resume { position: static; }
+}
+@media (max-width: 768px) {
+  .panier-section { padding: 20px 16px 40px; }
+  .panier-item { flex-wrap: wrap; }
+  .item-right { flex-direction: row; align-items: center; width: 100%; justify-content: space-between; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-header">
+    <span class="logo-text">Gold<br>Phone</span>
+  </div>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque..." onkeyup="rechercherProduit()">
+    <span class="search-icon">🔍</span>
+  </div>
+  <div class="account-menu">
+    <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
+    <div id="dropdown" class="dropdown">
+      <a href="connexion.html">Créer un compte</a>
+      <a href="connexion.html">Se connecter</a>
+    </div>
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="menu">
+  <a href="index.html">ACCUEIL</a>
+  <a href="produits.html">NOS PRODUITS</a>
+  <a href="#">ACCESSOIRES</a>
+  <a href="commande.html">COMMANDE</a>
+  <a href="#">À PROPOS</a>
+</nav>
+
+<!-- PANIER SECTION -->
+<section class="panier-section">
+  <h1>🛒 Mon Panier</h1>
+  <p class="panier-subtitle">Vérifiez vos articles avant de passer commande</p>
+
+  <div class="panier-layout" id="panier-layout">
+
+    <!-- Colonne gauche : items -->
+    <div>
+      <!-- Header bar -->
+      <div class="panier-header-bar" id="panier-header-bar">
+        <span class="panier-count"><strong id="items-count">0</strong> article(s) dans votre panier</span>
+        <button class="btn-clear-cart" onclick="viderPanier()">🗑️ Vider le panier</button>
+      </div>
+
+      <!-- Liste des items -->
+      <div class="panier-items" id="panier-items">
+        <!-- Généré par JS -->
+      </div>
+
+      <!-- Empty state (caché si des items) -->
+      <div class="panier-empty" id="panier-empty" style="display:none">
+        <div class="empty-icon">🛒</div>
+        <h2>Votre panier est vide</h2>
+        <p>Ajoutez des produits depuis notre catalogue pour commencer vos achats.</p>
+        <a href="produits.html" class="btn-empty-shop">🔍 Découvrir nos produits</a>
+      </div>
+    </div>
+
+    <!-- Colonne droite : résumé -->
+    <div id="panier-sidebar">
+      <!-- Résumé -->
+      <div class="panier-resume">
+        <div class="resume-header">
+          <h2>📋 Récapitulatif</h2>
+        </div>
+        <div class="resume-body">
+
+          <div class="resume-line">
+            <span class="label">Sous-total</span>
+            <span class="val" id="r-sous-total">0 DA</span>
+          </div>
+          <div class="resume-line livraison">
+            <span class="label">🚚 Livraison</span>
+            <span class="val" id="r-livraison">Gratuite</span>
+          </div>
+          <div class="resume-line">
+            <span class="label">Remise promo</span>
+            <span class="val" id="r-remise" style="color:#4caf50">- 0 DA</span>
+          </div>
+
+          <div class="resume-total">
+            <span class="t-label">Total TTC</span>
+            <span class="t-val" id="r-total">0 DA</span>
+          </div>
+
+          <!-- Code promo -->
+          <div class="promo-section">
+            <label>Code promo</label>
+            <div class="promo-input-row">
+              <input type="text" id="promo-input" placeholder="GOLD10, SUMMER20...">
+              <button class="btn-promo" onclick="appliquerPromo()">Appliquer</button>
+            </div>
+            <div class="promo-msg" id="promo-msg"></div>
+          </div>
+
+          <!-- Mode de paiement -->
+          <div class="paiement-methods">
+            <label>Mode de paiement</label>
+            <div class="pay-option selected" onclick="selectPay(this)">
+              <input type="radio" name="paiement" checked> 💵 Paiement à la livraison (CRB)
+            </div>
+            <div class="pay-option" onclick="selectPay(this)">
+              <input type="radio" name="paiement"> 🏦 Virement bancaire / CCP
+            </div>
+            <div class="pay-option" onclick="selectPay(this)">
+              <input type="radio" name="paiement"> 💳 Carte Edahabia / CIB
+            </div>
+          </div>
+
+          <button class="btn-commander" onclick="passerCommande()">
+            ✅ Passer la commande
+          </button>
+
+          <div class="secure-badge">🔒 Paiement 100% sécurisé — Gold Phone</div>
+        </div>
+      </div>
+
+      <!-- Vous aimerez aussi -->
+      <div class="panier-cross" id="cross-sell">
+        <h3>Vous aimerez aussi</h3>
+        <div class="cross-items">
+          <div class="cross-item" onclick="ajouterAuPanier('case-iphone', '🍎 Coque iPhone 16 Pro Max', 2500, null, 'Apple')">
+            <div style="width:50px;height:50px;background:#f0f4ff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:22px;">📱</div>
+            <div class="cross-item-info">
+              <div class="cross-name">Coque iPhone 16 Pro Max</div>
+              <div class="cross-price">2 500 DA</div>
+            </div>
+            <button class="btn-add-cross">+ Ajouter</button>
+          </div>
+          <div class="cross-item" onclick="ajouterAuPanier('cable-usbc', '🔌 Câble USB-C 120W', 1800, null, 'Accessoire')">
+            <div style="width:50px;height:50px;background:#f0f4ff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:22px;">🔌</div>
+            <div class="cross-item-info">
+              <div class="cross-name">Câble USB-C 120W</div>
+              <div class="cross-price">1 800 DA</div>
+            </div>
+            <button class="btn-add-cross">+ Ajouter</button>
+          </div>
+          <div class="cross-item" onclick="ajouterAuPanier('airpods-clone', '🎧 Écouteurs sans fil TWS', 5500, null, 'Audio')">
+            <div style="width:50px;height:50px;background:#f0f4ff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:22px;">🎧</div>
+            <div class="cross-item-info">
+              <div class="cross-name">Écouteurs sans fil TWS</div>
+              <div class="cross-price">5 500 DA</div>
+            </div>
+            <button class="btn-add-cross">+ Ajouter</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="logo-footer">Gold<br>Phone</div>
+      <a href="tel:0542960503" class="tel">📞 0542 96 05 03</a><br><br>
+      <a href="#" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
+      <p>📍 Tizi Ouzou, Alger, Algérie</p>
+    </div>
+    <div class="footer-middle">
+      <h3>CATÉGORIES</h3>
+      <ul>
+        <li><a href="produits.html">Téléphones portables</a></li>
+        <li><a href="produits.html?marque=Iphone">iPhone</a></li>
+        <li><a href="produits.html?marque=Samsung">Samsung</a></li>
+        <li><a href="#">Accessoires</a></li>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <h3>SUIVEZ-NOUS</h3>
+      <div class="social-links">
+        <a href="#" class="social-btn fb">f Facebook</a>
+        <a href="#" class="social-btn ig">📷 Instagram</a>
+        <a href="#" class="social-btn tk">🎵 TikTok</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Gold Phone — Tous droits réservés</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+// ==============================
+// CART STATE
+// ==============================
+let cart = JSON.parse(localStorage.getItem('goldphone_cart') || '[]');
+let promoApplied = 0;
+
+// Produits de démo (si panier vide)
+const demoItems = [
+  { id: 'iphone16promax', nom: 'iPhone 16 Pro Max 256GB', prix: 290000, img: 'image/iphone16promax.jpg', marque: 'Apple', qte: 1 },
+  { id: 'samsungs25', nom: 'Samsung Galaxy S25 Ultra', prix: 260000, img: 'image/samsungs25.jpg', marque: 'Samsung', qte: 1 },
+];
+
+// Si panier vide → charger démo
+if (cart.length === 0) {
+  cart = demoItems;
+  saveCart();
+}
+
+function saveCart() {
+  localStorage.setItem('goldphone_cart', JSON.stringify(cart));
+}
+
+// ==============================
+// RENDER
+// ==============================
+function renderCart() {
+  const container = document.getElementById('panier-items');
+  const empty = document.getElementById('panier-empty');
+  const headerBar = document.getElementById('panier-header-bar');
+  const sidebar = document.getElementById('panier-sidebar');
+  container.innerHTML = '';
+
+  if (cart.length === 0) {
+    empty.style.display = 'block';
+    headerBar.style.display = 'none';
+    sidebar.style.display = 'none';
+    return;
+  }
+
+  empty.style.display = 'none';
+  headerBar.style.display = 'flex';
+  sidebar.style.display = 'block';
+  document.getElementById('items-count').textContent = cart.reduce((s, i) => s + i.qte, 0);
+
+  cart.forEach((item, idx) => {
+    const el = document.createElement('div');
+    el.className = 'panier-item';
+    el.innerHTML = `
+      <img class="item-img" src="${item.img || ''}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" alt="${item.nom}">
+      <div style="display:none;width:90px;height:90px;background:#f0f4ff;border-radius:10px;align-items:center;justify-content:center;font-size:32px;flex-shrink:0">📱</div>
+      <div class="item-info">
+        <div class="item-brand">${item.marque}</div>
+        <div class="item-name">${item.nom}</div>
+        <div class="item-variant">Garantie 1 an incluse ✅</div>
+      </div>
+      <div class="item-right">
+        <div>
+          <div class="item-price">${formatPrix(item.prix * item.qte)} DA</div>
+          <div class="item-price-unit">${formatPrix(item.prix)} DA / unité</div>
+        </div>
+        <div class="qty-control">
+          <button class="qty-ctrl-btn" onclick="changeQte(${idx}, -1)">−</button>
+          <div class="qty-display">${item.qte}</div>
+          <button class="qty-ctrl-btn" onclick="changeQte(${idx}, 1)">+</button>
+        </div>
+        <button class="btn-delete-item" onclick="supprimerItem(${idx})">🗑️ Retirer</button>
+      </div>
+    `;
+    container.appendChild(el);
+  });
+
+  updateResume();
+}
+
+function formatPrix(n) {
+  return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+// ==============================
+// ACTIONS
+// ==============================
+function changeQte(idx, delta) {
+  cart[idx].qte = Math.max(1, cart[idx].qte + delta);
+  saveCart();
+  renderCart();
+}
+
+function supprimerItem(idx) {
+  cart.splice(idx, 1);
+  saveCart();
+  renderCart();
+}
+
+function viderPanier() {
+  if (confirm('Voulez-vous vraiment vider votre panier ?')) {
+    cart = [];
+    saveCart();
+    renderCart();
+  }
+}
+
+function ajouterAuPanier(id, nom, prix, img, marque) {
+  const existing = cart.find(i => i.id === id);
+  if (existing) {
+    existing.qte++;
+  } else {
+    cart.push({ id, nom, prix, img, marque, qte: 1 });
+  }
+  saveCart();
+  renderCart();
+  // Feedback
+  const msg = document.createElement('div');
+  msg.style.cssText = 'position:fixed;top:80px;right:20px;background:#4caf50;color:white;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:700;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.2);';
+  msg.textContent = '✅ Produit ajouté au panier !';
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 2000);
+}
+
+// ==============================
+// PROMO
+// ==============================
+const PROMOS = { 'GOLD10': 10, 'SUMMER20': 20, 'GOLDVIP': 15 };
+
+function appliquerPromo() {
+  const code = document.getElementById('promo-input').value.trim().toUpperCase();
+  const msg = document.getElementById('promo-msg');
+  if (PROMOS[code]) {
+    promoApplied = PROMOS[code];
+    msg.className = 'promo-msg ok';
+    msg.textContent = `✅ Code "${code}" appliqué : -${promoApplied}% de réduction !`;
+  } else {
+    promoApplied = 0;
+    msg.className = 'promo-msg err';
+    msg.textContent = '❌ Code promo invalide ou expiré.';
+  }
+  updateResume();
+}
+
+// ==============================
+// RÉSUMÉ
+// ==============================
+function updateResume() {
+  const sousTotal = cart.reduce((s, i) => s + i.prix * i.qte, 0);
+  const remise = Math.round(sousTotal * promoApplied / 100);
+  const total = sousTotal - remise;
+
+  document.getElementById('r-sous-total').textContent = formatPrix(sousTotal) + ' DA';
+  document.getElementById('r-remise').textContent = remise > 0 ? `- ${formatPrix(remise)} DA` : '- 0 DA';
+  document.getElementById('r-total').textContent = formatPrix(total) + ' DA';
+}
+
+// ==============================
+// PAIEMENT
+// ==============================
+function selectPay(el) {
+  document.querySelectorAll('.pay-option').forEach(o => {
+    o.classList.remove('selected');
+    o.querySelector('input').checked = false;
+  });
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+}
+
+function passerCommande() {
+  if (cart.length === 0) return;
+  window.location.href = 'commande.html';
+}
+
+// ==============================
+// HEADER
+// ==============================
+function toggleMenu() {
+  const menu = document.getElementById('dropdown');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.account-menu')) document.getElementById('dropdown').style.display = 'none';
+});
+function rechercherProduit() {
+  const val = document.getElementById('searchInput').value.toLowerCase();
+  if (val.length > 1) window.location.href = 'produits.html?q=' + encodeURIComponent(val);
+}
+
+// ==============================
+// INIT
+// ==============================
+renderCart();
+</script>
+</body>
+</html>

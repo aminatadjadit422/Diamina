@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold Phone - Smartphones & Accessoires</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-header">
+    <span class="logo-text">Gold<br>Phone</span>
+  </div>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque..." onkeyup="rechercherProduit()">
+    <span class="search-icon">🔍</span>
+  </div>
+  <div class="account-menu">
+    <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
+    <div id="dropdown" class="dropdown">
+      <a href="inscription.html">Créer un compte</a>
+      <a href="connexion.html">Se connecter</a>
+    </div>
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="menu">
+  <a href="index.html" class="active">ACCUEIL</a>
+  <a href="produits.html">NOS PRODUITS</a>
+  <a href="accessoires.html">ACCESSOIRES</a>
+  <a href="commande.html">COMMANDE</a>
+  <a href="a propos.html">À PROPOS</a>
+</nav>
+
+<!-- SLIDER HERO -->
+<div class="slider">
+  <div class="slides">
+    <div class="slide s1">
+      <img src="image/iphone16promax.jpg" alt="iPhone 16 Pro Max">
+      <div class="slide-overlay">
+        <h2>iPhone 16 Pro Max</h2>
+        <p>La puissance à l'état pur</p>
+      </div>
+    </div>
+    <div class="slide s2">
+      <img src="image/samsungs25.jpg" alt="Samsung Galaxy S25">
+      <div class="slide-overlay">
+        <h2>Samsung Galaxy S25 Ultra</h2>
+        <p>Redéfinir l'excellence</p>
+      </div>
+    </div>
+    <div class="slide s3">
+      <img src="image/iphone17orange.jpg" alt="iPhone 17">
+      <div class="slide-overlay">
+        <h2>iPhone 17 Pro Max</h2>
+        <p>Le futur est arrivé</p>
+      </div>
+    </div>
+  </div>
+  <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+  <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
+  <div class="slider-dots">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+  </div>
+  <a href="produits.html" class="btn-acceuil">Voir nos produits</a>
+</div>
+
+<!-- HERO TITLE -->
+<div class="main">
+  <section class="hero">
+    <h1>🏆 Top Smartphones 2026</h1>
+    <p>Les meilleurs modèles au meilleur prix en Algérie</p>
+  </section>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories">
+  <h2>Rayons populaires</h2>
+  <div class="cat-grid">
+    <div class="cat" onclick="window.location.href='produits.html?marque=Iphone'">
+      <div class="cat-icon">🍎</div>
+      <h3>iPhone</h3>
+      <p class="cat-sub">Apple Series</p>
+    </div>
+    <div class="cat" onclick="window.location.href='produits.html?marque=Samsung'">
+      <div class="cat-icon">📱</div>
+      <h3>Samsung</h3>
+      <p class="cat-sub">Galaxy Series</p>
+    </div>
+    <div class="cat" onclick="window.location.href='produits.html?marque=Xiaomi'">
+      <div class="cat-icon">🔶</div>
+      <h3>Xiaomi</h3>
+      <p class="cat-sub">Redmi & Mi Series</p>
+    </div>
+    <div class="cat" onclick="window.location.href='produits.html?marque=Oppo'">
+      <div class="cat-icon">💚</div>
+      <h3>Oppo</h3>
+      <p class="cat-sub">Find & Reno Series</p>
+    </div>
+    <div class="cat" onclick="window.location.href='produits.html?marque=Infinix'">
+      <div class="cat-icon">⚡</div>
+      <h3>Infinix</h3>
+      <p class="cat-sub">GT & Note Series</p>
+    </div>
+    <div class="cat" onclick="window.location.href='produits.html?marque=Honor'">
+      <div class="cat-icon">🥇</div>
+      <h3>Honor</h3>
+      <p class="cat-sub">Magic Series</p>
+    </div>
+  </div>
+</section>
+
+<!-- TOP VENTES -->
+<section class="produits">
+  <h2>🔥 Top Ventes</h2>
+  <div class="grid" id="topGrid">
+
+    <div class="card" onclick="voirFiche('iphone16promax', 'iPhone 16 Pro Max 256GB', '290000', 'iphone16promax.jpg', 'Iphone', 'A18 Pro, 6.9&quot; OLED, Triple 48MP, 5G, Titane Desert')">
+      <div class="badge">Best Seller</div>
+      <img src="image/iphone16promax.jpg" class="imgg" alt="iPhone 16 Pro Max">
+      <a href="produits.html?marque=Iphone" class="mrq" onclick="event.stopPropagation()">Apple</a>
+      <h5>iPhone 16 Pro Max 256GB</h5>
+      <p class="price">290 000 DA</p>
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <div class="card-actions">
+        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
+      </div>
+    </div>
+
+    <div class="card" onclick="voirFiche('iphone17orange', 'iPhone 17 Pro Max 256GB', '375000', 'iphone17orange.jpg', 'Iphone', 'A19 Pro, 6.9&quot; ProMotion OLED, Quad Camera 48MP, 5G, Titane Orange')">
+      <div class="badge new">Nouveau</div>
+      <img src="image/iphone17orange.jpg" class="imgg" alt="iPhone 17">
+      <a href="produits.html?marque=Iphone" class="mrq" onclick="event.stopPropagation()">Apple</a>
+      <h5>iPhone 17 Pro Max 256GB</h5>
+      <p class="price">375 000 DA</p>
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <div class="card-actions">
+        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
+      </div>
+    </div>
+
+    <div class="card" onclick="voirFiche('samsungs25', 'Samsung Galaxy S25 Ultra 12GB 256GB', '260000', 'samsungs25.jpg', 'Samsung', 'Snapdragon 8 Elite, 6.9&quot; Dynamic AMOLED, 200MP, S Pen, 5G')">
+      <img src="image/samsungs25.jpg" class="imgg" alt="Samsung S25">
+      <a href="produits.html?marque=Samsung" class="mrq" onclick="event.stopPropagation()">Samsung</a>
+      <h5>Galaxy S25 Ultra 12GB 256GB</h5>
+      <p class="price">260 000 DA</p>
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <div class="card-actions">
+        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
+      </div>
+    </div>
+
+    <div class="card" onclick="voirFiche('iphone15pro', 'iPhone 15 Pro 128GB', '225000', 'iphone 15 pro.jpg', 'Iphone', 'A17 Pro, 6.1&quot; OLED Super Retina, Triple 48MP, 5G, Titane Naturel')">
+      <img src="image/iphone 15 pro.jpg" class="imgg" alt="iPhone 15 Pro">
+      <a href="produits.html?marque=Iphone" class="mrq" onclick="event.stopPropagation()">Apple</a>
+      <h5>iPhone 15 Pro 128GB</h5>
+      <p class="price">225 000 DA</p>
+      <div class="stars">⭐⭐⭐⭐½</div>
+      <div class="card-actions">
+        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
+      </div>
+    </div>
+
+    <div class="card" onclick="voirFiche('iphone14pro', 'iPhone 14 Pro Max 128GB', '156000', 'iphone14pro.jpg', 'Iphone', 'A16 Bionic, 6.7&quot; ProMotion OLED, Triple 48MP, 5G, Dynamic Island')">
+      <div class="badge promo">Promo</div>
+      <img src="image/iphone14pro.jpg" class="imgg" alt="iPhone 14 Pro Max">
+      <a href="produits.html?marque=Iphone" class="mrq" onclick="event.stopPropagation()">Apple</a>
+      <h5>iPhone 14 Pro Max 128GB</h5>
+      <p class="price">156 000 DA</p>
+      <div class="stars">⭐⭐⭐⭐½</div>
+      <div class="card-actions">
+        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
+      </div>
+    </div>
+
+    <div class="card" onclick="voirFiche('honor2', 'Honor Magic 8 Pro 12GB 512GB', '240000', 'honor2.jpg', 'Honor', 'Kirin 9010, 6.8&quot; OLED 120Hz, Triple 50MP, 5G, Global Version')">
+      <img src="image/honor2.jpg" class="imgg" alt="Honor Magic 8">
+      <a href="produits.html?marque=Honor" class="mrq" onclick="event.stopPropagation()">Honor</a>
+      <h5>Honor Magic 8 Pro 12GB 512GB</h5>
+      <p class="price">240 000 DA</p>
+      <div class="stars">⭐⭐⭐⭐</div>
+      <div class="card-actions">
+        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
+      </div>
+    </div>
+
+    <div class="card" onclick="voirFiche('iphone13pro', 'iPhone 13 Pro Max 128GB', '160000', 'iphone13pro.jpg', 'Iphone', 'A15 Bionic, 6.7&quot; ProMotion OLED, Triple 12MP, 5G, ProRes Video')">
+      <div class="badge promo">Promo</div>
+      <img src="image/iphone13pro.jpg" class="imgg" alt="iPhone 13 Pro Max">
+      <a href="produits.html?marque=Iphone" class="mrq" onclick="event.stopPropagation()">Apple</a>
+      <h5>iPhone 13 Pro Max 128GB</h5>
+      <p class="price">160 000 DA</p>
+      <div class="stars">⭐⭐⭐⭐</div>
+      <div class="card-actions">
+        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
+      </div>
+    </div>
+
+    <div class="card" onclick="voirFiche('infinix1', 'Infinix GT30 Pro 12GB 256GB', '60000', 'infinix1.jpg', 'Infinix', 'Dimensity 8200, 6.78&quot; AMOLED 144Hz, 108MP, 5G, Gaming Turbo')">
+      <div class="badge promo">Bon Plan</div>
+      <img src="image/infinix1.jpg" class="imgg" alt="Infinix GT30">
+      <a href="produits.html?marque=Infinix" class="mrq" onclick="event.stopPropagation()">Infinix</a>
+      <h5>Infinix GT30 Pro 12GB 256GB</h5>
+      <p class="price">60 000 DA</p>
+      <div class="stars">⭐⭐⭐⭐</div>
+      <div class="card-actions">
+        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="voir-tout-wrapper">
+    <a href="produits.html" class="btn-voirtout">Voir tous les produits →</a>
+  </div>
+</section>
+
+<!-- MARQUES -->
+<section class="brands">
+  <h2>Nos Marques</h2>
+  <div class="brand-list">
+    <a href="produits.html?marque=Iphone" class="brand-item">
+      <div class="brand-logo">🍎</div>
+      <span>Apple</span>
+    </a>
+    <a href="produits.html?marque=Samsung" class="brand-item">
+      <div class="brand-logo">🔵</div>
+      <span>Samsung</span>
+    </a>
+    <a href="produits.html?marque=Xiaomi" class="brand-item">
+      <div class="brand-logo">🔶</div>
+      <span>Xiaomi</span>
+    </a>
+    <a href="produits.html?marque=Oppo" class="brand-item">
+      <div class="brand-logo">💚</div>
+      <span>Oppo</span>
+    </a>
+    <a href="produits.html?marque=Infinix" class="brand-item">
+      <div class="brand-logo">⚡</div>
+      <span>Infinix</span>
+    </a>
+    <a href="produits.html?marque=Honor" class="brand-item">
+      <div class="brand-logo">🥇</div>
+      <span>Honor</span>
+    </a>
+  </div>
+</section>
+
+<!-- AVANTAGES -->
+<section class="avantages">
+  <div class="avantage-grid">
+    <div class="avantage">
+      <span class="av-icon">🚚</span>
+      <h4>Livraison Rapide</h4>
+      <p>Livraison partout en Algérie</p>
+    </div>
+    <div class="avantage">
+      <span class="av-icon">✅</span>
+      <h4>Produits Garantis</h4>
+      <p>Garantie officielle sur tous les appareils</p>
+    </div>
+    <div class="avantage">
+      <span class="av-icon">💳</span>
+      <h4>Paiement Sécurisé</h4>
+      <p>CCP, Virement, Livraison contre remboursement</p>
+    </div>
+    <div class="avantage">
+      <span class="av-icon">🔧</span>
+      <h4>SAV Disponible</h4>
+      <p>Service après-vente réactif</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="logo-footer">Gold<br>Phone</div>
+      <a href="tel:0542960503" class="tel">📞 0542 96 05 03</a><br><br>
+      <a href="#" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
+      <p>📍 Tizi Ouzou, Alger, Algérie</p>
+    </div>
+    <div class="footer-middle">
+      <h3>CATÉGORIES</h3>
+      <ul>
+        <li><a href="produits.html">Téléphones portables</a></li>
+        <li><a href="produits.html?marque=Iphone">iPhone</a></li>
+        <li><a href="produits.html?marque=Samsung">Samsung</a></li>
+        <li><a href="#">Accessoires</a></li>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <h3>SUIVEZ-NOUS</h3>
+      <div class="social-links">
+        <a href="#" class="social-btn fb">f Facebook</a>
+        <a href="#" class="social-btn ig">📷 Instagram</a>
+        <a href="#" class="social-btn tk">🎵 TikTok</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Gold Phone — Tous droits réservés</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+// Slider
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+
+function updateSlider() {
+  slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+  dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+}
+
+function changeSlide(dir) {
+  currentSlide = (currentSlide + dir + slides.length) % slides.length;
+  updateSlider();
+}
+
+function goToSlide(i) {
+  currentSlide = i;
+  updateSlider();
+}
+
+updateSlider();
+setInterval(() => changeSlide(1), 4000);
+
+// Dropdown
+function toggleMenu() {
+  const menu = document.getElementById('dropdown');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.account-menu')) {
+    document.getElementById('dropdown').style.display = 'none';
+  }
+});
+
+// Voir fiche produit
+function voirFiche(id, nom, prix, img, marque, specs) {
+  const params = new URLSearchParams({ id, nom, prix, img, marque, specs });
+  window.location.href = 'fiche-produit.html?' + params.toString();
+}
+
+// Recherche
+function rechercherProduit() {
+  const val = document.getElementById('searchInput').value.toLowerCase();
+  if (val.length > 1) {
+    window.location.href = 'produits.html?q=' + encodeURIComponent(val);
+  }
+}
+</script>
+</body>
+</html>

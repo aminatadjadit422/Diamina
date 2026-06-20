@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gold Phone - Nos Produits</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-header">
+    <span class="logo-text">Gold<br>Phone</span>
+  </div>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque..." oninput="filtrerProduits()">
+    <span class="search-icon">🔍</span>
+  </div>
+  <div class="account-menu">
+    <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
+    <div id="dropdown" class="dropdown">
+      <a href="inscription.html">Créer un compte</a>
+      <a href="connexion.html">Se connecter</a>
+    </div>
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="menu">
+  <a href="index.html">ACCUEIL</a>
+  <a href="produits.html" class="active">NOS PRODUITS</a>
+  <a href="accessoires.html">ACCESSOIRES</a>
+  <a href="commande.html">COMMANDE</a>
+  <a href="a propos.html">À PROPOS</a>
+</nav>
+
+<!-- PAGE TITLE -->
+<div class="page-title">
+  <h1>📱 Nos Produits</h1>
+  <p>Découvrez notre catalogue complet de smartphones</p>
+</div>
+
+<!-- FILTRES -->
+<div class="filtres-bar">
+  <div class="filtres-marques">
+    <button class="filtre-btn active" data-marque="tous">Tous</button>
+    <button class="filtre-btn" data-marque="Iphone">🍎 iPhone</button>
+    <button class="filtre-btn" data-marque="Samsung">🔵 Samsung</button>
+    <button class="filtre-btn" data-marque="Xiaomi">🔶 Xiaomi</button>
+    <button class="filtre-btn" data-marque="Oppo">💚 Oppo</button>
+    <button class="filtre-btn" data-marque="Infinix">⚡ Infinix</button>
+    <button class="filtre-btn" data-marque="Honor">🥇 Honor</button>
+  </div>
+  <div class="tri-select">
+    <select onchange="trierProduits(this.value)">
+      <option value="">Trier par...</option>
+      <option value="prix-asc">Prix croissant</option>
+      <option value="prix-desc">Prix décroissant</option>
+      <option value="nom">Nom A-Z</option>
+    </select>
+  </div>
+</div>
+
+<!-- RÉSULTATS -->
+<div class="resultats-info">
+  <span id="nbResultats">Chargement...</span>
+</div>
+
+<!-- GRILLE PRODUITS -->
+<section class="produits-page">
+  <div class="grid" id="produitsGrid">
+    <!-- Les cartes seront injectées ici par JS -->
+  </div>
+  <div id="aucunResultat" class="aucun-resultat" style="display:none;">
+    <p>😕 Aucun produit trouvé pour cette recherche.</p>
+    <button onclick="resetFiltres()">Voir tous les produits</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="logo-footer">Gold<br>Phone</div>
+      <a href="tel:0542960503" class="tel">📞 0542 96 05 03</a><br><br>
+      <a href="#" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
+      <p>📍 Tizi Ouzou, Alger, Algérie</p>
+    </div>
+    <div class="footer-middle">
+      <h3>CATÉGORIES</h3>
+      <ul>
+        <li><a href="produits.html">Téléphones portables</a></li>
+        <li><a href="produits.html?marque=Iphone">iPhone</a></li>
+        <li><a href="produits.html?marque=Samsung">Samsung</a></li>
+        <li><a href="#">Accessoires</a></li>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <h3>SUIVEZ-NOUS</h3>
+      <div class="social-links">
+        <a href="#" class="social-btn fb">f Facebook</a>
+        <a href="#" class="social-btn ig">📷 Instagram</a>
+        <a href="#" class="social-btn tk">🎵 TikTok</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Gold Phone — Tous droits réservés</p>
+  </div>
+</footer>
+
+<script>
+// ===== BASE DE DONNÉES DES PRODUITS =====
+const produits = [
+  // ---- IPHONE ----
+  { id:'iphone17promax', nom:'iPhone 17 Pro Max 256GB', prix:375000, img:'iphone17orange.jpg', marque:'Iphone', badge:'Nouveau', stars:5, specs:'A19 Pro, 6.9" ProMotion OLED, Quad Camera 48MP, 5G, Titane Orange', ram:'8GB', stockage:'256GB', couleurs:['Orange Titanium','Space Black','White Titanium'] },
+  { id:'iphone17', nom:'iPhone 17 256GB', prix:230000, img:'iphone17.jpg', marque:'Iphone', badge:'Nouveau', stars:5, specs:'A19, 6.1" OLED Super Retina, Double 48MP, 5G, Aluminium', ram:'8GB', stockage:'256GB', couleurs:['Noir','Blanc','Rose','Bleu'] },
+  { id:'iphone16promax', nom:'iPhone 16 Pro Max 256GB', prix:290000, img:'iphone16promax.jpg', marque:'Iphone', badge:'Best Seller', stars:5, specs:'A18 Pro, 6.9" OLED, Triple 48MP, 5G, Titane Desert', ram:'8GB', stockage:'256GB', couleurs:['Desert Titanium','Black','White','Natural'] },
+  { id:'iphone16plus', nom:'iPhone 16 Plus 128GB', prix:180000, img:'iphone16.1.jpg', marque:'Iphone', badge:'', stars:4, specs:'A18, 6.7" OLED, Double 48MP+12MP, 5G, Action Button', ram:'8GB', stockage:'128GB', couleurs:['Noir','Blanc','Rose','Vert','Ultra Blue'] },
+  { id:'iphone15pro', nom:'iPhone 15 Pro 128GB', prix:225000, img:'iphone 15 pro.jpg', marque:'Iphone', badge:'', stars:5, specs:'A17 Pro, 6.1" Super Retina OLED, Triple 48MP, 5G, Titane Naturel', ram:'8GB', stockage:'128GB', couleurs:['Natural Titanium','Blue Titanium','Black','White'] },
+  { id:'iphone152', nom:'iPhone 15 256GB', prix:195000, img:'iphone15.1.jpg', marque:'Iphone', badge:'', stars:4, specs:'A16 Bionic, 6.1" Super Retina OLED, Double 48MP+12MP, 5G', ram:'6GB', stockage:'256GB', couleurs:['Noir','Rose','Jaune','Vert','Bleu'] },
+  { id:'iphone14promax', nom:'iPhone 14 Pro Max 128GB', prix:156000, img:'iphone14pro.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A16 Bionic, 6.7" ProMotion OLED, Triple 48MP, 5G, Dynamic Island', ram:'6GB', stockage:'128GB', couleurs:['Deep Purple','Gold','Silver','Space Black'] },
+  { id:'iphone14', nom:'iPhone 14 256GB', prix:130000, img:'iphone14.2.jpg___.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A15 Bionic, 6.1" Super Retina OLED, Double 12MP, 5G', ram:'6GB', stockage:'256GB', couleurs:['Midnight','Starlight','Blue','Purple','Yellow'] },
+  { id:'iphone13pro', nom:'iPhone 13 Pro Max 128GB', prix:160000, img:'iphone13pro.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A15 Bionic, 6.7" ProMotion OLED, Triple 12MP, 5G, ProRes Video', ram:'6GB', stockage:'128GB', couleurs:['Alpine Green','Sierra Blue','Gold','Silver','Graphite'] },
+  { id:'iphone13', nom:'iPhone 13 128GB', prix:110000, img:'iphone 13.2.jpg.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A15 Bionic, 6.1" Super Retina OLED, Double 12MP, 5G', ram:'4GB', stockage:'128GB', couleurs:['Midnight','Starlight','Pink','Blue','Green','Red'] },
+  { id:'iphone12pro', nom:'iPhone 12 Pro 128GB', prix:95000, img:'iphone12pro.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A14 Bionic, 6.1" Super Retina OLED, Triple 12MP, 5G, MagSafe', ram:'6GB', stockage:'128GB', couleurs:['Graphite','Gold','Silver','Pacific Blue'] },
+  { id:'iphone11', nom:'iPhone 11 64GB', prix:98000, img:'iphone11.jpg', marque:'Iphone', badge:'', stars:3, specs:'A13 Bionic, 6.1" Liquid Retina, Double 12MP, 4G', ram:'4GB', stockage:'64GB', couleurs:['Noir','Blanc','Rouge','Violet','Jaune','Vert'] },
+  { id:'iphone11promax', nom:'iPhone 11 Pro Max 256GB', prix:105000, img:'iphone11promax.jpg', marque:'Iphone', badge:'', stars:4, specs:'A13 Bionic, 6.5" Super Retina OLED, Triple 12MP, 4G', ram:'4GB', stockage:'256GB', couleurs:['Space Gray','Silver','Gold','Midnight Green'] },
+  { id:'iphonexr', nom:'iPhone XR 128GB', prix:72000, img:'iphonexr.jpg', marque:'Iphone', badge:'Promo', stars:3, specs:'A12 Bionic, 6.1" Liquid Retina, 12MP, 4G', ram:'3GB', stockage:'128GB', couleurs:['Noir','Blanc','Corail','Bleu','Jaune','Rouge'] },
+
+  // ---- SAMSUNG ----
+  { id:'samsungs25', nom:'Samsung Galaxy S25 Ultra 12GB 256GB', prix:260000, img:'samsungs25.jpg', marque:'Samsung', badge:'Best Seller', stars:5, specs:'Snapdragon 8 Elite, 6.9" Dynamic AMOLED 120Hz, 200MP+12MP+10MP+50MP, S Pen, 5G', ram:'12GB', stockage:'256GB', couleurs:['Titanium Gray','Titanium Black','Titanium White Silver'] },
+  { id:'samsung6', nom:'Samsung Galaxy S24 Ultra 12GB 256GB', prix:230000, img:'samsung6.jpg', marque:'Samsung', badge:'', stars:5, specs:'Snapdragon 8 Gen 3, 6.8" Dynamic AMOLED 120Hz, 200MP+12MP+10MP+50MP, S Pen, 5G', ram:'12GB', stockage:'256GB', couleurs:['Titanium Black','Titanium Gray','Titanium Violet'] },
+  { id:'samsung3', nom:'Samsung Galaxy S23 Ultra 12GB 512GB', prix:190000, img:'samsung3.jpg', marque:'Samsung', badge:'Promo', stars:4, specs:'Snapdragon 8 Gen 2, 6.8" Dynamic AMOLED 120Hz, 200MP+12MP+10MP+10MP, S Pen, 5G', ram:'12GB', stockage:'512GB', couleurs:['Phantom Black','Cream','Green','Lavender','Lime','Red'] },
+  { id:'sam', nom:'Samsung S23 Ultra 12GB 256GB', prix:110000, img:'sam.jpg', marque:'Samsung', badge:'Promo', stars:4, specs:'Snapdragon 8 Gen 2, 6.8" Dynamic AMOLED, 200MP, S Pen, 5G', ram:'12GB', stockage:'256GB', couleurs:['Phantom Black','Cream'] },
+  { id:'samsung1', nom:'Samsung Galaxy A55 8GB 256GB', prix:65000, img:'samsung1.jpg', marque:'Samsung', badge:'', stars:4, specs:'Exynos 1480, 6.6" Super AMOLED 120Hz, Triple 50MP, 5G', ram:'8GB', stockage:'256GB', couleurs:['Awesome Iceblue','Awesome Lilac','Awesome Navy'] },
+  { id:'samsung2', nom:'Samsung Galaxy A35 8GB 128GB', prix:48000, img:'samsung2.jpg', marque:'Samsung', badge:'', stars:3, specs:'Exynos 1380, 6.6" Super AMOLED 120Hz, Triple 50MP, 4G', ram:'8GB', stockage:'128GB', couleurs:['Awesome Iceblue','Awesome Lilac','Awesome Navy','Awesome Lemon'] },
+  { id:'samsung4', nom:'Samsung Galaxy S22 Ultra 12GB 256GB', prix:155000, img:'samsung4.jpg', marque:'Samsung', badge:'Promo', stars:4, specs:'Exynos 2200, 6.8" Dynamic AMOLED 120Hz, Quad 108MP, S Pen, 5G', ram:'12GB', stockage:'256GB', couleurs:['Phantom Black','Burgundy','Green','White'] },
+  { id:'samsung5', nom:'Samsung Galaxy Z Fold 5 12GB 256GB', prix:280000, img:'samsung5.jpg', marque:'Samsung', badge:'', stars:5, specs:'Snapdragon 8 Gen 2, 7.6" Foldable AMOLED 120Hz, Triple 50MP, 5G, IPX8', ram:'12GB', stockage:'256GB', couleurs:['Phantom Black','Cream','Icy Blue'] },
+
+  // ---- XIAOMI ----
+  { id:'xiomi1', nom:'Redmi Note 14 8GB 256GB', prix:41000, img:'xiomi1.jpg', marque:'Xiaomi', badge:'Bon Plan', stars:4, specs:'Snapdragon 7s Gen 3, 6.67" OLED 120Hz, Triple 50MP, 5G', ram:'8GB', stockage:'256GB', couleurs:['Moonlight White','Midnight Black','Titan Blue'] },
+  { id:'xiomi5', nom:'Xiaomi 15 12GB 256GB', prix:125000, img:'xiomi5.jpg', marque:'Xiaomi', badge:'', stars:5, specs:'Snapdragon 8 Elite, 6.36" OLED 120Hz, Leica Triple 50MP, 5G', ram:'12GB', stockage:'256GB', couleurs:['Noir','Blanc','Vert'] },
+  { id:'xiomi3', nom:'Redmi Note 13 Pro+ 12GB 256GB', prix:58000, img:'xiomi3.jpg', marque:'Xiaomi', badge:'', stars:4, specs:'Dimensity 7200 Ultra, 6.67" OLED 120Hz, 200MP, 5G, 120W Turbo Charge', ram:'12GB', stockage:'256GB', couleurs:['Aurora Purple','Midnight Black','Moonlight White'] },
+  { id:'xiomi4', nom:'Xiaomi 14 Ultra 16GB 512GB', prix:185000, img:'xiomi4.jpg', marque:'Xiaomi', badge:'', stars:5, specs:'Snapdragon 8 Gen 3, 6.73" OLED 120Hz, Leica Quad 50MP, 5G, 90W Wireless', ram:'16GB', stockage:'512GB', couleurs:['Titanium Black','Titanium White','Titanium Blue'] },
+  { id:'xiomi6', nom:'Redmi 13C 8GB 256GB', prix:28000, img:'xiomi6.jpg', marque:'Xiaomi', badge:'Bon Plan', stars:3, specs:'Helio G85, 6.74" IPS LCD, Triple 50MP, 4G', ram:'8GB', stockage:'256GB', couleurs:['Starfall Black','Glacier White','Clover Green'] },
+  { id:'xiomi7', nom:'Xiaomi 13T Pro 12GB 256GB', prix:95000, img:'xiomi7.jpg', marque:'Xiaomi', badge:'Promo', stars:4, specs:'Dimensity 9200+, 6.67" AMOLED 144Hz, Leica Triple 50MP, 5G, 144W Charge', ram:'12GB', stockage:'256GB', couleurs:['Alpine Blue','Black','Meadow Green','Titan Gray'] },
+  { id:'xiomi8', nom:'Redmi Note 14 Pro 5G 12GB 512GB', prix:72000, img:'xiomi8.jpg', marque:'Xiaomi', badge:'Nouveau', stars:4, specs:'Snapdragon 7s Gen 3, 6.67" OLED 120Hz, 200MP, 5G, 45W Charge', ram:'12GB', stockage:'512GB', couleurs:['Midnight Black','Moonlight White','Titan Blue'] },
+
+  // ---- OPPO ----
+  { id:'oppo1', nom:'Oppo Find X9 Pro 16GB 512GB', prix:228000, img:'oppo1.jpg', marque:'Oppo', badge:'', stars:5, specs:'Snapdragon 8 Elite, 6.82" AMOLED 120Hz, Hasselblad Quad 50MP, 5G, 100W SuperVOOC', ram:'16GB', stockage:'512GB', couleurs:['Space Black','Ceramic White'] },
+  { id:'oppo2', nom:'Oppo Reno 12 Pro 12GB 256GB', prix:90000, img:'oppo2.jpg', marque:'Oppo', badge:'', stars:4, specs:'Dimensity 7300 Energy, 6.7" AMOLED 120Hz, Triple 50MP+8MP+2MP, 5G, 80W SUPERVOOC', ram:'12GB', stockage:'256GB', couleurs:['Sunset Gold','Nebula Silver','Mariana Blue'] },
+  { id:'oppo3', nom:'Oppo A3 Pro 8GB 256GB', prix:42000, img:'oppo3.jpg', marque:'Oppo', badge:'Bon Plan', stars:3, specs:'Dimensity 7050, 6.67" OLED 120Hz, Double 50MP+2MP, 5G, 67W SUPERVOOC', ram:'8GB', stockage:'256GB', couleurs:['Starry Black','Icy Blue','Nebula Purple'] },
+  { id:'oppo4', nom:'Oppo Find N3 Flip 12GB 256GB', prix:185000, img:'oppo4.jpg', marque:'Oppo', badge:'', stars:5, specs:'Dimensity 9200, 6.8" Foldable AMOLED 120Hz, Triple 48MP, 5G, IPX4', ram:'12GB', stockage:'256GB', couleurs:['Sleek Black','Moonlit Purple'] },
+  { id:'oppo5', nom:'Oppo Reno 11 5G 8GB 256GB', prix:68000, img:'oppo5.jpg', marque:'Oppo', badge:'Promo', stars:4, specs:'Snapdragon 778G, 6.7" AMOLED 120Hz, Triple 50MP, 5G, 67W SUPERVOOC', ram:'8GB', stockage:'256GB', couleurs:['Rock Gray','Coral Purple'] },
+  { id:'oppo6', nom:'Oppo A58 4G 8GB 128GB', prix:32000, img:'oppo6.jpg', marque:'Oppo', badge:'', stars:3, specs:'Helio G85, 6.72" LCD 90Hz, 50MP+2MP, 4G, 33W SUPERVOOC', ram:'8GB', stockage:'128GB', couleurs:['Glowing Black','Glowing Green'] },
+  { id:'oppo7', nom:'Oppo Find X7 Ultra 16GB 1TB', prix:295000, img:'oppo7.jpg', marque:'Oppo', badge:'', stars:5, specs:'Snapdragon 8 Gen 3, 6.82" AMOLED 120Hz, Hasselblad Quad 50MP, 5G, 100W', ram:'16GB', stockage:'1TB', couleurs:['Flowy Emerald','Desert Silver'] },
+  { id:'oppo9', nom:'Oppo Find X8 12GB 256GB', prix:175000, img:'oppo9.jpg', marque:'Oppo', badge:'Nouveau', stars:5, specs:'Dimensity 9400, 6.59" OLED 120Hz, Hasselblad Triple 50MP, 5G, 80W SUPERVOOC', ram:'12GB', stockage:'256GB', couleurs:['Space Black','Moonlight White'] },
+  { id:'oppo11', nom:'Oppo Reno 13 5G 12GB 256GB', prix:85000, img:'oppo11.jpg', marque:'Oppo', badge:'Nouveau', stars:4, specs:'Dimensity 8350, 6.59" AMOLED 120Hz, Triple 50MP, 5G, 80W SUPERVOOC', ram:'12GB', stockage:'256GB', couleurs:['Marble White','Luminous Blue'] },
+  { id:'oppo12', nom:'Oppo A79 5G 8GB 256GB', prix:38000, img:'oppo12.jpg', marque:'Oppo', badge:'', stars:3, specs:'Dimensity 6020, 6.72" LCD 90Hz, 50MP+2MP, 5G, 33W SUPERVOOC', ram:'8GB', stockage:'256GB', couleurs:['Mystery Black','Glacier Blue'] },
+
+  // ---- INFINIX ----
+  { id:'infinix1', nom:'Infinix GT30 Pro 12GB 256GB', prix:60000, img:'infinix1.jpg', marque:'Infinix', badge:'Bon Plan', stars:4, specs:'Dimensity 8200, 6.78" AMOLED 144Hz, 108MP+13MP+2MP, 5G, Gaming Turbo', ram:'12GB', stockage:'256GB', couleurs:['Cyber Black','Mecha Orange','Storm White'] },
+  { id:'infinix2', nom:'Infinix Note 40 Pro 5G 12GB 256GB', prix:48000, img:'infinix2.jpg', marque:'Infinix', badge:'', stars:4, specs:'Dimensity 7020, 6.78" AMOLED 120Hz, 108MP, 5G, 45W Thunder Charge', ram:'12GB', stockage:'256GB', couleurs:['Race Black','Racing Grey','Sunset Gold'] },
+  { id:'infinix3', nom:'Infinix Hot 40i 8GB 256GB', prix:22000, img:'infinix3.jpg', marque:'Infinix', badge:'Bon Plan', stars:3, specs:'Helio G85, 6.56" IPS LCD 90Hz, 50MP, 4G, 18W Charge', ram:'8GB', stockage:'256GB', couleurs:['Horizon Blue','Palm Green','Starlit Black'] },
+  { id:'infinix4', nom:'Infinix Zero 40 5G 12GB 256GB', prix:55000, img:'infinix4.jpg', marque:'Infinix', badge:'', stars:4, specs:'Dimensity 8200, 6.78" AMOLED 144Hz, 108MP OIS, 5G, 45W Charge', ram:'12GB', stockage:'256GB', couleurs:['Volcanic Grey','Misty Lavender','Aqua Surge'] },
+  { id:'infinix6', nom:'Infinix Smart 8 Plus 8GB 128GB', prix:18000, img:'infinix6.jpg', marque:'Infinix', badge:'Bon Plan', stars:3, specs:'Helio G36, 6.6" IPS 90Hz, 50MP, 4G, 18W', ram:'8GB', stockage:'128GB', couleurs:['Timber Black','Crystal Green','Galaxy White'] },
+  { id:'infinix7', nom:'Infinix Note 30 Pro 8GB 256GB', prix:35000, img:'infinix7.jpg', marque:'Infinix', badge:'Promo', stars:3, specs:'Helio G99, 6.67" AMOLED 120Hz, 108MP, 4G, 68W All-Round FastCharge', ram:'8GB', stockage:'256GB', couleurs:['Burgundy Red','Obsidian Black','Mirage Silver'] },
+
+  // ---- HONOR ----
+  { id:'honor2', nom:'Honor Magic 8 Pro 12GB 512GB', prix:240000, img:'honor2.jpg', marque:'Honor', badge:'', stars:4, specs:'Kirin 9010, 6.8" OLED 120Hz, Triple 50MP, 5G, Global Version', ram:'12GB', stockage:'512GB', couleurs:['Purple','Silver','Black'] },
+  { id:'honor3', nom:'Honor 200 Pro 12GB 512GB', prix:155000, img:'honor3.jpg', marque:'Honor', badge:'Nouveau', stars:4, specs:'Snapdragon 8s Gen 3, 6.78" OLED 120Hz, Harcourt Triple 50MP, 5G', ram:'12GB', stockage:'512GB', couleurs:['Cyan Lake','Midnight Black','Rock Grey'] },
+  { id:'honor4', nom:'Honor Magic 6 Lite 5G 8GB 256GB', prix:72000, img:'honor4.jpg', marque:'Honor', badge:'', stars:4, specs:'Snapdragon 6 Gen 1, 6.78" OLED 120Hz, Triple 108MP, 5G', ram:'8GB', stockage:'256GB', couleurs:['Granite Black','Titanium Silver'] },
+];
+
+// ===== ÉTAT =====
+let marqueActive = 'tous';
+let recherche = '';
+let tri = '';
+
+// ===== INITIALISATION =====
+document.addEventListener('DOMContentLoaded', () => {
+  // Lire URL params
+  const params = new URLSearchParams(window.location.search);
+  const marqueURL = params.get('marque');
+  const rechercheURL = params.get('q');
+
+  if (marqueURL) {
+    marqueActive = marqueURL;
+    document.querySelectorAll('.filtre-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.marque === marqueURL || btn.dataset.marque === 'tous' && marqueURL === 'tous');
+    });
+    // Activer le bon bouton
+    const btnActif = document.querySelector(`.filtre-btn[data-marque="${marqueURL}"]`);
+    if (btnActif) {
+      document.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('active'));
+      btnActif.classList.add('active');
+    }
+  }
+
+  if (rechercheURL) {
+    recherche = rechercheURL.toLowerCase();
+    document.getElementById('searchInput').value = rechercheURL;
+  }
+
+  // Boutons de filtre
+  document.querySelectorAll('.filtre-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      marqueActive = btn.dataset.marque;
+      afficherProduits();
+    });
+  });
+
+  afficherProduits();
+});
+
+// ===== AFFICHAGE =====
+function afficherProduits() {
+  let liste = produits.filter(p => {
+    const matchMarque = marqueActive === 'tous' || p.marque === marqueActive;
+    const matchRecherche = recherche === '' || 
+      p.nom.toLowerCase().includes(recherche) || 
+      p.marque.toLowerCase().includes(recherche) ||
+      p.specs.toLowerCase().includes(recherche);
+    return matchMarque && matchRecherche;
+  });
+
+  // Tri
+  if (tri === 'prix-asc') liste.sort((a, b) => a.prix - b.prix);
+  else if (tri === 'prix-desc') liste.sort((a, b) => b.prix - a.prix);
+  else if (tri === 'nom') liste.sort((a, b) => a.nom.localeCompare(b.nom));
+
+  const grid = document.getElementById('produitsGrid');
+  const aucun = document.getElementById('aucunResultat');
+  document.getElementById('nbResultats').textContent = `${liste.length} produit${liste.length > 1 ? 's' : ''} trouvé${liste.length > 1 ? 's' : ''}`;
+
+  if (liste.length === 0) {
+    grid.innerHTML = '';
+    aucun.style.display = 'block';
+    return;
+  }
+  aucun.style.display = 'none';
+
+  grid.innerHTML = liste.map(p => `
+    <div class="card" onclick="voirFiche('${p.id}', '${p.nom.replace(/'/g,"\\'")}', '${p.prix}', '${p.img}', '${p.marque}', '${p.specs.replace(/'/g,"\\'")}', '${(p.ram||'')}', '${(p.stockage||'')}', '${(p.couleurs||[]).join('|').replace(/'/g,"\\'")}')">
+      ${p.badge ? `<div class="badge ${p.badge === 'Nouveau' ? 'new' : p.badge === 'Promo' ? 'promo' : ''}">${p.badge}</div>` : ''}
+      <img src="image/${p.img}" class="imgg" alt="${p.nom}" onerror="this.src='data:image/svg+xml,<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"185\\" height=\\"200\\"><rect width=\\"185\\" height=\\"200\\" fill=\\"%23f0f0f0\\"/><text x=\\"50%\\" y=\\"50%\\" text-anchor=\\"middle\\" fill=\\"%23aaa\\" dy=\\".35em\\">📱</text></svg>'">
+      <a href="produits.html?marque=${p.marque}" class="mrq" onclick="event.stopPropagation()">${p.marque}</a>
+      <h5>${p.nom}</h5>
+      <p class="price">${p.prix.toLocaleString('fr-DZ')} DA</p>
+      <div class="stars">${'⭐'.repeat(Math.floor(p.stars))}${p.stars % 1 ? '½' : ''}</div>
+      <div class="card-actions">
+        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filtrerProduits() {
+  recherche = document.getElementById('searchInput').value.toLowerCase();
+  afficherProduits();
+}
+
+function trierProduits(val) {
+  tri = val;
+  afficherProduits();
+}
+
+function resetFiltres() {
+  marqueActive = 'tous';
+  recherche = '';
+  tri = '';
+  document.getElementById('searchInput').value = '';
+  document.querySelectorAll('.filtre-btn').forEach(b => b.classList.toggle('active', b.dataset.marque === 'tous'));
+  afficherProduits();
+}
+
+function voirFiche(id, nom, prix, img, marque, specs, ram, stockage, couleurs) {
+  const params = new URLSearchParams({ id, nom, prix, img, marque, specs, ram: ram||'', stockage: stockage||'', couleurs: couleurs||'' });
+  window.location.href = 'fiche-produit.html?' + params.toString();
+}
+
+function toggleMenu() {
+  const menu = document.getElementById('dropdown');
+  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.account-menu')) {
+    const d = document.getElementById('dropdown');
+    if (d) d.style.display = 'none';
+  }
+});
+</script>
+</body>
+</html>
