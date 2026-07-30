@@ -3,7 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gold Phone - Passer Commande</title>
+<title>Passer Commande — Gold Phone</title>
+<meta name="description" content="Finalisez votre commande de smartphone en quelques clics : livraison en Algérie, paiement à la livraison, confirmation rapide.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="Passer Commande — Gold Phone">
+<meta property="og:description" content="Finalisez votre commande de smartphone en quelques clics : livraison en Algérie, paiement à la livraison, confirmation rapide.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta name="theme-color" content="#0b1224">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
 /* ==============================
@@ -17,7 +27,7 @@
 
 .commande-section h1 {
   font-size: 24px;
-  color: #1a1a2e;
+  color: var(--noir);
   font-weight: 900;
   margin-bottom: 6px;
 }
@@ -56,7 +66,7 @@
   background: #eee;
   left: 160px;
 }
-.step-item.done:not(:last-child)::after { background: #e91e8c; }
+.step-item.done:not(:last-child)::after { background: var(--or); }
 .step-num {
   width: 36px;
   height: 36px;
@@ -71,11 +81,11 @@
   flex-shrink: 0;
   transition: 0.3s;
 }
-.step-item.active .step-num { background: #e91e8c; color: white; box-shadow: 0 4px 12px rgba(233,30,140,0.35); }
+.step-item.active .step-num { background: var(--or); color: white; box-shadow: 0 4px 12px rgba(var(--or-rgb),0.35); }
 .step-item.done .step-num { background: #4caf50; color: white; }
 .step-info .step-label { font-size: 12px; color: #aaa; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 .step-info .step-title { font-size: 13px; color: #333; font-weight: 700; }
-.step-item.active .step-info .step-title { color: #e91e8c; }
+.step-item.active .step-info .step-title { color: var(--or); }
 .step-item.done .step-info .step-title { color: #4caf50; }
 
 /* Layout */
@@ -99,10 +109,10 @@
   align-items: center;
   gap: 12px;
   padding: 16px 22px;
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  background: linear-gradient(135deg, var(--noir), var(--noir-2));
 }
 .form-block-header .block-icon { font-size: 18px; }
-.form-block-header h2 { color: #f5c518; font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-block-header h2 { color: var(--or-clair); font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
 .form-block-body { padding: 24px 22px; }
 
 /* Fields */
@@ -133,11 +143,11 @@
 .field-group-cmd input:focus,
 .field-group-cmd select:focus,
 .field-group-cmd textarea:focus {
-  border-color: #e91e8c;
-  box-shadow: 0 0 0 3px rgba(233,30,140,0.1);
+  border-color: var(--or);
+  box-shadow: 0 0 0 3px rgba(var(--or-rgb),0.1);
 }
 .field-group-cmd textarea { resize: vertical; min-height: 80px; }
-.field-group-cmd .req { color: #e91e8c; }
+.field-group-cmd .req { color: var(--or); }
 
 .field-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
@@ -157,17 +167,17 @@
   cursor: pointer;
   transition: 0.3s;
 }
-.livraison-option:hover { border-color: #e91e8c50; background: #fff5fb; }
-.livraison-option.selected { border-color: #e91e8c; background: #fce4f420; }
-.livraison-option input[type="radio"] { accent-color: #e91e8c; }
+.livraison-option:hover { border-color: var(--or-50); background: var(--or-wash); }
+.livraison-option.selected { border-color: var(--or); background: rgba(var(--or-rgb), .13); }
+.livraison-option input[type="radio"] { accent-color: var(--or); }
 .liv-icon { font-size: 26px; }
 .liv-info { flex: 1; }
-.liv-info strong { display: block; font-size: 14px; color: #1a1a2e; }
+.liv-info strong { display: block; font-size: 14px; color: var(--noir); }
 .liv-info span { font-size: 12px; color: #888; }
 .liv-price {
   font-size: 15px;
   font-weight: 900;
-  color: #e91e8c;
+  color: var(--or);
   white-space: nowrap;
 }
 .liv-price.free { color: #4caf50; }
@@ -184,12 +194,12 @@
   cursor: pointer;
   transition: 0.3s;
 }
-.paiement-option:hover { border-color: #e91e8c50; background: #fff5fb; }
-.paiement-option.selected { border-color: #e91e8c; background: #fce4f420; }
-.paiement-option input[type="radio"] { accent-color: #e91e8c; }
+.paiement-option:hover { border-color: var(--or-50); background: var(--or-wash); }
+.paiement-option.selected { border-color: var(--or); background: rgba(var(--or-rgb), .13); }
+.paiement-option input[type="radio"] { accent-color: var(--or); }
 .pay-icon { font-size: 26px; }
 .pay-info { flex: 1; }
-.pay-info strong { display: block; font-size: 14px; color: #1a1a2e; }
+.pay-info strong { display: block; font-size: 14px; color: var(--noir); }
 .pay-info span { font-size: 12px; color: #888; }
 
 /* Résumé commande droite */
@@ -202,10 +212,10 @@
   top: 80px;
 }
 .cmd-resume-header {
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  background: linear-gradient(135deg, var(--noir), var(--noir-2));
   padding: 18px 22px;
 }
-.cmd-resume-header h2 { color: #f5c518; font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+.cmd-resume-header h2 { color: var(--or-clair); font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
 .cmd-resume-body { padding: 20px; }
 
 /* Mini items */
@@ -227,9 +237,9 @@
   padding: 4px;
 }
 .cmd-mini-info { flex: 1; min-width: 0; }
-.cmd-mini-info .mini-name { font-size: 12px; font-weight: 700; color: #1a1a2e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cmd-mini-info .mini-name { font-size: 12px; font-weight: 700; color: var(--noir); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cmd-mini-info .mini-qte { font-size: 11px; color: #aaa; }
-.cmd-mini-price { font-size: 13px; font-weight: 800; color: #e91e8c; white-space: nowrap; }
+.cmd-mini-price { font-size: 13px; font-weight: 800; color: var(--or); white-space: nowrap; }
 
 /* Lines */
 .cmd-line {
@@ -245,7 +255,7 @@
 .cmd-line.free .val { color: #4caf50; }
 
 .cmd-total-box {
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  background: linear-gradient(135deg, var(--noir), var(--noir-2));
   border-radius: 12px;
   padding: 14px 16px;
   display: flex;
@@ -254,12 +264,12 @@
   margin: 14px 0;
 }
 .cmd-total-box .t-lbl { color: #ccc; font-size: 13px; }
-.cmd-total-box .t-val { color: #f5c518; font-size: 20px; font-weight: 900; }
+.cmd-total-box .t-val { color: var(--or-clair); font-size: 20px; font-weight: 900; }
 
 .btn-cmd-submit {
   width: 100%;
   padding: 15px;
-  background: linear-gradient(135deg, #e91e8c, #c2185b);
+  background: linear-gradient(135deg, var(--or), var(--or-profond));
   color: white;
   border: none;
   border-radius: 14px;
@@ -267,11 +277,11 @@
   font-weight: 900;
   cursor: pointer;
   transition: 0.3s;
-  box-shadow: 0 4px 20px rgba(233,30,140,0.35);
+  box-shadow: 0 4px 20px rgba(var(--or-rgb),0.35);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-.btn-cmd-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(233,30,140,0.55); }
+.btn-cmd-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(var(--or-rgb),0.55); }
 
 .cmd-secure { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 11px; color: #aaa; margin-top: 10px; }
 
@@ -321,11 +331,11 @@
   to { transform: scale(1); opacity: 1; }
 }
 .modal-success-icon { font-size: 64px; margin-bottom: 16px; display: block; }
-.modal-box h2 { font-size: 22px; font-weight: 900; color: #1a1a2e; margin-bottom: 10px; }
+.modal-box h2 { font-size: 22px; font-weight: 900; color: var(--noir); margin-bottom: 10px; }
 .modal-box p { color: #666; font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
 .modal-order-num {
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
-  color: #f5c518;
+  background: linear-gradient(135deg, var(--noir), var(--noir-2));
+  color: var(--or-clair);
   border-radius: 12px;
   padding: 14px 20px;
   font-size: 18px;
@@ -337,7 +347,7 @@
 .btn-modal-home {
   flex: 1;
   padding: 13px 20px;
-  background: #1a1a2e;
+  background: var(--noir);
   color: white;
   border: none;
   border-radius: 12px;
@@ -351,11 +361,11 @@
   justify-content: center;
   gap: 6px;
 }
-.btn-modal-home:hover { background: #0f3460; }
+.btn-modal-home:hover { background: var(--noir-3); }
 .btn-modal-continue {
   flex: 1;
   padding: 13px 20px;
-  background: linear-gradient(135deg, #e91e8c, #c2185b);
+  background: linear-gradient(135deg, var(--or), var(--or-profond));
   color: white;
   border: none;
   border-radius: 12px;
@@ -399,18 +409,32 @@
 <!-- HEADER -->
 <header>
   <div class="logo-header">
-    <span class="logo-text">Gold<br>Phone</span>
+    <span class="logo-mark">GP</span>
+    <span class="logo-text">Gold<br><b>Phone</b></span>
   </div>
   <div class="search">
     <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque..." onkeyup="rechercherProduit()">
     <span class="search-icon">🔍</span>
   </div>
-  <div class="account-menu">
-    <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
-    <div id="dropdown" class="dropdown">
-      <a href="connexion.html">Créer un compte</a>
-      <a href="connexion.html">Se connecter</a>
+  <div class="header-actions">
+    <div class="account-menu">
+      <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
+      <div id="dropdown" class="dropdown">
+        <a href="connexion.html">Créer un compte</a>
+        <a href="connexion.html">Se connecter</a>
+      </div>
     </div>
+    <a href="panier.html" class="cart-icon-btn" id="cartBtn" aria-label="Mon panier">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <span class="cart-badge" id="cartCount">0</span>
+    </a>
+    <button class="hamburger-btn" onclick="toggleNav()" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -418,9 +442,9 @@
 <nav class="menu">
   <a href="index.html">ACCUEIL</a>
   <a href="produits.html">NOS PRODUITS</a>
-  <a href="#">ACCESSOIRES</a>
+  <a href="produits.html">ACCESSOIRES</a>
   <a href="commande.html" class="active">COMMANDE</a>
-  <a href="#">À PROPOS</a>
+  <a href="a-propos.html">À PROPOS</a>
 </nav>
 
 <!-- COMMANDE SECTION -->
@@ -706,7 +730,7 @@
     <div class="footer-left">
       <div class="logo-footer">Gold<br>Phone</div>
       <a href="tel:0542960503" class="tel">📞 0542 96 05 03</a><br><br>
-      <a href="#" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
+      <a href="mailto:contactGoldPhone@gmail.com" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
       <p>📍 Tizi Ouzou, Alger, Algérie</p>
     </div>
     <div class="footer-middle">
@@ -715,14 +739,14 @@
         <li><a href="produits.html">Téléphones portables</a></li>
         <li><a href="produits.html?marque=Iphone">iPhone</a></li>
         <li><a href="produits.html?marque=Samsung">Samsung</a></li>
-        <li><a href="#">Accessoires</a></li>
+        <li><a href="produits.html">Accessoires</a></li>
       </ul>
     </div>
     <div class="footer-right">
       <h3>SUIVEZ-NOUS</h3>
       <div class="social-links">
-        <a href="#" class="social-btn fb">f Facebook</a>
-        <a href="#" class="social-btn ig">📷 Instagram</a>
+        <a href="https://www.facebook.com/goldphone" target="_blank" rel="noopener noreferrer" class="social-btn fb">f Facebook</a>
+        <a href="https://www.instagram.com/goldphone" target="_blank" rel="noopener noreferrer" class="social-btn ig">📷 Instagram</a>
         <a href="#" class="social-btn tk">🎵 TikTok</a>
       </div>
     </div>

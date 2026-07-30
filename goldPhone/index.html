@@ -3,27 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gold Phone - Smartphones & Accessoires</title>
+<title>Gold Phone - Smartphones & Accessoires | Tizi Ouzou · Algérie</title>
+<meta name="description" content="Gold Phone, votre boutique de smartphones neufs et reconditionnés à Tizi Ouzou. iPhone, Samsung, Xiaomi, Oppo, Honor, Infinix. Garantie 12 mois, livraison en Algérie.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="Gold Phone - Smartphones & Accessoires | Tizi Ouzou · Algérie">
+<meta property="og:description" content="Gold Phone, votre boutique de smartphones neufs et reconditionnés à Tizi Ouzou. iPhone, Samsung, Xiaomi, Oppo, Honor, Infinix. Garantie 12 mois, livraison en Algérie.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta name="theme-color" content="#0b1224">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- BARRE D'ANNONCES (ticker) -->
+<div class="annonce-bar">
+  <div class="annonce-track" id="announceTicker">
+    <span class="annonce-item">🔥 Offre spéciale été : -15% sur tous les iPhone <span class="sep">|</span></span>
+    <span class="annonce-item">🚚 Livraison gratuite dès 100 000 DA d'achat <span class="sep">|</span></span>
+    <span class="annonce-item">✅ Garantie officielle 12 mois sur tous les appareils <span class="sep">|</span></span>
+    <span class="annonce-item">📞 Commande rapide par téléphone : 0542 96 05 03 <span class="sep">|</span></span>
+    <span class="annonce-item">🆕 iPhone 17 Pro Max en stock — quantités limitées ! <span class="sep">|</span></span>
+    <span class="annonce-item">💳 Paiement en 3× sans frais disponible <span class="sep">|</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="annonce-item">🔥 Offre spéciale été : -15% sur tous les iPhone <span class="sep">|</span></span>
+    <span class="annonce-item">🚚 Livraison gratuite dès 100 000 DA d'achat <span class="sep">|</span></span>
+    <span class="annonce-item">✅ Garantie officielle 12 mois sur tous les appareils <span class="sep">|</span></span>
+    <span class="annonce-item">📞 Commande rapide par téléphone : 0542 96 05 03 <span class="sep">|</span></span>
+    <span class="annonce-item">🆕 iPhone 17 Pro Max en stock — quantités limitées ! <span class="sep">|</span></span>
+    <span class="annonce-item">💳 Paiement en 3× sans frais disponible <span class="sep">|</span></span>
+  </div>
+</div>
+
 <!-- HEADER -->
 <header>
   <div class="logo-header">
-    <span class="logo-text">Gold<br>Phone</span>
+    <span class="logo-mark">GP</span>
+    <span class="logo-text">Gold<br><b>Phone</b></span>
   </div>
   <div class="search">
     <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque..." onkeyup="rechercherProduit()">
     <span class="search-icon">🔍</span>
   </div>
-  <div class="account-menu">
-    <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
-    <div id="dropdown" class="dropdown">
-      <a href="inscription.html">Créer un compte</a>
-      <a href="connexion.html">Se connecter</a>
+  <div class="header-actions">
+    <div class="account-menu">
+      <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
+      <div id="dropdown" class="dropdown">
+        <a href="connexion.html">Créer un compte</a>
+        <a href="connexion.html">Se connecter</a>
+      </div>
     </div>
+    <a href="panier.html" class="cart-icon-btn" id="cartBtn" aria-label="Mon panier">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <span class="cart-badge" id="cartCount">0</span>
+    </a>
+    <button class="hamburger-btn" onclick="toggleNav()" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -31,9 +74,9 @@
 <nav class="menu">
   <a href="index.html" class="active">ACCUEIL</a>
   <a href="produits.html">NOS PRODUITS</a>
-  <a href="accessoires.html">ACCESSOIRES</a>
+  <a href="produits.html">ACCESSOIRES</a>
   <a href="commande.html">COMMANDE</a>
-  <a href="a propos.html">À PROPOS</a>
+  <a href="a-propos.html">À PROPOS</a>
 </nav>
 
 <!-- SLIDER HERO -->
@@ -60,6 +103,13 @@
         <p>Le futur est arrivé</p>
       </div>
     </div>
+    <div class="slide" style="background:#0b1224;">
+      <img src="image/xiomi4.jpg" alt="Xiaomi 14 Ultra">
+      <div class="slide-overlay">
+        <h2>Xiaomi 14 Ultra</h2>
+        <p>Leica · Snapdragon 8 Gen 3</p>
+      </div>
+    </div>
   </div>
   <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
   <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
@@ -67,6 +117,7 @@
     <span class="dot active" onclick="goToSlide(0)"></span>
     <span class="dot" onclick="goToSlide(1)"></span>
     <span class="dot" onclick="goToSlide(2)"></span>
+    <span class="dot" onclick="goToSlide(3)"></span>
   </div>
   <a href="produits.html" class="btn-acceuil">Voir nos produits</a>
 </div>
@@ -77,6 +128,90 @@
     <h1>🏆 Top Smartphones 2026</h1>
     <p>Les meilleurs modèles au meilleur prix en Algérie</p>
   </section>
+</div>
+
+<!-- OFFRES FLASH -->
+<section class="flash-section">
+  <div class="flash-header">
+    <div class="flash-title">
+      <h2>⚡ Offres Flash</h2>
+      <span class="flash-label">Limité</span>
+    </div>
+    <div class="countdown" id="countdown">
+      <div class="cd-unit"><span class="cd-num" id="cd-h">05</span><span class="cd-lbl">Heures</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-m">47</span><span class="cd-lbl">Min</span></div>
+      <span class="cd-sep">:</span>
+      <div class="cd-unit"><span class="cd-num" id="cd-s">30</span><span class="cd-lbl">Sec</span></div>
+    </div>
+  </div>
+  <div class="flash-grid">
+
+    <div class="flash-card" onclick="voirFiche('iphone14pro','iPhone 14 Pro Max 128GB','156000','iphone14pro.jpg','Iphone','A16 Bionic, 6.7&quot; ProMotion OLED, Triple 48MP, 5G, Dynamic Island')">
+      <span class="flash-promo-badge">-18%</span>
+      <img src="image/iphone14pro.jpg" alt="iPhone 14 Pro Max">
+      <h5>iPhone 14 Pro Max 128GB</h5>
+      <div class="flash-prices">
+        <span class="flash-old">190 000 DA</span>
+        <span class="flash-new">156 000 DA</span>
+      </div>
+      <button class="flash-btn" onclick="event.stopPropagation(); ajouterAuPanier('iphone14pro','iPhone 14 Pro Max 128GB','156000 DA','iphone14pro.jpg')">🛒 Ajouter au panier</button>
+    </div>
+
+    <div class="flash-card" onclick="voirFiche('iphone13pro','iPhone 13 Pro Max 128GB','160000','iphone13pro.jpg','Iphone','A15 Bionic, 6.7&quot; ProMotion OLED, Triple 12MP, 5G, ProRes Video')">
+      <span class="flash-promo-badge">-20%</span>
+      <img src="image/iphone13pro.jpg" alt="iPhone 13 Pro Max">
+      <h5>iPhone 13 Pro Max 128GB</h5>
+      <div class="flash-prices">
+        <span class="flash-old">200 000 DA</span>
+        <span class="flash-new">160 000 DA</span>
+      </div>
+      <button class="flash-btn" onclick="event.stopPropagation(); ajouterAuPanier('iphone13pro','iPhone 13 Pro Max 128GB','160000 DA','iphone13pro.jpg')">🛒 Ajouter au panier</button>
+    </div>
+
+    <div class="flash-card" onclick="voirFiche('infinix1','Infinix GT30 Pro 12GB 256GB','60000','infinix1.jpg','Infinix','Dimensity 8200, 6.78&quot; AMOLED 144Hz, 108MP, 5G, Gaming Turbo')">
+      <span class="flash-promo-badge">-25%</span>
+      <img src="image/infinix1.jpg" alt="Infinix GT30 Pro">
+      <h5>Infinix GT30 Pro 12GB 256GB</h5>
+      <div class="flash-prices">
+        <span class="flash-old">80 000 DA</span>
+        <span class="flash-new">60 000 DA</span>
+      </div>
+      <button class="flash-btn" onclick="event.stopPropagation(); ajouterAuPanier('infinix1','Infinix GT30 Pro 12GB 256GB','60000 DA','infinix1.jpg')">🛒 Ajouter au panier</button>
+    </div>
+
+    <div class="flash-card" onclick="voirFiche('oppo1','Oppo Find X8 Pro 12GB 256GB','185000','oppo1.jpg','Oppo','Dimensity 9400, 6.78&quot; LTPO AMOLED, Hasselblad 50MP, 5G')">
+      <span class="flash-promo-badge">-12%</span>
+      <img src="image/oppo1.jpg" alt="Oppo Find X8 Pro">
+      <h5>Oppo Find X8 Pro 12GB 256GB</h5>
+      <div class="flash-prices">
+        <span class="flash-old">210 000 DA</span>
+        <span class="flash-new">185 000 DA</span>
+      </div>
+      <button class="flash-btn" onclick="event.stopPropagation(); ajouterAuPanier('oppo1','Oppo Find X8 Pro 12GB 256GB','185000 DA','oppo1.jpg')">🛒 Ajouter au panier</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- BANNIÈRES PROMO -->
+<div class="promo-banners">
+  <div class="promo-banner" onclick="window.location.href='produits.html?marque=Iphone'">
+    <img src="image/iphone17orange.jpg" alt="iPhone 17 Collection">
+    <div class="promo-banner-overlay">
+      <span class="promo-banner-tag">Nouveau 2026</span>
+      <h3>iPhone 17 Series</h3>
+      <p>Découvrir la collection →</p>
+    </div>
+  </div>
+  <div class="promo-banner" onclick="window.location.href='produits.html?marque=Samsung'">
+    <img src="image/samsungs25.jpg" alt="Samsung Galaxy S25">
+    <div class="promo-banner-overlay">
+      <span class="promo-banner-tag">Best Seller</span>
+      <h3>Samsung Galaxy S25 Ultra</h3>
+      <p>S Pen · 200MP · 5G →</p>
+    </div>
+  </div>
 </div>
 
 <!-- CATEGORIES -->
@@ -116,6 +251,75 @@
   </div>
 </section>
 
+<!-- NOUVEAUTÉS — scroll horizontal -->
+<section class="nouveautes-section">
+  <div class="section-header">
+    <h2>🆕 Nouveautés</h2>
+    <a href="produits.html" class="voir-plus-link">Tout voir →</a>
+  </div>
+  <div class="scroll-track-wrapper">
+    <button class="scroll-nav left" onclick="scrollTrack('nouveautes', -1)">&#8592;</button>
+    <div class="scroll-track" id="nouveautes">
+
+      <div class="scroll-card" onclick="voirFiche('iphone17orange','iPhone 17 Pro Max 256GB','375000','iphone17orange.jpg','Iphone','A19 Pro, 6.9&quot; ProMotion OLED, Quad Camera 48MP, 5G')">
+        <span class="scroll-badge">Nouveau</span>
+        <img src="image/iphone17orange.jpg" alt="iPhone 17 Pro Max">
+        <div class="sc-brand">Apple</div>
+        <div class="sc-name">iPhone 17 Pro Max 256GB</div>
+        <div class="sc-price">375 000 DA</div>
+      </div>
+
+      <div class="scroll-card" onclick="voirFiche('samsungs25','Samsung Galaxy S25 Ultra 12GB 256GB','260000','samsungs25.jpg','Samsung','Snapdragon 8 Elite, 6.9&quot; Dynamic AMOLED, 200MP, S Pen')">
+        <span class="scroll-badge">Nouveau</span>
+        <img src="image/samsungs25.jpg" alt="Samsung S25 Ultra">
+        <div class="sc-brand">Samsung</div>
+        <div class="sc-name">Galaxy S25 Ultra 12GB</div>
+        <div class="sc-price">260 000 DA</div>
+      </div>
+
+      <div class="scroll-card" onclick="voirFiche('xiomi4','Xiaomi 14 Ultra 16GB 512GB','215000','xiomi4.jpg','Xiaomi','Snapdragon 8 Gen 3, 6.73&quot; AMOLED, Leica Quad 50MP, 5G')">
+        <span class="scroll-badge">Nouveau</span>
+        <img src="image/xiomi4.jpg" alt="Xiaomi 14 Ultra">
+        <div class="sc-brand">Xiaomi</div>
+        <div class="sc-name">Xiaomi 14 Ultra 16GB 512GB</div>
+        <div class="sc-price">215 000 DA</div>
+      </div>
+
+      <div class="scroll-card" onclick="voirFiche('oppo12','Oppo Find X8 Ultra 16GB 512GB','220000','oppo12.jpg','Oppo','Snapdragon 8 Elite, 6.82&quot; LTPO AMOLED, Hasselblad 200MP')">
+        <span class="scroll-badge">Nouveau</span>
+        <img src="image/oppo12.jpg" alt="Oppo Find X8">
+        <div class="sc-brand">Oppo</div>
+        <div class="sc-name">Oppo Find X8 Ultra 16GB</div>
+        <div class="sc-price">220 000 DA</div>
+      </div>
+
+      <div class="scroll-card" onclick="voirFiche('honor4','Honor Magic 9 Pro 12GB 256GB','195000','honor4.jpg','Honor','Kirin 9020, 6.8&quot; OLED 120Hz, Triple 50MP, 5G')">
+        <span class="scroll-badge">Nouveau</span>
+        <img src="image/honor4.jpg" alt="Honor Magic 9">
+        <div class="sc-brand">Honor</div>
+        <div class="sc-name">Honor Magic 9 Pro 12GB</div>
+        <div class="sc-price">195 000 DA</div>
+      </div>
+
+      <div class="scroll-card" onclick="voirFiche('iphone16promax','iPhone 16 Pro Max 256GB','290000','iphone16promax.jpg','Iphone','A18 Pro, 6.9&quot; OLED, Triple 48MP, 5G, Titane Desert')">
+        <img src="image/iphone16promax.jpg" alt="iPhone 16 Pro Max">
+        <div class="sc-brand">Apple</div>
+        <div class="sc-name">iPhone 16 Pro Max 256GB</div>
+        <div class="sc-price">290 000 DA</div>
+      </div>
+
+      <div class="scroll-card" onclick="voirFiche('infinix6','Infinix Zero Ultra 8GB 256GB','55000','infinix6.jpg','Infinix','Dimensity 920, 6.8&quot; AMOLED 120Hz, 200MP, 180W charge')">
+        <img src="image/infinix6.jpg" alt="Infinix Zero Ultra">
+        <div class="sc-brand">Infinix</div>
+        <div class="sc-name">Infinix Zero Ultra 8GB</div>
+        <div class="sc-price">55 000 DA</div>
+      </div>
+
+    </div>
+    <button class="scroll-nav right" onclick="scrollTrack('nouveautes', 1)">&#8594;</button>
+  </div>
+</section>
+
 <!-- TOP VENTES -->
 <section class="produits">
   <h2>🔥 Top Ventes</h2>
@@ -129,7 +333,7 @@
       <p class="price">290 000 DA</p>
       <div class="stars">⭐⭐⭐⭐⭐</div>
       <div class="card-actions">
-        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <button class="btn btn-buy" onclick="event.stopPropagation(); ajouterAuPanier('iphone16promax','iPhone 16 Pro Max 256GB','290000 DA','iphone16promax.jpg')">🛒 Acheter</button>
         <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
       </div>
     </div>
@@ -142,7 +346,7 @@
       <p class="price">375 000 DA</p>
       <div class="stars">⭐⭐⭐⭐⭐</div>
       <div class="card-actions">
-        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <button class="btn btn-buy" onclick="event.stopPropagation(); ajouterAuPanier('iphone17orange','iPhone 17 Pro Max 256GB','375000 DA','iphone17orange.jpg')">🛒 Acheter</button>
         <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
       </div>
     </div>
@@ -154,7 +358,7 @@
       <p class="price">260 000 DA</p>
       <div class="stars">⭐⭐⭐⭐⭐</div>
       <div class="card-actions">
-        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <button class="btn btn-buy" onclick="event.stopPropagation(); ajouterAuPanier('samsungs25','Samsung Galaxy S25 Ultra 12GB 256GB','260000 DA','samsungs25.jpg')">🛒 Acheter</button>
         <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
       </div>
     </div>
@@ -166,7 +370,7 @@
       <p class="price">225 000 DA</p>
       <div class="stars">⭐⭐⭐⭐½</div>
       <div class="card-actions">
-        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <button class="btn btn-buy" onclick="event.stopPropagation(); ajouterAuPanier('iphone15pro','iPhone 15 Pro 128GB','225000 DA','iphone 15 pro.jpg')">🛒 Acheter</button>
         <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
       </div>
     </div>
@@ -179,7 +383,7 @@
       <p class="price">156 000 DA</p>
       <div class="stars">⭐⭐⭐⭐½</div>
       <div class="card-actions">
-        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <button class="btn btn-buy" onclick="event.stopPropagation(); ajouterAuPanier('iphone14pro','iPhone 14 Pro Max 128GB','156000 DA','iphone14pro.jpg')">🛒 Acheter</button>
         <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
       </div>
     </div>
@@ -191,7 +395,7 @@
       <p class="price">240 000 DA</p>
       <div class="stars">⭐⭐⭐⭐</div>
       <div class="card-actions">
-        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <button class="btn btn-buy" onclick="event.stopPropagation(); ajouterAuPanier('honor2','Honor Magic 8 Pro 12GB 512GB','240000 DA','honor2.jpg')">🛒 Acheter</button>
         <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
       </div>
     </div>
@@ -204,7 +408,7 @@
       <p class="price">160 000 DA</p>
       <div class="stars">⭐⭐⭐⭐</div>
       <div class="card-actions">
-        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <button class="btn btn-buy" onclick="event.stopPropagation(); ajouterAuPanier('iphone13pro','iPhone 13 Pro Max 128GB','160000 DA','iphone13pro.jpg')">🛒 Acheter</button>
         <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
       </div>
     </div>
@@ -217,7 +421,7 @@
       <p class="price">60 000 DA</p>
       <div class="stars">⭐⭐⭐⭐</div>
       <div class="card-actions">
-        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <button class="btn btn-buy" onclick="event.stopPropagation(); ajouterAuPanier('infinix1','Infinix GT30 Pro 12GB 256GB','60000 DA','infinix1.jpg')">🛒 Acheter</button>
         <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
       </div>
     </div>
@@ -228,34 +432,254 @@
   </div>
 </section>
 
+<!-- GALERIE PHOTOS -->
+<section class="galerie-section">
+  <h2>📸 Notre Galerie</h2>
+  <div class="galerie-grid">
+    <div class="gal-item" onclick="voirFiche('iphone16promax','iPhone 16 Pro Max 256GB','290000','iphone16promax.jpg','Iphone','A18 Pro, 6.9&quot; OLED, Triple 48MP')">
+      <img src="image/iphone16promax.jpg" alt="iPhone 16 Pro Max">
+      <div class="gal-overlay"><span>iPhone 16 Pro Max</span></div>
+    </div>
+    <div class="gal-item" onclick="voirFiche('samsungs25','Samsung Galaxy S25 Ultra','260000','samsungs25.jpg','Samsung','Snapdragon 8 Elite')">
+      <img src="image/samsungs25.jpg" alt="Samsung Galaxy S25">
+      <div class="gal-overlay"><span>Samsung S25 Ultra</span></div>
+    </div>
+    <div class="gal-item" onclick="voirFiche('xiomi4','Xiaomi 14 Ultra','215000','xiomi4.jpg','Xiaomi','Snapdragon 8 Gen 3')">
+      <img src="image/xiomi4.jpg" alt="Xiaomi 14 Ultra">
+      <div class="gal-overlay"><span>Xiaomi 14 Ultra</span></div>
+    </div>
+    <div class="gal-item" onclick="voirFiche('oppo12','Oppo Find X8 Ultra','220000','oppo12.jpg','Oppo','Hasselblad 200MP')">
+      <img src="image/oppo12.jpg" alt="Oppo Find X8">
+      <div class="gal-overlay"><span>Oppo Find X8 Ultra</span></div>
+    </div>
+    <div class="gal-item" onclick="voirFiche('infinix1','Infinix GT30 Pro','60000','infinix1.jpg','Infinix','Gaming 144Hz')">
+      <img src="image/infinix1.jpg" alt="Infinix GT30">
+      <div class="gal-overlay"><span>Infinix GT30 Pro</span></div>
+    </div>
+    <div class="gal-item" onclick="voirFiche('honor4','Honor Magic 9 Pro','195000','honor4.jpg','Honor','Kirin 9020')">
+      <img src="image/honor4.jpg" alt="Honor Magic 9">
+      <div class="gal-overlay"><span>Honor Magic 9 Pro</span></div>
+    </div>
+    <div class="gal-item" onclick="window.location.href='produits.html?marque=Iphone'">
+      <img src="image/iphone17orange.jpg" alt="iPhone 17">
+      <div class="gal-overlay"><span>iPhone 17 Pro Max</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- BANDEAU CHIFFRES CLÉS -->
+<div class="stats-band">
+  <div class="stat-item">
+    <span class="stat-num" data-target="2500">0</span>
+    <span class="stat-lbl">Clients satisfaits</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" data-target="150">0</span>
+    <span class="stat-lbl">Modèles disponibles</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" data-target="48">0</span>
+    <span class="stat-lbl">Wilayas livrées</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" data-target="5">0</span>
+    <span class="stat-lbl">Années d'expérience</span>
+  </div>
+</div>
+
+<!-- TROUVEUR DE BUDGET -->
+<section class="budget-finder">
+  <div class="budget-inner">
+    <div class="budget-text">
+      <div class="budget-eyebrow">🎯 Outil exclusif</div>
+      <h2>Trouvez votre smartphone selon votre budget</h2>
+      <p>Glissez le curseur et découvrez instantanément les modèles dans votre fourchette de prix.</p>
+    </div>
+    <div class="budget-slider-area">
+      <div class="budget-display">
+        <span class="budget-min-lbl">0 DA</span>
+        <span class="budget-cur-lbl" id="budgetLabel">100 000 DA</span>
+        <span class="budget-max-lbl">400 000 DA</span>
+      </div>
+      <input type="range" class="budget-range" id="budgetSlider" min="0" max="400000" value="100000" step="5000" oninput="updateBudget(this.value)">
+      <div class="budget-result" id="budgetResult">
+        <span id="budgetCount">...</span> smartphones dans ce budget
+        <a href="#" id="budgetLink" class="budget-link">Voir tous →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARATEUR RAPIDE -->
+<section class="comparateur-section">
+  <h2>⚡ Comparaison rapide</h2>
+  <p class="comp-sub">Comparez les meilleurs smartphones côte à côte</p>
+  <div class="comp-table-wrapper">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Critère</th>
+          <th>
+            <img src="image/iphone17orange.jpg" alt="iPhone 17 Pro Max">
+            <div>iPhone 17 Pro Max</div>
+            <div class="comp-prix">375 000 DA</div>
+          </th>
+          <th>
+            <img src="image/samsungs25.jpg" alt="Samsung S25 Ultra">
+            <div>Samsung S25 Ultra</div>
+            <div class="comp-prix">260 000 DA</div>
+          </th>
+          <th>
+            <img src="image/xiomi4.jpg" alt="Xiaomi 14 Ultra">
+            <div>Xiaomi 14 Ultra</div>
+            <div class="comp-prix">185 000 DA</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Processeur</td><td>Apple A19 Pro</td><td>Snapdragon 8 Elite</td><td>Snapdragon 8 Gen 3</td></tr>
+        <tr><td>Écran</td><td>6.9" OLED 120Hz</td><td>6.9" AMOLED 120Hz</td><td>6.73" OLED 120Hz</td></tr>
+        <tr><td>RAM</td><td>8 GB</td><td>12 GB</td><td>16 GB</td></tr>
+        <tr><td>Stockage</td><td>256 GB</td><td>256 GB</td><td>512 GB</td></tr>
+        <tr><td>Caméra principale</td><td>48 MP Quad</td><td>200 MP</td><td>50 MP Leica</td></tr>
+        <tr><td>Réseau</td><td><span class="comp-tag-5g">5G</span></td><td><span class="comp-tag-5g">5G</span></td><td><span class="comp-tag-5g">5G</span></td></tr>
+        <tr><td>Batterie</td><td>4685 mAh</td><td>5000 mAh</td><td>5000 mAh</td></tr>
+        <tr class="comp-row-action">
+          <td></td>
+          <td><a href="produits.html?marque=Iphone" class="comp-btn">Voir les iPhones</a></td>
+          <td><a href="produits.html?marque=Samsung" class="comp-btn">Voir les Samsung</a></td>
+          <td><a href="produits.html?marque=Xiaomi" class="comp-btn">Voir les Xiaomi</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
 <!-- MARQUES -->
 <section class="brands">
   <h2>Nos Marques</h2>
   <div class="brand-list">
-    <a href="produits.html?marque=Iphone" class="brand-item">
-      <div class="brand-logo">🍎</div>
-      <span>Apple</span>
-    </a>
-    <a href="produits.html?marque=Samsung" class="brand-item">
-      <div class="brand-logo">🔵</div>
-      <span>Samsung</span>
-    </a>
-    <a href="produits.html?marque=Xiaomi" class="brand-item">
-      <div class="brand-logo">🔶</div>
-      <span>Xiaomi</span>
-    </a>
-    <a href="produits.html?marque=Oppo" class="brand-item">
-      <div class="brand-logo">💚</div>
-      <span>Oppo</span>
-    </a>
-    <a href="produits.html?marque=Infinix" class="brand-item">
-      <div class="brand-logo">⚡</div>
-      <span>Infinix</span>
-    </a>
-    <a href="produits.html?marque=Honor" class="brand-item">
-      <div class="brand-logo">🥇</div>
-      <span>Honor</span>
-    </a>
+    <a href="produits.html?marque=Iphone" class="brand-item"><div class="brand-logo">🍎</div><span>Apple</span></a>
+    <a href="produits.html?marque=Samsung" class="brand-item"><div class="brand-logo">🔵</div><span>Samsung</span></a>
+    <a href="produits.html?marque=Xiaomi" class="brand-item"><div class="brand-logo">🔶</div><span>Xiaomi</span></a>
+    <a href="produits.html?marque=Oppo" class="brand-item"><div class="brand-logo">💚</div><span>Oppo</span></a>
+    <a href="produits.html?marque=Infinix" class="brand-item"><div class="brand-logo">⚡</div><span>Infinix</span></a>
+    <a href="produits.html?marque=Honor" class="brand-item"><div class="brand-logo">🥇</div><span>Honor</span></a>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES CLIENTS -->
+<section class="temoignages">
+  <h2>💬 Ce que disent nos clients</h2>
+  <p class="sub">Plus de 2 500 clients satisfaits à travers toute l'Algérie</p>
+  <div class="temoignages-grid">
+
+    <div class="temoignage-card">
+      <div class="temoignage-stars">⭐⭐⭐⭐⭐</div>
+      <p class="temoignage-text">Livraison rapide en 2 jours à Alger. Mon iPhone 16 Pro Max est arrivé parfaitement emballé avec sa garantie. Je recommande vivement Gold Phone !</p>
+      <div class="temoignage-author">
+        <div class="author-avatar">K</div>
+        <div class="author-info">
+          <div class="name">Karim B.</div>
+          <div class="loc">📍 Alger</div>
+          <div class="prod-bought">iPhone 16 Pro Max</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="temoignage-card">
+      <div class="temoignage-stars">⭐⭐⭐⭐⭐</div>
+      <p class="temoignage-text">Prix imbattables en Algérie. Le Samsung Galaxy S25 Ultra que j'ai commandé est 100% original, le service après-vente est réactif. Très bonne expérience.</p>
+      <div class="temoignage-author">
+        <div class="author-avatar">S</div>
+        <div class="author-info">
+          <div class="name">Sara M.</div>
+          <div class="loc">📍 Tizi Ouzou</div>
+          <div class="prod-bought">Samsung Galaxy S25 Ultra</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="temoignage-card">
+      <div class="temoignage-stars">⭐⭐⭐⭐⭐</div>
+      <p class="temoignage-text">J'ai commandé un Xiaomi 14 Ultra, produit authentique avec facture. L'équipe Gold Phone m'a bien conseillé avant l'achat. Parfait pour les gamers !</p>
+      <div class="temoignage-author">
+        <div class="author-avatar">R</div>
+        <div class="author-info">
+          <div class="name">Rami T.</div>
+          <div class="loc">📍 Oran</div>
+          <div class="prod-bought">Xiaomi 14 Ultra</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="temoignage-card">
+      <div class="temoignage-stars">⭐⭐⭐⭐⭐</div>
+      <p class="temoignage-text">Super service ! J'ai commandé un Oppo Find X8 depuis Constantine, livraison en 3 jours. Téléphone 100% original avec boîte complète. Gold Phone c'est sérieux !</p>
+      <div class="temoignage-author">
+        <div class="author-avatar">A</div>
+        <div class="author-info">
+          <div class="name">Amira L.</div>
+          <div class="loc">📍 Constantine</div>
+          <div class="prod-bought">Oppo Find X8</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GUIDE D'ACHAT -->
+<section class="guide-achat">
+  <div class="guide-header">
+    <h2>📖 Guide d'achat rapide</h2>
+    <p>Quel smartphone choisir selon votre profil ?</p>
+  </div>
+  <div class="guide-grid">
+    <div class="guide-card" onclick="window.location.href='produits.html?marque=Iphone'">
+      <div class="guide-icon">🍎</div>
+      <h3>Pour les fans Apple</h3>
+      <p>Meilleure optimisation, mises à jour longues durée, écosystème intégré.</p>
+      <ul class="guide-list">
+        <li>iPhone 17 Pro Max — 375 000 DA</li>
+        <li>iPhone 16 Pro Max — 290 000 DA</li>
+        <li>iPhone 15 Pro — 225 000 DA</li>
+      </ul>
+      <span class="guide-link">Voir les iPhones →</span>
+    </div>
+    <div class="guide-card" onclick="window.location.href='produits.html?marque=Samsung'">
+      <div class="guide-icon">📷</div>
+      <h3>Pour la photo pro</h3>
+      <p>Zoom, 200MP, nuit, vidéo 8K — les meilleurs appareils photo-smartphones.</p>
+      <ul class="guide-list">
+        <li>Samsung S25 Ultra — 260 000 DA</li>
+        <li>Xiaomi 14 Ultra Leica — 185 000 DA</li>
+        <li>Oppo Find X9 Pro — 228 000 DA</li>
+      </ul>
+      <span class="guide-link">Découvrir →</span>
+    </div>
+    <div class="guide-card" onclick="window.location.href='produits.html?marque=Xiaomi'">
+      <div class="guide-icon">💡</div>
+      <h3>Meilleur rapport qualité/prix</h3>
+      <p>Performances haut de gamme à prix accessible — les bons plans du moment.</p>
+      <ul class="guide-list">
+        <li>Infinix GT30 Pro — 60 000 DA</li>
+        <li>Redmi Note 14 — 41 000 DA</li>
+        <li>Infinix Hot 40i — 22 000 DA</li>
+      </ul>
+      <span class="guide-link">Voir les bons plans →</span>
+    </div>
+    <div class="guide-card" onclick="window.location.href='produits.html?marque=Samsung'">
+      <div class="guide-icon">🎮</div>
+      <h3>Pour les gamers</h3>
+      <p>Écrans 144Hz, processeurs Snapdragon Elite, batterie longue durée.</p>
+      <ul class="guide-list">
+        <li>Infinix GT30 Pro 144Hz — 60 000 DA</li>
+        <li>Xiaomi 13T Pro 144Hz — 95 000 DA</li>
+        <li>Samsung Galaxy Z Fold 5 — 280 000 DA</li>
+      </ul>
+      <span class="guide-link">Explorer →</span>
+    </div>
   </div>
 </section>
 
@@ -265,12 +689,12 @@
     <div class="avantage">
       <span class="av-icon">🚚</span>
       <h4>Livraison Rapide</h4>
-      <p>Livraison partout en Algérie</p>
+      <p>Livraison partout en Algérie sous 48h</p>
     </div>
     <div class="avantage">
       <span class="av-icon">✅</span>
       <h4>Produits Garantis</h4>
-      <p>Garantie officielle sur tous les appareils</p>
+      <p>Garantie officielle 12 mois sur tous les appareils</p>
     </div>
     <div class="avantage">
       <span class="av-icon">💳</span>
@@ -280,9 +704,20 @@
     <div class="avantage">
       <span class="av-icon">🔧</span>
       <h4>SAV Disponible</h4>
-      <p>Service après-vente réactif</p>
+      <p>Service après-vente réactif 7j/7</p>
     </div>
   </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <h2>📬 Restez informé des offres</h2>
+  <p>Inscrivez-vous et recevez les meilleures promos en avant-première</p>
+  <div class="newsletter-form">
+    <input type="email" id="nlEmail" placeholder="Votre adresse email...">
+    <button onclick="subscriberNewsletter()">S'inscrire</button>
+  </div>
+  <p class="newsletter-note">🔒 Aucun spam. Désinscription en un clic.</p>
 </section>
 
 <!-- FOOTER -->
@@ -291,7 +726,7 @@
     <div class="footer-left">
       <div class="logo-footer">Gold<br>Phone</div>
       <a href="tel:0542960503" class="tel">📞 0542 96 05 03</a><br><br>
-      <a href="#" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
+      <a href="mailto:contactGoldPhone@gmail.com" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
       <p>📍 Tizi Ouzou, Alger, Algérie</p>
     </div>
     <div class="footer-middle">
@@ -300,14 +735,14 @@
         <li><a href="produits.html">Téléphones portables</a></li>
         <li><a href="produits.html?marque=Iphone">iPhone</a></li>
         <li><a href="produits.html?marque=Samsung">Samsung</a></li>
-        <li><a href="#">Accessoires</a></li>
+        <li><a href="produits.html">Accessoires</a></li>
       </ul>
     </div>
     <div class="footer-right">
       <h3>SUIVEZ-NOUS</h3>
       <div class="social-links">
-        <a href="#" class="social-btn fb">f Facebook</a>
-        <a href="#" class="social-btn ig">📷 Instagram</a>
+        <a href="https://www.facebook.com/goldphone" target="_blank" rel="noopener noreferrer" class="social-btn fb">f Facebook</a>
+        <a href="https://www.instagram.com/goldphone" target="_blank" rel="noopener noreferrer" class="social-btn ig">📷 Instagram</a>
         <a href="#" class="social-btn tk">🎵 TikTok</a>
       </div>
     </div>
@@ -317,55 +752,140 @@
   </div>
 </footer>
 
+<!-- BOUTON WHATSAPP FLOTTANT -->
+<a href="https://wa.me/213542960503?text=Bonjour%20Gold%20Phone%2C%20je%20voudrais%20des%20informations%20sur%20vos%20smartphones."
+   class="whatsapp-float" target="_blank" rel="noopener" title="Contacter sur WhatsApp">
+  💬
+</a>
+
 <script src="script.js"></script>
 <script>
-// Slider
+// ========================
+// SLIDER (4 slides)
+// ========================
 let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
+const dots   = document.querySelectorAll('.dot');
 
 function updateSlider() {
   slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
-  dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+  dots.forEach((d, i)   => d.classList.toggle('active', i === currentSlide));
 }
-
 function changeSlide(dir) {
   currentSlide = (currentSlide + dir + slides.length) % slides.length;
   updateSlider();
 }
-
-function goToSlide(i) {
-  currentSlide = i;
-  updateSlider();
-}
-
+function goToSlide(i) { currentSlide = i; updateSlider(); }
 updateSlider();
 setInterval(() => changeSlide(1), 4000);
 
-// Dropdown
+// ========================
+// COMPTE À REBOURS OFFRE FLASH
+// ========================
+(function() {
+  const end = new Date();
+  end.setHours(end.getHours() + 5, end.getMinutes() + 47, end.getSeconds() + 30);
+  function tick() {
+    const now  = new Date();
+    let diff   = Math.max(0, end - now);
+    const h    = Math.floor(diff / 3600000); diff %= 3600000;
+    const m    = Math.floor(diff / 60000);   diff %= 60000;
+    const s    = Math.floor(diff / 1000);
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+// ========================
+// SCROLL HORIZONTAL (nouveautés)
+// ========================
+function scrollTrack(id, dir) {
+  const track = document.getElementById(id);
+  track.scrollBy({ left: dir * 240, behavior: 'smooth' });
+}
+
+// ========================
+// ANIMATION CHIFFRES CLÉS
+// ========================
+function animateCounters() {
+  document.querySelectorAll('.stat-num[data-target]').forEach(el => {
+    const target = parseInt(el.dataset.target);
+    let current  = 0;
+    const step   = Math.ceil(target / 50);
+    const timer  = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = current.toLocaleString('fr-DZ') + (target >= 100 ? '+' : '');
+      if (current >= target) clearInterval(timer);
+    }, 30);
+    delete el.dataset.target; // éviter re-animation
+  });
+}
+const statsObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { animateCounters(); statsObs.disconnect(); }});
+}, { threshold: 0.3 });
+const statsEl = document.querySelector('.stats-band');
+if (statsEl) statsObs.observe(statsEl);
+
+// ========================
+// NEWSLETTER
+// ========================
+function subscriberNewsletter() {
+  const email = document.getElementById('nlEmail').value.trim();
+  if (!email || !email.includes('@')) {
+    showToast('⚠️ Veuillez entrer un email valide.');
+    return;
+  }
+  showToast('✅ Merci ! Vous recevrez nos meilleures offres bientôt.');
+  document.getElementById('nlEmail').value = '';
+}
+
+// ========================
+// DROPDOWN & NAV
+// ========================
 function toggleMenu() {
   const menu = document.getElementById('dropdown');
   menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 document.addEventListener('click', (e) => {
-  if (!e.target.closest('.account-menu')) {
+  if (!e.target.closest('.account-menu'))
     document.getElementById('dropdown').style.display = 'none';
-  }
 });
 
-// Voir fiche produit
+// ========================
+// VOIR FICHE PRODUIT
+// ========================
 function voirFiche(id, nom, prix, img, marque, specs) {
   const params = new URLSearchParams({ id, nom, prix, img, marque, specs });
   window.location.href = 'fiche-produit.html?' + params.toString();
 }
 
-// Recherche
+// ========================
+// RECHERCHE
+// ========================
 function rechercherProduit() {
   const val = document.getElementById('searchInput').value.toLowerCase();
-  if (val.length > 1) {
-    window.location.href = 'produits.html?q=' + encodeURIComponent(val);
-  }
+  if (val.length > 1) window.location.href = 'produits.html?q=' + encodeURIComponent(val);
 }
+
+// ========================
+// BUDGET FINDER
+// ========================
+function updateBudget(val) {
+  const v = parseInt(val);
+  document.getElementById('budgetLabel').textContent = v.toLocaleString('fr-DZ') + ' DA';
+  const pct = (v / 400000) * 100;
+  document.getElementById('budgetSlider').style.background = 'linear-gradient(to right, var(--or) ' + pct + '%, #333 ' + pct + '%)';
+  // Count products in budget (approx from dataset)
+  const allPrices = [375000,230000,290000,180000,225000,195000,156000,130000,160000,110000,95000,98000,105000,72000,260000,230000,190000,110000,65000,48000,155000,280000,41000,125000,58000,185000,28000,95000,72000,228000,90000,42000,185000,68000,32000,295000,175000,85000,38000,60000,48000,22000,55000,18000,35000,240000,155000,72000];
+  const count = allPrices.filter(p => p <= v).length;
+  document.getElementById('budgetCount').textContent = count;
+  document.getElementById('budgetLink').href = 'produits.html';
+}
+const sliderEl = document.getElementById('budgetSlider');
+if (sliderEl) { updateBudget(sliderEl.value); }
 </script>
 </body>
 </html>

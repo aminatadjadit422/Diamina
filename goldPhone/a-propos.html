@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>À Propos — Gold Phone | Tizi Ouzou · Algérie</title>
+<meta name="description" content="Gold Phone, votre partenaire de confiance pour les smartphones neufs et reconditionnés à Tizi Ouzou, Algérie. Qualité garantie, service humain.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="À Propos — Gold Phone | Tizi Ouzou · Algérie">
+<meta property="og:description" content="Gold Phone, votre partenaire de confiance pour les smartphones neufs et reconditionnés à Tizi Ouzou, Algérie. Qualité garantie, service humain.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta name="theme-color" content="#0b1224">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── PAGE À PROPOS ── */
+
+.ap-hero {
+  background: linear-gradient(135deg, var(--noir) 0%, var(--noir-2) 60%, var(--noir-3) 100%);
+  padding: 80px 30px 72px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.ap-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(var(--or-rgb),.13) 0%, transparent 70%);
+  pointer-events: none;
+}
+.ap-hero .badge {
+  display: inline-block;
+  font-family: var(--police-titre);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--or);
+  border: 1px solid rgba(var(--or-rgb),.4);
+  padding: 6px 18px;
+  margin-bottom: 24px;
+}
+.ap-hero h1 {
+  font-family: var(--police-titre);
+  font-size: clamp(30px, 6vw, 58px);
+  font-weight: 800;
+  color: var(--creme);
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+.ap-hero h1 span { color: var(--or); }
+.ap-hero .lead {
+  font-size: 16px;
+  color: rgba(250,248,242,.6);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+.or-sep {
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--or), transparent);
+}
+
+/* ── Wrapper ── */
+.ap-body { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+/* ── Histoire ── */
+.s-histoire { padding: 72px 0 60px; }
+.hist-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.hist-text p {
+  font-size: 15px;
+  color: var(--gris);
+  line-height: 1.85;
+  margin-bottom: 14px;
+}
+.hist-text p strong { color: var(--encre); font-weight: 600; }
+.hist-card-wrap { position: relative; }
+.hist-card-wrap::before, .hist-card-wrap::after {
+  content: '';
+  position: absolute;
+  width: 20px; height: 20px;
+  border: 2px solid var(--or);
+  opacity: .75;
+  z-index: 2;
+}
+.hist-card-wrap::before { top: -8px; left: -8px; border-right: none; border-bottom: none; }
+.hist-card-wrap::after { bottom: -8px; right: -8px; border-left: none; border-top: none; }
+.hist-card {
+  background: linear-gradient(135deg, var(--noir) 0%, var(--noir-2) 100%);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.hist-card::after {
+  content: '';
+  position: absolute;
+  bottom: -28px; right: -28px;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, rgba(var(--or-rgb),.15) 0%, transparent 70%);
+}
+.hist-card .an { font-family: var(--police-titre); font-size: 68px; font-weight: 800; color: var(--or); line-height: 1; display: block; }
+.hist-card .an-sub { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(250,248,242,.4); font-weight: 600; display: block; margin-bottom: 26px; }
+.hist-card blockquote { font-size: 15px; color: rgba(250,248,242,.75); border-left: 2px solid var(--or); padding-left: 16px; font-style: italic; line-height: 1.7; }
+
+/* ── Chiffres ── */
+.s-chiffres { background: linear-gradient(135deg, var(--noir) 0%, var(--noir-2) 100%); padding: 64px 28px; }
+.s-chiffres h2 { text-align: center; font-family: var(--police-titre); font-size: 24px; font-weight: 700; color: var(--creme); margin-bottom: 44px; }
+.s-chiffres h2 span { color: var(--or); }
+.ch-grid { display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1100px; margin: 0 auto; }
+.ch-item { text-align: center; padding: 30px 16px; border-right: 1px solid rgba(var(--or-rgb),.15); }
+.ch-item:last-child { border-right: none; }
+.ch-ic { font-size: 26px; display: block; margin-bottom: 12px; }
+.ch-nb { font-family: var(--police-titre); font-size: 40px; font-weight: 800; color: var(--or); display: block; line-height: 1; margin-bottom: 8px; }
+.ch-lb { font-size: 11px; color: rgba(250,248,242,.45); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+
+/* ── Valeurs ── */
+.s-valeurs { padding: 72px 0; }
+.val-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; }
+.val-card {
+  background: #fff;
+  border: 1px solid var(--ligne);
+  padding: 32px 26px;
+  position: relative;
+  transition: box-shadow .25s, transform .22s;
+}
+.val-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--or), var(--or-clair));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s;
+}
+.val-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.07); transform: translateY(-4px); }
+.val-card:hover::after { transform: scaleX(1); }
+.val-ic { font-size: 30px; display: block; margin-bottom: 16px; }
+.val-card h3 { font-family: var(--police-titre); font-size: 16px; font-weight: 700; color: var(--encre); margin-bottom: 10px; }
+.val-card p { font-size: 14px; color: var(--gris); line-height: 1.75; }
+
+/* ── Équipe ── */
+.s-equipe { background: var(--or-wash); padding: 72px 28px; }
+.eq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 36px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+.eq-card { background: #fff; border: 1px solid var(--ligne); overflow: hidden; text-align: center; transition: box-shadow .25s; }
+.eq-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+.eq-av { background: linear-gradient(135deg, var(--noir) 0%, var(--noir-2) 100%); height: 110px; display: flex; align-items: center; justify-content: center; }
+.eq-av span { font-family: var(--police-titre); font-size: 34px; font-weight: 800; color: var(--or); }
+.eq-info { padding: 28px 18px 24px; }
+.eq-info h3 { font-family: var(--police-titre); font-size: 15px; font-weight: 700; color: var(--encre); margin-bottom: 4px; }
+.eq-poste { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--or); font-weight: 700; display: block; margin-bottom: 12px; }
+.eq-info p { font-size: 13px; color: var(--gris); line-height: 1.7; }
+
+/* ── Engagements ── */
+.s-engage { padding: 72px 0; }
+.eng-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px; }
+.eng-item { display: flex; align-items: flex-start; gap: 18px; background: #fff; border: 1px solid var(--ligne); padding: 24px 20px; transition: border-color .22s; }
+.eng-item:hover { border-color: var(--or); }
+.eng-ic { flex-shrink: 0; width: 44px; height: 44px; background: linear-gradient(135deg, var(--noir) 0%, var(--noir-2) 100%); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.eng-txt h4 { font-family: var(--police-titre); font-size: 14px; font-weight: 700; color: var(--encre); margin-bottom: 6px; }
+.eng-txt p { font-size: 13px; color: var(--gris); line-height: 1.7; }
+
+/* ── CTA ── */
+.s-cta { background: linear-gradient(135deg, var(--noir) 0%, var(--noir-3) 100%); padding: 72px 28px; text-align: center; position: relative; overflow: hidden; }
+.s-cta::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(var(--or-rgb),.1) 0%, transparent 70%); }
+.s-cta h2 { font-family: var(--police-titre); font-size: 28px; font-weight: 800; color: var(--creme); margin-bottom: 12px; position: relative; }
+.s-cta h2 span { color: var(--or); }
+.s-cta p { font-size: 15px; color: rgba(250,248,242,.55); margin-bottom: 34px; position: relative; }
+.cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+.btn-or { display: inline-flex; align-items: center; gap: 8px; background: var(--or); color: var(--noir); font-family: var(--police-titre); font-weight: 700; font-size: 14px; padding: 14px 28px; transition: background .2s, transform .2s; }
+.btn-or:hover { background: var(--or-clair); transform: translateY(-2px); }
+.btn-outline { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(var(--or-rgb),.5); color: var(--or); font-family: var(--police-titre); font-weight: 600; font-size: 14px; padding: 14px 28px; transition: border-color .2s, background .2s, transform .2s; }
+.btn-outline:hover { border-color: var(--or); background: rgba(var(--or-rgb),.08); transform: translateY(-2px); }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .hist-grid { grid-template-columns: 1fr; gap: 36px; }
+  .ch-grid { grid-template-columns: repeat(2,1fr); }
+  .ch-item { border-right: none; border-bottom: 1px solid rgba(var(--or-rgb),.15); }
+  .ch-item:nth-child(odd) { border-right: 1px solid rgba(var(--or-rgb),.15); }
+  .ch-item:last-child,.ch-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+  .val-grid { grid-template-columns: 1fr 1fr; }
+  .eq-grid { grid-template-columns: 1fr 1fr; }
+  .eng-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 540px) {
+  .val-grid, .eq-grid { grid-template-columns: 1fr; }
+  .ap-hero { padding: 56px 20px 48px; }
+  .hist-card .an { font-size: 52px; }
+}
+</style>
+</head>
+<body>
+
+<!-- BARRE D'ANNONCES -->
+<div class="annonce-bar">
+  <div class="annonce-track" id="announceTicker">
+    <span class="annonce-item">🔥 Offre spéciale été : -15% sur tous les iPhone <span class="sep">|</span></span>
+    <span class="annonce-item">🚚 Livraison gratuite dès 100 000 DA d'achat <span class="sep">|</span></span>
+    <span class="annonce-item">✅ Garantie officielle 12 mois sur tous les appareils <span class="sep">|</span></span>
+    <span class="annonce-item">📞 Commande rapide par téléphone : 0542 96 05 03 <span class="sep">|</span></span>
+    <span class="annonce-item">🆕 iPhone 17 Pro Max en stock — quantités limitées ! <span class="sep">|</span></span>
+    <span class="annonce-item">💳 Paiement en 3× sans frais disponible <span class="sep">|</span></span>
+    <span class="annonce-item">🔥 Offre spéciale été : -15% sur tous les iPhone <span class="sep">|</span></span>
+    <span class="annonce-item">🚚 Livraison gratuite dès 100 000 DA d'achat <span class="sep">|</span></span>
+    <span class="annonce-item">✅ Garantie officielle 12 mois sur tous les appareils <span class="sep">|</span></span>
+    <span class="annonce-item">📞 Commande rapide par téléphone : 0542 96 05 03 <span class="sep">|</span></span>
+    <span class="annonce-item">🆕 iPhone 17 Pro Max en stock — quantités limitées ! <span class="sep">|</span></span>
+    <span class="annonce-item">💳 Paiement en 3× sans frais disponible <span class="sep">|</span></span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-header">
+    <span class="logo-mark">GP</span>
+    <span class="logo-text">Gold<br><b>Phone</b></span>
+  </div>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque...">
+    <span class="search-icon">🔍</span>
+  </div>
+  <div class="header-actions">
+    <div class="account-menu">
+      <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
+      <div id="dropdown" class="dropdown">
+        <a href="connexion.html">Créer un compte</a>
+        <a href="connexion.html">Se connecter</a>
+      </div>
+    </div>
+    <a href="panier.html" class="cart-icon-btn" id="cartBtn" aria-label="Mon panier">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <span class="cart-badge" id="cartCount">0</span>
+    </a>
+    <button class="hamburger-btn" onclick="toggleNav()" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="menu">
+  <a href="index.html">ACCUEIL</a>
+  <a href="produits.html">NOS PRODUITS</a>
+  <a href="produits.html">ACCESSOIRES</a>
+  <a href="commande.html">COMMANDE</a>
+  <a href="a-propos.html" class="active">À PROPOS</a>
+</nav>
+
+<!-- HERO -->
+<section class="ap-hero">
+  <div class="badge">Notre histoire</div>
+  <h1>La technologie,<br>au cœur de <span>l'Algérie</span></h1>
+  <p class="lead">Gold Phone, votre partenaire de confiance pour les smartphones et accessoires à Tizi Ouzou. Qualité garantie, service humain.</p>
+</section>
+<div class="or-sep"></div>
+
+<!-- HISTOIRE -->
+<div class="ap-body">
+  <section class="s-histoire">
+    <div class="hist-grid">
+      <div class="hist-text">
+        <h2 class="section-title">Notre histoire</h2>
+        <p>Gold Phone est né d'une passion simple : <strong>rendre la technologie accessible à tous les Algériens</strong>, sans compromis sur la qualité ni sur le service.</p>
+        <p>Fondée à Tizi Ouzou, notre boutique s'est rapidement imposée comme la référence locale pour les smartphones neufs, reconditionnés et les accessoires premium — avec une promesse ferme : <strong>chaque appareil vendu est authentique et garanti.</strong></p>
+        <p>Aujourd'hui, nous livrons à travers toute l'Algérie et accompagnons des milliers de clients dans leurs choix technologiques, du premier smartphone aux modèles les plus récents comme l'iPhone 17 Pro Max ou le Samsung Galaxy S25.</p>
+      </div>
+      <div class="hist-card-wrap">
+        <div class="hist-card">
+          <span class="an">2020</span>
+          <span class="an-sub">Année de fondation</span>
+          <blockquote>« Notre ambition : que chaque client repart avec le meilleur appareil pour son budget et ses besoins, en toute confiance. »</blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CHIFFRES -->
+<section class="s-chiffres">
+  <h2>Gold Phone <span>en chiffres</span></h2>
+  <div class="ch-grid">
+    <div class="ch-item"><span class="ch-ic">📱</span><span class="ch-nb">5 000+</span><span class="ch-lb">Appareils vendus</span></div>
+    <div class="ch-item"><span class="ch-ic">⭐</span><span class="ch-nb">4,9/5</span><span class="ch-lb">Note client</span></div>
+    <div class="ch-item"><span class="ch-ic">🚚</span><span class="ch-nb">48 Wilayas</span><span class="ch-lb">Livraison nationale</span></div>
+    <div class="ch-item"><span class="ch-ic">🛡️</span><span class="ch-nb">12 mois</span><span class="ch-lb">Garantie officielle</span></div>
+  </div>
+</section>
+
+<!-- VALEURS -->
+<div class="ap-body">
+  <section class="s-valeurs">
+    <h2 class="section-title">Nos valeurs</h2>
+    <div class="val-grid">
+      <div class="val-card"><span class="val-ic">🔐</span><h3>Authenticité garantie</h3><p>Tous nos appareils sont 100 % originaux, sourcés auprès de distributeurs officiels. Aucun produit contrefait, aucune surprise à l'unboxing.</p></div>
+      <div class="val-card"><span class="val-ic">💛</span><h3>Service client humain</h3><p>Chez Gold Phone, vous parlez à de vraies personnes. Conseil avant achat, suivi de commande, SAV — nous sommes là à chaque étape.</p></div>
+      <div class="val-card"><span class="val-ic">💰</span><h3>Prix justes &amp; transparents</h3><p>Pas de frais cachés, pas de surprises. Nos prix sont affichés clairement et nous proposons le paiement en plusieurs fois sans frais.</p></div>
+      <div class="val-card"><span class="val-ic">⚡</span><h3>Livraison rapide</h3><p>Votre commande expédiée sous 24 h partout en Algérie, avec suivi en temps réel et remise en mains propres si vous préférez.</p></div>
+      <div class="val-card"><span class="val-ic">🔧</span><h3>Support après-vente</h3><p>Un problème avec votre appareil ? Notre équipe technique vous accompagne même après l'achat, pendant toute la durée de garantie.</p></div>
+      <div class="val-card"><span class="val-ic">🌍</span><h3>Ancrage local</h3><p>Fiers d'être une entreprise algérienne, nous soutenons notre communauté locale et contribuons au développement du commerce numérique en Algérie.</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ÉQUIPE -->
+<section class="s-equipe">
+  <div style="max-width:1100px;margin:0 auto">
+    <h2 class="section-title">L'équipe</h2>
+  </div>
+  <div class="eq-grid">
+    <div class="eq-card">
+      <div class="eq-av"><span>YB</span></div>
+      <div class="eq-info">
+        <h3>Youcef Benali</h3>
+        <span class="eq-poste">Fondateur &amp; Directeur</span>
+        <p>Passionné de technologie depuis plus de 10 ans, Youcef a créé Gold Phone avec une vision claire : démocratiser l'accès aux meilleurs smartphones en Algérie.</p>
+      </div>
+    </div>
+    <div class="eq-card">
+      <div class="eq-av"><span>KM</span></div>
+      <div class="eq-info">
+        <h3>Karima Meziani</h3>
+        <span class="eq-poste">Responsable Service Client</span>
+        <p>Karima veille à ce que chaque client reçoive un accompagnement personnalisé, du conseil à la livraison. Elle incarne la promesse humaine de Gold Phone.</p>
+      </div>
+    </div>
+    <div class="eq-card">
+      <div class="eq-av"><span>AM</span></div>
+      <div class="eq-info">
+        <h3>Anis Mouhoubi</h3>
+        <span class="eq-poste">Technicien &amp; SAV</span>
+        <p>Expert en diagnostic, Anis garantit que chaque appareil vendu est testé, vérifié et en parfait état de fonctionnement avant livraison.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENTS -->
+<div class="ap-body">
+  <section class="s-engage">
+    <h2 class="section-title">Nos engagements</h2>
+    <div class="eng-grid">
+      <div class="eng-item"><div class="eng-ic">✅</div><div class="eng-txt"><h4>Produits 100 % authentiques</h4><p>Chaque appareil est accompagné de sa boîte d'origine, de ses accessoires et d'une facture officielle.</p></div></div>
+      <div class="eng-item"><div class="eng-ic">🛡️</div><div class="eng-txt"><h4>Garantie 12 mois officielle</h4><p>Tous nos smartphones bénéficient d'une garantie constructeur de 12 mois minimum. En cas de panne, nous gérons tout.</p></div></div>
+      <div class="eng-item"><div class="eng-ic">💳</div><div class="eng-txt"><h4>Paiement en 3× sans frais</h4><p>Pour rendre nos produits accessibles au plus grand nombre, disponible sur tous nos appareils sans frais supplémentaires.</p></div></div>
+      <div class="eng-item"><div class="eng-ic">🚚</div><div class="eng-txt"><h4>Livraison rapide à domicile</h4><p>Expédition sous 24 h ouvrées partout en Algérie. Retrait en boutique à Tizi Ouzou aussi disponible.</p></div></div>
+      <div class="eng-item"><div class="eng-ic">🔄</div><div class="eng-txt"><h4>Retour facile sous 7 jours</h4><p>Si vous n'êtes pas satisfait, 7 jours pour retourner l'appareil dans son état d'origine, sans question.</p></div></div>
+      <div class="eng-item"><div class="eng-ic">📞</div><div class="eng-txt"><h4>Assistance 7j/7</h4><p>Notre équipe est joignable tous les jours par téléphone, WhatsApp ou email pour vous accompagner avant et après l'achat.</p></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- CTA -->
+<section class="s-cta">
+  <h2>Prêt à trouver votre <span>prochain smartphone</span> ?</h2>
+  <p>Découvrez notre catalogue ou contactez-nous directement — nous sommes là pour vous guider.</p>
+  <div class="cta-btns">
+    <a href="produits.html" class="btn-or">📱 Voir nos produits</a>
+    <a href="tel:0542960503" class="btn-outline">📞 Nous appeler</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="logo-footer">Gold<br>Phone</div>
+      <a href="tel:0542960503" class="tel">📞 0542 96 05 03</a><br><br>
+      <a href="mailto:contactGoldPhone@gmail.com" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
+      <p>📍 Tizi Ouzou, Alger, Algérie</p>
+    </div>
+    <div class="footer-middle">
+      <h3>CATÉGORIES</h3>
+      <ul>
+        <li><a href="produits.html">Téléphones portables</a></li>
+        <li><a href="produits.html?marque=Iphone">iPhone</a></li>
+        <li><a href="produits.html?marque=Samsung">Samsung</a></li>
+        <li><a href="produits.html">Accessoires</a></li>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <h3>SUIVEZ-NOUS</h3>
+      <div class="social-links">
+        <a href="https://www.facebook.com/goldphone" target="_blank" rel="noopener noreferrer" class="social-btn fb">f Facebook</a>
+        <a href="https://www.instagram.com/goldphone" target="_blank" rel="noopener noreferrer" class="social-btn ig">📷 Instagram</a>
+        <a href="#" class="social-btn tk">🎵 TikTok</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Gold Phone — Tous droits réservés</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>updateCartBadge();</script>
+</body>
+</html>

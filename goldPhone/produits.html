@@ -3,26 +3,455 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gold Phone - Nos Produits</title>
+<title>Gold Phone - Nos Produits | Smartphones à Tizi Ouzou</title>
+<meta name="description" content="Découvrez notre catalogue complet de smartphones : iPhone, Samsung, Xiaomi, Oppo, Honor, Infinix. Filtrez par marque et budget, prix en dinars algériens.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="Gold Phone - Nos Produits | Smartphones à Tizi Ouzou">
+<meta property="og:description" content="Découvrez notre catalogue complet de smartphones : iPhone, Samsung, Xiaomi, Oppo, Honor, Infinix. Filtrez par marque et budget, prix en dinars algériens.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta name="theme-color" content="#0b1224">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+/* ===== FILTRES AVANCÉS ===== */
+.filtres-avances {
+  background: white;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 73px;
+  z-index: 90;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.filtres-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px clamp(16px, 5vw, 40px);
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.filtres-marques { display: flex; gap: 8px; flex-wrap: wrap; }
+.filtre-btn {
+  padding: 7px 16px;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  background: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: 0.22s;
+  color: #444;
+  white-space: nowrap;
+}
+.filtre-btn:hover { border-color: var(--or); color: var(--or-profond); }
+.filtre-btn.active {
+  background: linear-gradient(135deg, var(--or-clair), var(--or));
+  border-color: var(--or);
+  color: var(--noir);
+}
+
+.tri-select select {
+  padding: 7px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+}
+.tri-select select:focus { border-color: var(--or); }
+
+/* Deuxième barre de filtres spécifiques */
+.filtres-specifiques {
+  padding: 12px clamp(16px, 5vw, 40px);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  background: #fafafa;
+}
+
+.filtre-groupe {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filtre-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  white-space: nowrap;
+}
+
+.filtre-chip {
+  padding: 5px 13px;
+  border: 1.5px solid #ddd;
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: 0.2s;
+  color: #555;
+  white-space: nowrap;
+}
+.filtre-chip:hover { border-color: var(--or); color: var(--or-profond); }
+.filtre-chip.active {
+  background: var(--or);
+  border-color: var(--or);
+  color: var(--noir);
+  font-weight: 700;
+}
+
+.filtre-separateur {
+  width: 1px;
+  height: 28px;
+  background: #e0e0e0;
+  margin: 0 4px;
+}
+
+/* Slider prix */
+.prix-range-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.prix-range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.prix-input {
+  width: 90px;
+  padding: 5px 8px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 12px;
+  outline: none;
+  text-align: center;
+  transition: 0.2s;
+}
+.prix-input:focus { border-color: var(--or); }
+.prix-range-sep { font-size: 12px; color: #aaa; }
+
+/* Bouton reset filtres */
+.btn-reset-filtres {
+  padding: 5px 14px;
+  border: 1.5px solid #ffb3b3;
+  border-radius: 20px;
+  background: #fff5f5;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: 0.2s;
+  color: #c0392b;
+  white-space: nowrap;
+  margin-left: auto;
+}
+.btn-reset-filtres:hover { background: #ffe0e0; }
+
+/* Barre de résultats */
+.resultats-bar {
+  padding: 10px clamp(16px, 5vw, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #888;
+  font-size: 13px;
+  background: var(--creme);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.resultats-bar .tags-actifs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.tag-actif {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  background: rgba(201,162,39,.15);
+  border: 1px solid rgba(201,162,39,.35);
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--or-profond);
+}
+.tag-actif button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--or-profond);
+  font-size: 12px;
+  padding: 0;
+  line-height: 1;
+}
+
+/* Vue liste/grille */
+.vue-toggle {
+  display: flex;
+  gap: 4px;
+}
+.vue-btn {
+  padding: 5px 9px;
+  border: 1.5px solid #ddd;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+  line-height: 1;
+  color: #888;
+}
+.vue-btn.active { border-color: var(--or); color: var(--or); background: rgba(201,162,39,.08); }
+
+/* Vue liste */
+.grid.liste-vue .card {
+  flex-direction: row;
+  align-items: center;
+  max-width: 100%;
+  width: 100%;
+}
+.grid.liste-vue {
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.grid.liste-vue .card .imgg {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.grid.liste-vue .card h5 { font-size: 14px; }
+
+/* Highlight de recherche */
+mark {
+  background: rgba(201,162,39,.3);
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* Compteur de filtres actifs */
+.badge-filtres {
+  background: var(--or);
+  color: var(--noir);
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+/* Pas de résultats amélioré */
+.aucun-resultat {
+  text-align: center;
+  padding: 80px 20px;
+  color: #888;
+}
+.aucun-resultat .emoji-sad { font-size: 48px; margin-bottom: 16px; }
+.aucun-resultat h3 { color: var(--noir); margin-bottom: 8px; font-size: 18px; }
+.aucun-resultat p { margin-bottom: 20px; }
+.aucun-resultat button {
+  margin-top: 15px;
+  padding: 10px 25px;
+  background: linear-gradient(135deg, var(--or-clair), var(--or));
+  color: var(--noir);
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* ===== QUICK VIEW MODAL ===== */
+.qv-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.qv-overlay.open { display: flex; }
+.qv-modal {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  animation: qvIn .25s ease;
+}
+@keyframes qvIn {
+  from { opacity: 0; transform: scale(.94) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.qv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid #eee;
+}
+.qv-close {
+  background: #f0f0f0;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+.qv-close:hover { background: #e0e0e0; }
+.qv-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 24px;
+}
+.qv-img {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+}
+.qv-img img { width: 100%; height: 240px; object-fit: contain; }
+.qv-info .qv-brand { font-size: 12px; color: var(--or-profond); font-weight: 700; text-transform: uppercase; }
+.qv-info .qv-nom { font-size: 18px; font-weight: 800; color: var(--noir); margin: 6px 0; font-family: var(--police-titre); }
+.qv-info .qv-prix { font-size: 24px; font-weight: 900; color: var(--or-profond); margin-bottom: 14px; font-family: var(--police-titre); }
+.qv-specs-list { list-style: none; margin-bottom: 16px; }
+.qv-specs-list li {
+  font-size: 13px;
+  color: #555;
+  padding: 5px 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  gap: 6px;
+}
+.qv-specs-list li::before { content: '✓'; color: var(--or); font-weight: 700; flex-shrink: 0; }
+.qv-couleurs { margin-bottom: 16px; }
+.qv-couleurs .lbl { font-size: 12px; font-weight: 700; color: #888; margin-bottom: 6px; }
+.qv-couleurs-list { display: flex; gap: 6px; flex-wrap: wrap; }
+.couleur-dot {
+  padding: 4px 10px;
+  background: #f0f0f0;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.couleur-dot.selected, .couleur-dot:hover { border-color: var(--or); background: rgba(201,162,39,.12); color: var(--or-profond); }
+.qv-actions { display: flex; gap: 10px; flex-direction: column; }
+.qv-btn-acheter {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, var(--or-clair), var(--or));
+  color: var(--noir);
+  border: none;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: var(--police-titre);
+  transition: 0.2s;
+  text-align: center;
+}
+.qv-btn-acheter:hover { opacity: .88; }
+.qv-btn-appel {
+  padding: 11px 20px;
+  background: white;
+  color: var(--noir);
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  transition: 0.2s;
+}
+.qv-btn-appel:hover { border-color: var(--or); }
+.qv-badges { display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+.qv-badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.qv-badge.new { background: #e8f4ec; color: #1f6f4c; }
+.qv-badge.promo { background: #fce8ea; color: #8c3140; }
+.qv-badge.best { background: rgba(201,162,39,.2); color: var(--or-profond); }
+
+@media (max-width: 580px) {
+  .qv-body { grid-template-columns: 1fr; }
+  .filtres-specifiques { gap: 8px; }
+  .filtre-separateur { display: none; }
+}
+</style>
 </head>
 <body>
 
 <!-- HEADER -->
 <header>
   <div class="logo-header">
-    <span class="logo-text">Gold<br>Phone</span>
+    <span class="logo-mark">GP</span>
+    <span class="logo-text">Gold<br><b>Phone</b></span>
   </div>
   <div class="search">
     <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque..." oninput="filtrerProduits()">
     <span class="search-icon">🔍</span>
   </div>
-  <div class="account-menu">
-    <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
-    <div id="dropdown" class="dropdown">
-      <a href="inscription.html">Créer un compte</a>
-      <a href="connexion.html">Se connecter</a>
+  <div class="header-actions">
+    <div class="account-menu">
+      <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
+      <div id="dropdown" class="dropdown">
+        <a href="connexion.html?tab=register">Créer un compte</a>
+        <a href="connexion.html">Se connecter</a>
+      </div>
     </div>
+    <a href="panier.html" class="cart-icon-btn" id="cartBtn" aria-label="Mon panier">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <span class="cart-badge" id="cartCount">0</span>
+    </a>
+    <button class="hamburger-btn" onclick="toggleNav()" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -30,9 +459,9 @@
 <nav class="menu">
   <a href="index.html">ACCUEIL</a>
   <a href="produits.html" class="active">NOS PRODUITS</a>
-  <a href="accessoires.html">ACCESSOIRES</a>
+  <a href="produits.html">ACCESSOIRES</a>
   <a href="commande.html">COMMANDE</a>
-  <a href="a propos.html">À PROPOS</a>
+  <a href="a-propos.html">À PROPOS</a>
 </nav>
 
 <!-- PAGE TITLE -->
@@ -41,42 +470,124 @@
   <p>Découvrez notre catalogue complet de smartphones</p>
 </div>
 
-<!-- FILTRES -->
-<div class="filtres-bar">
-  <div class="filtres-marques">
-    <button class="filtre-btn active" data-marque="tous">Tous</button>
-    <button class="filtre-btn" data-marque="Iphone">🍎 iPhone</button>
-    <button class="filtre-btn" data-marque="Samsung">🔵 Samsung</button>
-    <button class="filtre-btn" data-marque="Xiaomi">🔶 Xiaomi</button>
-    <button class="filtre-btn" data-marque="Oppo">💚 Oppo</button>
-    <button class="filtre-btn" data-marque="Infinix">⚡ Infinix</button>
-    <button class="filtre-btn" data-marque="Honor">🥇 Honor</button>
+<!-- FILTRES AVANCÉS -->
+<div class="filtres-avances">
+
+  <!-- Ligne 1 : Marques + Tri -->
+  <div class="filtres-top">
+    <div class="filtres-marques">
+      <button class="filtre-btn active" data-marque="tous">Tous</button>
+      <button class="filtre-btn" data-marque="Iphone">🍎 iPhone</button>
+      <button class="filtre-btn" data-marque="Samsung">🔵 Samsung</button>
+      <button class="filtre-btn" data-marque="Xiaomi">🔶 Xiaomi</button>
+      <button class="filtre-btn" data-marque="Oppo">💚 Oppo</button>
+      <button class="filtre-btn" data-marque="Infinix">⚡ Infinix</button>
+      <button class="filtre-btn" data-marque="Honor">🥇 Honor</button>
+    </div>
+    <div class="tri-select">
+      <select onchange="trierProduits(this.value)">
+        <option value="">Trier par...</option>
+        <option value="prix-asc">💰 Prix croissant</option>
+        <option value="prix-desc">💎 Prix décroissant</option>
+        <option value="nom">🔤 Nom A-Z</option>
+        <option value="stars-desc">⭐ Mieux notés</option>
+      </select>
+    </div>
   </div>
-  <div class="tri-select">
-    <select onchange="trierProduits(this.value)">
-      <option value="">Trier par...</option>
-      <option value="prix-asc">Prix croissant</option>
-      <option value="prix-desc">Prix décroissant</option>
-      <option value="nom">Nom A-Z</option>
-    </select>
+
+  <!-- Ligne 2 : Filtres spécifiques -->
+  <div class="filtres-specifiques">
+
+    <!-- RAM -->
+    <div class="filtre-groupe">
+      <span class="filtre-label">RAM</span>
+      <button class="filtre-chip active" data-type="ram" data-val="tous">Tout</button>
+      <button class="filtre-chip" data-type="ram" data-val="3GB">3GB</button>
+      <button class="filtre-chip" data-type="ram" data-val="4GB">4GB</button>
+      <button class="filtre-chip" data-type="ram" data-val="6GB">6GB</button>
+      <button class="filtre-chip" data-type="ram" data-val="8GB">8GB</button>
+      <button class="filtre-chip" data-type="ram" data-val="12GB">12GB</button>
+      <button class="filtre-chip" data-type="ram" data-val="16GB">16GB</button>
+    </div>
+
+    <div class="filtre-separateur"></div>
+
+    <!-- Stockage -->
+    <div class="filtre-groupe">
+      <span class="filtre-label">Stockage</span>
+      <button class="filtre-chip active" data-type="stockage" data-val="tous">Tout</button>
+      <button class="filtre-chip" data-type="stockage" data-val="64GB">64GB</button>
+      <button class="filtre-chip" data-type="stockage" data-val="128GB">128GB</button>
+      <button class="filtre-chip" data-type="stockage" data-val="256GB">256GB</button>
+      <button class="filtre-chip" data-type="stockage" data-val="512GB">512GB</button>
+      <button class="filtre-chip" data-type="stockage" data-val="1TB">1TB</button>
+    </div>
+
+    <div class="filtre-separateur"></div>
+
+    <!-- Réseau -->
+    <div class="filtre-groupe">
+      <span class="filtre-label">Réseau</span>
+      <button class="filtre-chip active" data-type="reseau" data-val="tous">Tout</button>
+      <button class="filtre-chip" data-type="reseau" data-val="5G">5G</button>
+      <button class="filtre-chip" data-type="reseau" data-val="4G">4G</button>
+    </div>
+
+    <div class="filtre-separateur"></div>
+
+    <!-- Prix -->
+    <div class="filtre-groupe prix-range-group">
+      <span class="filtre-label">Prix (DA)</span>
+      <div class="prix-range-inputs">
+        <input type="number" class="prix-input" id="prixMin" placeholder="Min" step="5000" min="0" oninput="filtrerProduits()">
+        <span class="prix-range-sep">—</span>
+        <input type="number" class="prix-input" id="prixMax" placeholder="Max" step="5000" min="0" oninput="filtrerProduits()">
+      </div>
+    </div>
+
+    <!-- Reset -->
+    <button class="btn-reset-filtres" onclick="resetFiltres()">✕ Effacer tout</button>
+
   </div>
 </div>
 
-<!-- RÉSULTATS -->
-<div class="resultats-info">
-  <span id="nbResultats">Chargement...</span>
+<!-- BARRE RÉSULTATS -->
+<div class="resultats-bar">
+  <div style="display:flex; align-items:center; gap: 12px; flex-wrap:wrap;">
+    <span id="nbResultats">Chargement...</span>
+    <div class="tags-actifs" id="tagsActifs"></div>
+  </div>
+  <div class="vue-toggle">
+    <button class="vue-btn active" id="btnGrille" onclick="setVue('grille')" title="Vue grille">⊞</button>
+    <button class="vue-btn" id="btnListe" onclick="setVue('liste')" title="Vue liste">☰</button>
+  </div>
 </div>
 
 <!-- GRILLE PRODUITS -->
 <section class="produits-page">
   <div class="grid" id="produitsGrid">
-    <!-- Les cartes seront injectées ici par JS -->
+    <!-- Cartes injectées par JS -->
   </div>
   <div id="aucunResultat" class="aucun-resultat" style="display:none;">
-    <p>😕 Aucun produit trouvé pour cette recherche.</p>
-    <button onclick="resetFiltres()">Voir tous les produits</button>
+    <div class="emoji-sad">😕</div>
+    <h3>Aucun produit trouvé</h3>
+    <p>Essayez de modifier vos critères de recherche.</p>
+    <button onclick="resetFiltres()">🔄 Voir tous les produits</button>
   </div>
 </section>
+
+<!-- QUICK VIEW MODAL -->
+<div class="qv-overlay" id="qvOverlay" onclick="fermerQV(event)">
+  <div class="qv-modal" id="qvModal">
+    <div class="qv-header">
+      <span style="font-weight:700; font-size:15px; font-family:var(--police-titre)">Aperçu rapide</span>
+      <button class="qv-close" onclick="fermerQVBtn()">✕</button>
+    </div>
+    <div class="qv-body" id="qvBody">
+      <!-- Injecté par JS -->
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -84,7 +595,7 @@
     <div class="footer-left">
       <div class="logo-footer">Gold<br>Phone</div>
       <a href="tel:0542960503" class="tel">📞 0542 96 05 03</a><br><br>
-      <a href="#" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
+      <a href="mailto:contactGoldPhone@gmail.com" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
       <p>📍 Tizi Ouzou, Alger, Algérie</p>
     </div>
     <div class="footer-middle">
@@ -93,14 +604,14 @@
         <li><a href="produits.html">Téléphones portables</a></li>
         <li><a href="produits.html?marque=Iphone">iPhone</a></li>
         <li><a href="produits.html?marque=Samsung">Samsung</a></li>
-        <li><a href="#">Accessoires</a></li>
+        <li><a href="produits.html">Accessoires</a></li>
       </ul>
     </div>
     <div class="footer-right">
       <h3>SUIVEZ-NOUS</h3>
       <div class="social-links">
-        <a href="#" class="social-btn fb">f Facebook</a>
-        <a href="#" class="social-btn ig">📷 Instagram</a>
+        <a href="https://www.facebook.com/goldphone" target="_blank" rel="noopener noreferrer" class="social-btn fb">f Facebook</a>
+        <a href="https://www.instagram.com/goldphone" target="_blank" rel="noopener noreferrer" class="social-btn ig">📷 Instagram</a>
         <a href="#" class="social-btn tk">🎵 TikTok</a>
       </div>
     </div>
@@ -110,101 +621,92 @@
   </div>
 </footer>
 
+<!-- BOUTON WHATSAPP -->
+<a href="https://wa.me/213542960503?text=Bonjour%20Gold%20Phone%2C%20je%20voudrais%20des%20informations%20sur%20vos%20smartphones."
+   class="whatsapp-float" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+
+<script src="script.js"></script>
 <script>
-// ===== BASE DE DONNÉES DES PRODUITS =====
+// ===== BASE DE DONNÉES =====
 const produits = [
-  // ---- IPHONE ----
-  { id:'iphone17promax', nom:'iPhone 17 Pro Max 256GB', prix:375000, img:'iphone17orange.jpg', marque:'Iphone', badge:'Nouveau', stars:5, specs:'A19 Pro, 6.9" ProMotion OLED, Quad Camera 48MP, 5G, Titane Orange', ram:'8GB', stockage:'256GB', couleurs:['Orange Titanium','Space Black','White Titanium'] },
-  { id:'iphone17', nom:'iPhone 17 256GB', prix:230000, img:'iphone17.jpg', marque:'Iphone', badge:'Nouveau', stars:5, specs:'A19, 6.1" OLED Super Retina, Double 48MP, 5G, Aluminium', ram:'8GB', stockage:'256GB', couleurs:['Noir','Blanc','Rose','Bleu'] },
-  { id:'iphone16promax', nom:'iPhone 16 Pro Max 256GB', prix:290000, img:'iphone16promax.jpg', marque:'Iphone', badge:'Best Seller', stars:5, specs:'A18 Pro, 6.9" OLED, Triple 48MP, 5G, Titane Desert', ram:'8GB', stockage:'256GB', couleurs:['Desert Titanium','Black','White','Natural'] },
-  { id:'iphone16plus', nom:'iPhone 16 Plus 128GB', prix:180000, img:'iphone16.1.jpg', marque:'Iphone', badge:'', stars:4, specs:'A18, 6.7" OLED, Double 48MP+12MP, 5G, Action Button', ram:'8GB', stockage:'128GB', couleurs:['Noir','Blanc','Rose','Vert','Ultra Blue'] },
-  { id:'iphone15pro', nom:'iPhone 15 Pro 128GB', prix:225000, img:'iphone 15 pro.jpg', marque:'Iphone', badge:'', stars:5, specs:'A17 Pro, 6.1" Super Retina OLED, Triple 48MP, 5G, Titane Naturel', ram:'8GB', stockage:'128GB', couleurs:['Natural Titanium','Blue Titanium','Black','White'] },
-  { id:'iphone152', nom:'iPhone 15 256GB', prix:195000, img:'iphone15.1.jpg', marque:'Iphone', badge:'', stars:4, specs:'A16 Bionic, 6.1" Super Retina OLED, Double 48MP+12MP, 5G', ram:'6GB', stockage:'256GB', couleurs:['Noir','Rose','Jaune','Vert','Bleu'] },
-  { id:'iphone14promax', nom:'iPhone 14 Pro Max 128GB', prix:156000, img:'iphone14pro.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A16 Bionic, 6.7" ProMotion OLED, Triple 48MP, 5G, Dynamic Island', ram:'6GB', stockage:'128GB', couleurs:['Deep Purple','Gold','Silver','Space Black'] },
-  { id:'iphone14', nom:'iPhone 14 256GB', prix:130000, img:'iphone14.2.jpg___.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A15 Bionic, 6.1" Super Retina OLED, Double 12MP, 5G', ram:'6GB', stockage:'256GB', couleurs:['Midnight','Starlight','Blue','Purple','Yellow'] },
-  { id:'iphone13pro', nom:'iPhone 13 Pro Max 128GB', prix:160000, img:'iphone13pro.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A15 Bionic, 6.7" ProMotion OLED, Triple 12MP, 5G, ProRes Video', ram:'6GB', stockage:'128GB', couleurs:['Alpine Green','Sierra Blue','Gold','Silver','Graphite'] },
-  { id:'iphone13', nom:'iPhone 13 128GB', prix:110000, img:'iphone 13.2.jpg.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A15 Bionic, 6.1" Super Retina OLED, Double 12MP, 5G', ram:'4GB', stockage:'128GB', couleurs:['Midnight','Starlight','Pink','Blue','Green','Red'] },
-  { id:'iphone12pro', nom:'iPhone 12 Pro 128GB', prix:95000, img:'iphone12pro.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A14 Bionic, 6.1" Super Retina OLED, Triple 12MP, 5G, MagSafe', ram:'6GB', stockage:'128GB', couleurs:['Graphite','Gold','Silver','Pacific Blue'] },
-  { id:'iphone11', nom:'iPhone 11 64GB', prix:98000, img:'iphone11.jpg', marque:'Iphone', badge:'', stars:3, specs:'A13 Bionic, 6.1" Liquid Retina, Double 12MP, 4G', ram:'4GB', stockage:'64GB', couleurs:['Noir','Blanc','Rouge','Violet','Jaune','Vert'] },
-  { id:'iphone11promax', nom:'iPhone 11 Pro Max 256GB', prix:105000, img:'iphone11promax.jpg', marque:'Iphone', badge:'', stars:4, specs:'A13 Bionic, 6.5" Super Retina OLED, Triple 12MP, 4G', ram:'4GB', stockage:'256GB', couleurs:['Space Gray','Silver','Gold','Midnight Green'] },
-  { id:'iphonexr', nom:'iPhone XR 128GB', prix:72000, img:'iphonexr.jpg', marque:'Iphone', badge:'Promo', stars:3, specs:'A12 Bionic, 6.1" Liquid Retina, 12MP, 4G', ram:'3GB', stockage:'128GB', couleurs:['Noir','Blanc','Corail','Bleu','Jaune','Rouge'] },
-
-  // ---- SAMSUNG ----
-  { id:'samsungs25', nom:'Samsung Galaxy S25 Ultra 12GB 256GB', prix:260000, img:'samsungs25.jpg', marque:'Samsung', badge:'Best Seller', stars:5, specs:'Snapdragon 8 Elite, 6.9" Dynamic AMOLED 120Hz, 200MP+12MP+10MP+50MP, S Pen, 5G', ram:'12GB', stockage:'256GB', couleurs:['Titanium Gray','Titanium Black','Titanium White Silver'] },
-  { id:'samsung6', nom:'Samsung Galaxy S24 Ultra 12GB 256GB', prix:230000, img:'samsung6.jpg', marque:'Samsung', badge:'', stars:5, specs:'Snapdragon 8 Gen 3, 6.8" Dynamic AMOLED 120Hz, 200MP+12MP+10MP+50MP, S Pen, 5G', ram:'12GB', stockage:'256GB', couleurs:['Titanium Black','Titanium Gray','Titanium Violet'] },
-  { id:'samsung3', nom:'Samsung Galaxy S23 Ultra 12GB 512GB', prix:190000, img:'samsung3.jpg', marque:'Samsung', badge:'Promo', stars:4, specs:'Snapdragon 8 Gen 2, 6.8" Dynamic AMOLED 120Hz, 200MP+12MP+10MP+10MP, S Pen, 5G', ram:'12GB', stockage:'512GB', couleurs:['Phantom Black','Cream','Green','Lavender','Lime','Red'] },
-  { id:'sam', nom:'Samsung S23 Ultra 12GB 256GB', prix:110000, img:'sam.jpg', marque:'Samsung', badge:'Promo', stars:4, specs:'Snapdragon 8 Gen 2, 6.8" Dynamic AMOLED, 200MP, S Pen, 5G', ram:'12GB', stockage:'256GB', couleurs:['Phantom Black','Cream'] },
-  { id:'samsung1', nom:'Samsung Galaxy A55 8GB 256GB', prix:65000, img:'samsung1.jpg', marque:'Samsung', badge:'', stars:4, specs:'Exynos 1480, 6.6" Super AMOLED 120Hz, Triple 50MP, 5G', ram:'8GB', stockage:'256GB', couleurs:['Awesome Iceblue','Awesome Lilac','Awesome Navy'] },
-  { id:'samsung2', nom:'Samsung Galaxy A35 8GB 128GB', prix:48000, img:'samsung2.jpg', marque:'Samsung', badge:'', stars:3, specs:'Exynos 1380, 6.6" Super AMOLED 120Hz, Triple 50MP, 4G', ram:'8GB', stockage:'128GB', couleurs:['Awesome Iceblue','Awesome Lilac','Awesome Navy','Awesome Lemon'] },
-  { id:'samsung4', nom:'Samsung Galaxy S22 Ultra 12GB 256GB', prix:155000, img:'samsung4.jpg', marque:'Samsung', badge:'Promo', stars:4, specs:'Exynos 2200, 6.8" Dynamic AMOLED 120Hz, Quad 108MP, S Pen, 5G', ram:'12GB', stockage:'256GB', couleurs:['Phantom Black','Burgundy','Green','White'] },
-  { id:'samsung5', nom:'Samsung Galaxy Z Fold 5 12GB 256GB', prix:280000, img:'samsung5.jpg', marque:'Samsung', badge:'', stars:5, specs:'Snapdragon 8 Gen 2, 7.6" Foldable AMOLED 120Hz, Triple 50MP, 5G, IPX8', ram:'12GB', stockage:'256GB', couleurs:['Phantom Black','Cream','Icy Blue'] },
-
-  // ---- XIAOMI ----
-  { id:'xiomi1', nom:'Redmi Note 14 8GB 256GB', prix:41000, img:'xiomi1.jpg', marque:'Xiaomi', badge:'Bon Plan', stars:4, specs:'Snapdragon 7s Gen 3, 6.67" OLED 120Hz, Triple 50MP, 5G', ram:'8GB', stockage:'256GB', couleurs:['Moonlight White','Midnight Black','Titan Blue'] },
-  { id:'xiomi5', nom:'Xiaomi 15 12GB 256GB', prix:125000, img:'xiomi5.jpg', marque:'Xiaomi', badge:'', stars:5, specs:'Snapdragon 8 Elite, 6.36" OLED 120Hz, Leica Triple 50MP, 5G', ram:'12GB', stockage:'256GB', couleurs:['Noir','Blanc','Vert'] },
-  { id:'xiomi3', nom:'Redmi Note 13 Pro+ 12GB 256GB', prix:58000, img:'xiomi3.jpg', marque:'Xiaomi', badge:'', stars:4, specs:'Dimensity 7200 Ultra, 6.67" OLED 120Hz, 200MP, 5G, 120W Turbo Charge', ram:'12GB', stockage:'256GB', couleurs:['Aurora Purple','Midnight Black','Moonlight White'] },
-  { id:'xiomi4', nom:'Xiaomi 14 Ultra 16GB 512GB', prix:185000, img:'xiomi4.jpg', marque:'Xiaomi', badge:'', stars:5, specs:'Snapdragon 8 Gen 3, 6.73" OLED 120Hz, Leica Quad 50MP, 5G, 90W Wireless', ram:'16GB', stockage:'512GB', couleurs:['Titanium Black','Titanium White','Titanium Blue'] },
-  { id:'xiomi6', nom:'Redmi 13C 8GB 256GB', prix:28000, img:'xiomi6.jpg', marque:'Xiaomi', badge:'Bon Plan', stars:3, specs:'Helio G85, 6.74" IPS LCD, Triple 50MP, 4G', ram:'8GB', stockage:'256GB', couleurs:['Starfall Black','Glacier White','Clover Green'] },
-  { id:'xiomi7', nom:'Xiaomi 13T Pro 12GB 256GB', prix:95000, img:'xiomi7.jpg', marque:'Xiaomi', badge:'Promo', stars:4, specs:'Dimensity 9200+, 6.67" AMOLED 144Hz, Leica Triple 50MP, 5G, 144W Charge', ram:'12GB', stockage:'256GB', couleurs:['Alpine Blue','Black','Meadow Green','Titan Gray'] },
-  { id:'xiomi8', nom:'Redmi Note 14 Pro 5G 12GB 512GB', prix:72000, img:'xiomi8.jpg', marque:'Xiaomi', badge:'Nouveau', stars:4, specs:'Snapdragon 7s Gen 3, 6.67" OLED 120Hz, 200MP, 5G, 45W Charge', ram:'12GB', stockage:'512GB', couleurs:['Midnight Black','Moonlight White','Titan Blue'] },
-
-  // ---- OPPO ----
-  { id:'oppo1', nom:'Oppo Find X9 Pro 16GB 512GB', prix:228000, img:'oppo1.jpg', marque:'Oppo', badge:'', stars:5, specs:'Snapdragon 8 Elite, 6.82" AMOLED 120Hz, Hasselblad Quad 50MP, 5G, 100W SuperVOOC', ram:'16GB', stockage:'512GB', couleurs:['Space Black','Ceramic White'] },
-  { id:'oppo2', nom:'Oppo Reno 12 Pro 12GB 256GB', prix:90000, img:'oppo2.jpg', marque:'Oppo', badge:'', stars:4, specs:'Dimensity 7300 Energy, 6.7" AMOLED 120Hz, Triple 50MP+8MP+2MP, 5G, 80W SUPERVOOC', ram:'12GB', stockage:'256GB', couleurs:['Sunset Gold','Nebula Silver','Mariana Blue'] },
-  { id:'oppo3', nom:'Oppo A3 Pro 8GB 256GB', prix:42000, img:'oppo3.jpg', marque:'Oppo', badge:'Bon Plan', stars:3, specs:'Dimensity 7050, 6.67" OLED 120Hz, Double 50MP+2MP, 5G, 67W SUPERVOOC', ram:'8GB', stockage:'256GB', couleurs:['Starry Black','Icy Blue','Nebula Purple'] },
-  { id:'oppo4', nom:'Oppo Find N3 Flip 12GB 256GB', prix:185000, img:'oppo4.jpg', marque:'Oppo', badge:'', stars:5, specs:'Dimensity 9200, 6.8" Foldable AMOLED 120Hz, Triple 48MP, 5G, IPX4', ram:'12GB', stockage:'256GB', couleurs:['Sleek Black','Moonlit Purple'] },
-  { id:'oppo5', nom:'Oppo Reno 11 5G 8GB 256GB', prix:68000, img:'oppo5.jpg', marque:'Oppo', badge:'Promo', stars:4, specs:'Snapdragon 778G, 6.7" AMOLED 120Hz, Triple 50MP, 5G, 67W SUPERVOOC', ram:'8GB', stockage:'256GB', couleurs:['Rock Gray','Coral Purple'] },
-  { id:'oppo6', nom:'Oppo A58 4G 8GB 128GB', prix:32000, img:'oppo6.jpg', marque:'Oppo', badge:'', stars:3, specs:'Helio G85, 6.72" LCD 90Hz, 50MP+2MP, 4G, 33W SUPERVOOC', ram:'8GB', stockage:'128GB', couleurs:['Glowing Black','Glowing Green'] },
-  { id:'oppo7', nom:'Oppo Find X7 Ultra 16GB 1TB', prix:295000, img:'oppo7.jpg', marque:'Oppo', badge:'', stars:5, specs:'Snapdragon 8 Gen 3, 6.82" AMOLED 120Hz, Hasselblad Quad 50MP, 5G, 100W', ram:'16GB', stockage:'1TB', couleurs:['Flowy Emerald','Desert Silver'] },
-  { id:'oppo9', nom:'Oppo Find X8 12GB 256GB', prix:175000, img:'oppo9.jpg', marque:'Oppo', badge:'Nouveau', stars:5, specs:'Dimensity 9400, 6.59" OLED 120Hz, Hasselblad Triple 50MP, 5G, 80W SUPERVOOC', ram:'12GB', stockage:'256GB', couleurs:['Space Black','Moonlight White'] },
-  { id:'oppo11', nom:'Oppo Reno 13 5G 12GB 256GB', prix:85000, img:'oppo11.jpg', marque:'Oppo', badge:'Nouveau', stars:4, specs:'Dimensity 8350, 6.59" AMOLED 120Hz, Triple 50MP, 5G, 80W SUPERVOOC', ram:'12GB', stockage:'256GB', couleurs:['Marble White','Luminous Blue'] },
-  { id:'oppo12', nom:'Oppo A79 5G 8GB 256GB', prix:38000, img:'oppo12.jpg', marque:'Oppo', badge:'', stars:3, specs:'Dimensity 6020, 6.72" LCD 90Hz, 50MP+2MP, 5G, 33W SUPERVOOC', ram:'8GB', stockage:'256GB', couleurs:['Mystery Black','Glacier Blue'] },
-
-  // ---- INFINIX ----
-  { id:'infinix1', nom:'Infinix GT30 Pro 12GB 256GB', prix:60000, img:'infinix1.jpg', marque:'Infinix', badge:'Bon Plan', stars:4, specs:'Dimensity 8200, 6.78" AMOLED 144Hz, 108MP+13MP+2MP, 5G, Gaming Turbo', ram:'12GB', stockage:'256GB', couleurs:['Cyber Black','Mecha Orange','Storm White'] },
-  { id:'infinix2', nom:'Infinix Note 40 Pro 5G 12GB 256GB', prix:48000, img:'infinix2.jpg', marque:'Infinix', badge:'', stars:4, specs:'Dimensity 7020, 6.78" AMOLED 120Hz, 108MP, 5G, 45W Thunder Charge', ram:'12GB', stockage:'256GB', couleurs:['Race Black','Racing Grey','Sunset Gold'] },
-  { id:'infinix3', nom:'Infinix Hot 40i 8GB 256GB', prix:22000, img:'infinix3.jpg', marque:'Infinix', badge:'Bon Plan', stars:3, specs:'Helio G85, 6.56" IPS LCD 90Hz, 50MP, 4G, 18W Charge', ram:'8GB', stockage:'256GB', couleurs:['Horizon Blue','Palm Green','Starlit Black'] },
-  { id:'infinix4', nom:'Infinix Zero 40 5G 12GB 256GB', prix:55000, img:'infinix4.jpg', marque:'Infinix', badge:'', stars:4, specs:'Dimensity 8200, 6.78" AMOLED 144Hz, 108MP OIS, 5G, 45W Charge', ram:'12GB', stockage:'256GB', couleurs:['Volcanic Grey','Misty Lavender','Aqua Surge'] },
-  { id:'infinix6', nom:'Infinix Smart 8 Plus 8GB 128GB', prix:18000, img:'infinix6.jpg', marque:'Infinix', badge:'Bon Plan', stars:3, specs:'Helio G36, 6.6" IPS 90Hz, 50MP, 4G, 18W', ram:'8GB', stockage:'128GB', couleurs:['Timber Black','Crystal Green','Galaxy White'] },
-  { id:'infinix7', nom:'Infinix Note 30 Pro 8GB 256GB', prix:35000, img:'infinix7.jpg', marque:'Infinix', badge:'Promo', stars:3, specs:'Helio G99, 6.67" AMOLED 120Hz, 108MP, 4G, 68W All-Round FastCharge', ram:'8GB', stockage:'256GB', couleurs:['Burgundy Red','Obsidian Black','Mirage Silver'] },
-
-  // ---- HONOR ----
-  { id:'honor2', nom:'Honor Magic 8 Pro 12GB 512GB', prix:240000, img:'honor2.jpg', marque:'Honor', badge:'', stars:4, specs:'Kirin 9010, 6.8" OLED 120Hz, Triple 50MP, 5G, Global Version', ram:'12GB', stockage:'512GB', couleurs:['Purple','Silver','Black'] },
-  { id:'honor3', nom:'Honor 200 Pro 12GB 512GB', prix:155000, img:'honor3.jpg', marque:'Honor', badge:'Nouveau', stars:4, specs:'Snapdragon 8s Gen 3, 6.78" OLED 120Hz, Harcourt Triple 50MP, 5G', ram:'12GB', stockage:'512GB', couleurs:['Cyan Lake','Midnight Black','Rock Grey'] },
-  { id:'honor4', nom:'Honor Magic 6 Lite 5G 8GB 256GB', prix:72000, img:'honor4.jpg', marque:'Honor', badge:'', stars:4, specs:'Snapdragon 6 Gen 1, 6.78" OLED 120Hz, Triple 108MP, 5G', ram:'8GB', stockage:'256GB', couleurs:['Granite Black','Titanium Silver'] },
+  { id:'iphone17promax', nom:'iPhone 17 Pro Max 256GB', prix:375000, img:'iphone17orange.jpg', marque:'Iphone', badge:'Nouveau', stars:5, specs:'A19 Pro, 6.9" ProMotion OLED, Quad Camera 48MP, 5G, Titane Orange', ram:'8GB', stockage:'256GB', couleurs:['Orange Titanium','Space Black','White Titanium'], reseau:'5G' },
+  { id:'iphone17', nom:'iPhone 17 256GB', prix:230000, img:'iphone17.jpg', marque:'Iphone', badge:'Nouveau', stars:5, specs:'A19, 6.1" OLED Super Retina, Double 48MP, 5G, Aluminium', ram:'8GB', stockage:'256GB', couleurs:['Noir','Blanc','Rose','Bleu'], reseau:'5G' },
+  { id:'iphone16promax', nom:'iPhone 16 Pro Max 256GB', prix:290000, img:'iphone16promax.jpg', marque:'Iphone', badge:'Best Seller', stars:5, specs:'A18 Pro, 6.9" OLED, Triple 48MP, 5G, Titane Desert', ram:'8GB', stockage:'256GB', couleurs:['Desert Titanium','Black','White','Natural'], reseau:'5G' },
+  { id:'iphone16plus', nom:'iPhone 16 Plus 128GB', prix:180000, img:'iphone16.1.jpg', marque:'Iphone', badge:'', stars:4, specs:'A18, 6.7" OLED, Double 48MP+12MP, 5G, Action Button', ram:'8GB', stockage:'128GB', couleurs:['Noir','Blanc','Rose','Vert','Ultra Blue'], reseau:'5G' },
+  { id:'iphone15pro', nom:'iPhone 15 Pro 128GB', prix:225000, img:'iphone 15 pro.jpg', marque:'Iphone', badge:'', stars:5, specs:'A17 Pro, 6.1" Super Retina OLED, Triple 48MP, 5G, Titane Naturel', ram:'8GB', stockage:'128GB', couleurs:['Natural Titanium','Blue Titanium','Black','White'], reseau:'5G' },
+  { id:'iphone152', nom:'iPhone 15 256GB', prix:195000, img:'iphone15.1.jpg', marque:'Iphone', badge:'', stars:4, specs:'A16 Bionic, 6.1" Super Retina OLED, Double 48MP+12MP, 5G', ram:'6GB', stockage:'256GB', couleurs:['Noir','Rose','Jaune','Vert','Bleu'], reseau:'5G' },
+  { id:'iphone14promax', nom:'iPhone 14 Pro Max 128GB', prix:156000, img:'iphone14pro.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A16 Bionic, 6.7" ProMotion OLED, Triple 48MP, 5G, Dynamic Island', ram:'6GB', stockage:'128GB', couleurs:['Deep Purple','Gold','Silver','Space Black'], reseau:'5G' },
+  { id:'iphone14', nom:'iPhone 14 256GB', prix:130000, img:'iphone14.2.jpg___.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A15 Bionic, 6.1" Super Retina OLED, Double 12MP, 5G', ram:'6GB', stockage:'256GB', couleurs:['Midnight','Starlight','Blue','Purple','Yellow'], reseau:'5G' },
+  { id:'iphone13pro', nom:'iPhone 13 Pro Max 128GB', prix:160000, img:'iphone13pro.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A15 Bionic, 6.7" ProMotion OLED, Triple 12MP, 5G, ProRes Video', ram:'6GB', stockage:'128GB', couleurs:['Alpine Green','Sierra Blue','Gold','Silver','Graphite'], reseau:'5G' },
+  { id:'iphone13', nom:'iPhone 13 128GB', prix:110000, img:'iphone 13.2.jpg.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A15 Bionic, 6.1" Super Retina OLED, Double 12MP, 5G', ram:'4GB', stockage:'128GB', couleurs:['Midnight','Starlight','Pink','Blue','Green','Red'], reseau:'5G' },
+  { id:'iphone12pro', nom:'iPhone 12 Pro 128GB', prix:95000, img:'iphone12pro.jpg', marque:'Iphone', badge:'Promo', stars:4, specs:'A14 Bionic, 6.1" Super Retina OLED, Triple 12MP, 5G, MagSafe', ram:'6GB', stockage:'128GB', couleurs:['Graphite','Gold','Silver','Pacific Blue'], reseau:'5G' },
+  { id:'iphone11', nom:'iPhone 11 64GB', prix:98000, img:'iphone11.jpg', marque:'Iphone', badge:'', stars:3, specs:'A13 Bionic, 6.1" Liquid Retina, Double 12MP, 4G', ram:'4GB', stockage:'64GB', couleurs:['Noir','Blanc','Rouge','Violet','Jaune','Vert'], reseau:'4G' },
+  { id:'iphone11promax', nom:'iPhone 11 Pro Max 256GB', prix:105000, img:'iphone11promax.jpg', marque:'Iphone', badge:'', stars:4, specs:'A13 Bionic, 6.5" Super Retina OLED, Triple 12MP, 4G', ram:'4GB', stockage:'256GB', couleurs:['Space Gray','Silver','Gold','Midnight Green'], reseau:'4G' },
+  { id:'iphonexr', nom:'iPhone XR 128GB', prix:72000, img:'iphonexr.jpg', marque:'Iphone', badge:'Promo', stars:3, specs:'A12 Bionic, 6.1" Liquid Retina, 12MP, 4G', ram:'3GB', stockage:'128GB', couleurs:['Noir','Blanc','Corail','Bleu','Jaune','Rouge'], reseau:'4G' },
+  { id:'samsungs25', nom:'Samsung Galaxy S25 Ultra 12GB 256GB', prix:260000, img:'samsungs25.jpg', marque:'Samsung', badge:'Best Seller', stars:5, specs:'Snapdragon 8 Elite, 6.9" Dynamic AMOLED 120Hz, 200MP+12MP+10MP+50MP, S Pen, 5G', ram:'12GB', stockage:'256GB', couleurs:['Titanium Gray','Titanium Black','Titanium White Silver'], reseau:'5G' },
+  { id:'samsung6', nom:'Samsung Galaxy S24 Ultra 12GB 256GB', prix:230000, img:'samsung6.jpg', marque:'Samsung', badge:'', stars:5, specs:'Snapdragon 8 Gen 3, 6.8" Dynamic AMOLED 120Hz, 200MP+12MP+10MP+50MP, S Pen, 5G', ram:'12GB', stockage:'256GB', couleurs:['Titanium Black','Titanium Gray','Titanium Violet'], reseau:'5G' },
+  { id:'samsung3', nom:'Samsung Galaxy S23 Ultra 12GB 512GB', prix:190000, img:'samsung3.jpg', marque:'Samsung', badge:'Promo', stars:4, specs:'Snapdragon 8 Gen 2, 6.8" Dynamic AMOLED 120Hz, 200MP, S Pen, 5G', ram:'12GB', stockage:'512GB', couleurs:['Phantom Black','Cream','Green','Lavender'], reseau:'5G' },
+  { id:'sam', nom:'Samsung S23 Ultra 12GB 256GB', prix:110000, img:'sam.jpg', marque:'Samsung', badge:'Promo', stars:4, specs:'Snapdragon 8 Gen 2, 6.8" Dynamic AMOLED, 200MP, S Pen, 5G', ram:'12GB', stockage:'256GB', couleurs:['Phantom Black','Cream'], reseau:'5G' },
+  { id:'samsung1', nom:'Samsung Galaxy A55 8GB 256GB', prix:65000, img:'samsung1.jpg', marque:'Samsung', badge:'', stars:4, specs:'Exynos 1480, 6.6" Super AMOLED 120Hz, Triple 50MP, 5G', ram:'8GB', stockage:'256GB', couleurs:['Awesome Iceblue','Awesome Lilac','Awesome Navy'], reseau:'5G' },
+  { id:'samsung2', nom:'Samsung Galaxy A35 8GB 128GB', prix:48000, img:'samsung2.jpg', marque:'Samsung', badge:'', stars:3, specs:'Exynos 1380, 6.6" Super AMOLED 120Hz, Triple 50MP, 4G', ram:'8GB', stockage:'128GB', couleurs:['Awesome Iceblue','Awesome Lilac','Awesome Navy','Awesome Lemon'], reseau:'4G' },
+  { id:'samsung4', nom:'Samsung Galaxy S22 Ultra 12GB 256GB', prix:155000, img:'samsung4.jpg', marque:'Samsung', badge:'Promo', stars:4, specs:'Exynos 2200, 6.8" Dynamic AMOLED 120Hz, Quad 108MP, S Pen, 5G', ram:'12GB', stockage:'256GB', couleurs:['Phantom Black','Burgundy','Green','White'], reseau:'5G' },
+  { id:'samsung5', nom:'Samsung Galaxy Z Fold 5 12GB 256GB', prix:280000, img:'samsung5.jpg', marque:'Samsung', badge:'', stars:5, specs:'Snapdragon 8 Gen 2, 7.6" Foldable AMOLED 120Hz, Triple 50MP, 5G, IPX8', ram:'12GB', stockage:'256GB', couleurs:['Phantom Black','Cream','Icy Blue'], reseau:'5G' },
+  { id:'xiomi1', nom:'Redmi Note 14 8GB 256GB', prix:41000, img:'xiomi1.jpg', marque:'Xiaomi', badge:'Bon Plan', stars:4, specs:'Snapdragon 7s Gen 3, 6.67" OLED 120Hz, Triple 50MP, 5G', ram:'8GB', stockage:'256GB', couleurs:['Moonlight White','Midnight Black','Titan Blue'], reseau:'5G' },
+  { id:'xiomi5', nom:'Xiaomi 15 12GB 256GB', prix:125000, img:'xiomi5.jpg', marque:'Xiaomi', badge:'', stars:5, specs:'Snapdragon 8 Elite, 6.36" OLED 120Hz, Leica Triple 50MP, 5G', ram:'12GB', stockage:'256GB', couleurs:['Noir','Blanc','Vert'], reseau:'5G' },
+  { id:'xiomi3', nom:'Redmi Note 13 Pro+ 12GB 256GB', prix:58000, img:'xiomi3.jpg', marque:'Xiaomi', badge:'', stars:4, specs:'Dimensity 7200 Ultra, 6.67" OLED 120Hz, 200MP, 5G, 120W Turbo Charge', ram:'12GB', stockage:'256GB', couleurs:['Aurora Purple','Midnight Black','Moonlight White'], reseau:'5G' },
+  { id:'xiomi4', nom:'Xiaomi 14 Ultra 16GB 512GB', prix:185000, img:'xiomi4.jpg', marque:'Xiaomi', badge:'', stars:5, specs:'Snapdragon 8 Gen 3, 6.73" OLED 120Hz, Leica Quad 50MP, 5G, 90W Wireless', ram:'16GB', stockage:'512GB', couleurs:['Titanium Black','Titanium White','Titanium Blue'], reseau:'5G' },
+  { id:'xiomi6', nom:'Redmi 13C 8GB 256GB', prix:28000, img:'xiomi6.jpg', marque:'Xiaomi', badge:'Bon Plan', stars:3, specs:'Helio G85, 6.74" IPS LCD, Triple 50MP, 4G', ram:'8GB', stockage:'256GB', couleurs:['Starfall Black','Glacier White','Clover Green'], reseau:'4G' },
+  { id:'xiomi7', nom:'Xiaomi 13T Pro 12GB 256GB', prix:95000, img:'xiomi7.jpg', marque:'Xiaomi', badge:'Promo', stars:4, specs:'Dimensity 9200+, 6.67" AMOLED 144Hz, Leica Triple 50MP, 5G, 144W Charge', ram:'12GB', stockage:'256GB', couleurs:['Alpine Blue','Black','Meadow Green','Titan Gray'], reseau:'5G' },
+  { id:'xiomi8', nom:'Redmi Note 14 Pro 5G 12GB 512GB', prix:72000, img:'xiomi8.jpg', marque:'Xiaomi', badge:'Nouveau', stars:4, specs:'Snapdragon 7s Gen 3, 6.67" OLED 120Hz, 200MP, 5G, 45W Charge', ram:'12GB', stockage:'512GB', couleurs:['Midnight Black','Moonlight White','Titan Blue'], reseau:'5G' },
+  { id:'oppo1', nom:'Oppo Find X9 Pro 16GB 512GB', prix:228000, img:'oppo1.jpg', marque:'Oppo', badge:'', stars:5, specs:'Snapdragon 8 Elite, 6.82" AMOLED 120Hz, Hasselblad Quad 50MP, 5G, 100W SuperVOOC', ram:'16GB', stockage:'512GB', couleurs:['Space Black','Ceramic White'], reseau:'5G' },
+  { id:'oppo2', nom:'Oppo Reno 12 Pro 12GB 256GB', prix:90000, img:'oppo2.jpg', marque:'Oppo', badge:'', stars:4, specs:'Dimensity 7300 Energy, 6.7" AMOLED 120Hz, Triple 50MP, 5G, 80W SUPERVOOC', ram:'12GB', stockage:'256GB', couleurs:['Sunset Gold','Nebula Silver','Mariana Blue'], reseau:'5G' },
+  { id:'oppo3', nom:'Oppo A3 Pro 8GB 256GB', prix:42000, img:'oppo3.jpg', marque:'Oppo', badge:'Bon Plan', stars:3, specs:'Dimensity 7050, 6.67" OLED 120Hz, Double 50MP+2MP, 5G, 67W SUPERVOOC', ram:'8GB', stockage:'256GB', couleurs:['Starry Black','Icy Blue','Nebula Purple'], reseau:'5G' },
+  { id:'oppo4', nom:'Oppo Find N3 Flip 12GB 256GB', prix:185000, img:'oppo4.jpg', marque:'Oppo', badge:'', stars:5, specs:'Dimensity 9200, 6.8" Foldable AMOLED 120Hz, Triple 48MP, 5G, IPX4', ram:'12GB', stockage:'256GB', couleurs:['Sleek Black','Moonlit Purple'], reseau:'5G' },
+  { id:'oppo5', nom:'Oppo Reno 11 5G 8GB 256GB', prix:68000, img:'oppo5.jpg', marque:'Oppo', badge:'Promo', stars:4, specs:'Snapdragon 778G, 6.7" AMOLED 120Hz, Triple 50MP, 5G, 67W SUPERVOOC', ram:'8GB', stockage:'256GB', couleurs:['Rock Gray','Coral Purple'], reseau:'5G' },
+  { id:'oppo6', nom:'Oppo A58 4G 8GB 128GB', prix:32000, img:'oppo6.jpg', marque:'Oppo', badge:'', stars:3, specs:'Helio G85, 6.72" LCD 90Hz, 50MP+2MP, 4G, 33W SUPERVOOC', ram:'8GB', stockage:'128GB', couleurs:['Glowing Black','Glowing Green'], reseau:'4G' },
+  { id:'oppo7', nom:'Oppo Find X7 Ultra 16GB 1TB', prix:295000, img:'oppo7.jpg', marque:'Oppo', badge:'', stars:5, specs:'Snapdragon 8 Gen 3, 6.82" AMOLED 120Hz, Hasselblad Quad 50MP, 5G, 100W', ram:'16GB', stockage:'1TB', couleurs:['Flowy Emerald','Desert Silver'], reseau:'5G' },
+  { id:'oppo9', nom:'Oppo Find X8 12GB 256GB', prix:175000, img:'oppo9.jpg', marque:'Oppo', badge:'Nouveau', stars:5, specs:'Dimensity 9400, 6.59" OLED 120Hz, Hasselblad Triple 50MP, 5G, 80W SUPERVOOC', ram:'12GB', stockage:'256GB', couleurs:['Space Black','Moonlight White'], reseau:'5G' },
+  { id:'oppo11', nom:'Oppo Reno 13 5G 12GB 256GB', prix:85000, img:'oppo11.jpg', marque:'Oppo', badge:'Nouveau', stars:4, specs:'Dimensity 8350, 6.59" AMOLED 120Hz, Triple 50MP, 5G, 80W SUPERVOOC', ram:'12GB', stockage:'256GB', couleurs:['Marble White','Luminous Blue'], reseau:'5G' },
+  { id:'oppo12', nom:'Oppo A79 5G 8GB 256GB', prix:38000, img:'oppo12.jpg', marque:'Oppo', badge:'', stars:3, specs:'Dimensity 6020, 6.72" LCD 90Hz, 50MP+2MP, 5G, 33W SUPERVOOC', ram:'8GB', stockage:'256GB', couleurs:['Mystery Black','Glacier Blue'], reseau:'5G' },
+  { id:'infinix1', nom:'Infinix GT30 Pro 12GB 256GB', prix:60000, img:'infinix1.jpg', marque:'Infinix', badge:'Bon Plan', stars:4, specs:'Dimensity 8200, 6.78" AMOLED 144Hz, 108MP+13MP+2MP, 5G, Gaming Turbo', ram:'12GB', stockage:'256GB', couleurs:['Cyber Black','Mecha Orange','Storm White'], reseau:'5G' },
+  { id:'infinix2', nom:'Infinix Note 40 Pro 5G 12GB 256GB', prix:48000, img:'infinix2.jpg', marque:'Infinix', badge:'', stars:4, specs:'Dimensity 7020, 6.78" AMOLED 120Hz, 108MP, 5G, 45W Thunder Charge', ram:'12GB', stockage:'256GB', couleurs:['Race Black','Racing Grey','Sunset Gold'], reseau:'5G' },
+  { id:'infinix3', nom:'Infinix Hot 40i 8GB 256GB', prix:22000, img:'infinix3.jpg', marque:'Infinix', badge:'Bon Plan', stars:3, specs:'Helio G85, 6.56" IPS LCD 90Hz, 50MP, 4G, 18W Charge', ram:'8GB', stockage:'256GB', couleurs:['Horizon Blue','Palm Green','Starlit Black'], reseau:'4G' },
+  { id:'infinix4', nom:'Infinix Zero 40 5G 12GB 256GB', prix:55000, img:'infinix4.jpg', marque:'Infinix', badge:'', stars:4, specs:'Dimensity 8200, 6.78" AMOLED 144Hz, 108MP OIS, 5G, 45W Charge', ram:'12GB', stockage:'256GB', couleurs:['Volcanic Grey','Misty Lavender','Aqua Surge'], reseau:'5G' },
+  { id:'infinix6', nom:'Infinix Smart 8 Plus 8GB 128GB', prix:18000, img:'infinix6.jpg', marque:'Infinix', badge:'Bon Plan', stars:3, specs:'Helio G36, 6.6" IPS 90Hz, 50MP, 4G, 18W', ram:'8GB', stockage:'128GB', couleurs:['Timber Black','Crystal Green','Galaxy White'], reseau:'4G' },
+  { id:'infinix7', nom:'Infinix Note 30 Pro 8GB 256GB', prix:35000, img:'infinix7.jpg', marque:'Infinix', badge:'Promo', stars:3, specs:'Helio G99, 6.67" AMOLED 120Hz, 108MP, 4G, 68W AllRound FastCharge', ram:'8GB', stockage:'256GB', couleurs:['Burgundy Red','Obsidian Black','Mirage Silver'], reseau:'4G' },
+  { id:'honor2', nom:'Honor Magic 8 Pro 12GB 512GB', prix:240000, img:'honor2.jpg', marque:'Honor', badge:'', stars:4, specs:'Kirin 9010, 6.8" OLED 120Hz, Triple 50MP, 5G, Global Version', ram:'12GB', stockage:'512GB', couleurs:['Purple','Silver','Black'], reseau:'5G' },
+  { id:'honor3', nom:'Honor 200 Pro 12GB 512GB', prix:155000, img:'honor3.jpg', marque:'Honor', badge:'Nouveau', stars:4, specs:'Snapdragon 8s Gen 3, 6.78" OLED 120Hz, Harcourt Triple 50MP, 5G', ram:'12GB', stockage:'512GB', couleurs:['Cyan Lake','Midnight Black','Rock Grey'], reseau:'5G' },
+  { id:'honor4', nom:'Honor Magic 6 Lite 5G 8GB 256GB', prix:72000, img:'honor4.jpg', marque:'Honor', badge:'', stars:4, specs:'Snapdragon 6 Gen 1, 6.78" OLED 120Hz, Triple 108MP, 5G', ram:'8GB', stockage:'256GB', couleurs:['Granite Black','Titanium Silver'], reseau:'5G' },
 ];
 
 // ===== ÉTAT =====
 let marqueActive = 'tous';
+let ramActive = 'tous';
+let stockageActive = 'tous';
+let reseauActive = 'tous';
 let recherche = '';
 let tri = '';
+let vueMode = 'grille';
 
-// ===== INITIALISATION =====
+// ===== INIT =====
 document.addEventListener('DOMContentLoaded', () => {
-  // Lire URL params
+  // URL params
   const params = new URLSearchParams(window.location.search);
   const marqueURL = params.get('marque');
   const rechercheURL = params.get('q');
 
   if (marqueURL) {
     marqueActive = marqueURL;
-    document.querySelectorAll('.filtre-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.marque === marqueURL || btn.dataset.marque === 'tous' && marqueURL === 'tous');
+    document.querySelectorAll('.filtre-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.marque === marqueURL);
     });
-    // Activer le bon bouton
-    const btnActif = document.querySelector(`.filtre-btn[data-marque="${marqueURL}"]`);
-    if (btnActif) {
-      document.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('active'));
-      btnActif.classList.add('active');
-    }
   }
-
   if (rechercheURL) {
     recherche = rechercheURL.toLowerCase();
     document.getElementById('searchInput').value = rechercheURL;
   }
 
-  // Boutons de filtre
+  // Boutons marque
   document.querySelectorAll('.filtre-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filtre-btn').forEach(b => b.classList.remove('active'));
@@ -214,28 +716,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Chips RAM/Stockage/Réseau
+  document.querySelectorAll('.filtre-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const type = chip.dataset.type;
+      document.querySelectorAll(`.filtre-chip[data-type="${type}"]`).forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      if (type === 'ram') ramActive = chip.dataset.val;
+      if (type === 'stockage') stockageActive = chip.dataset.val;
+      if (type === 'reseau') reseauActive = chip.dataset.val;
+      afficherProduits();
+    });
+  });
+
   afficherProduits();
 });
 
 // ===== AFFICHAGE =====
 function afficherProduits() {
+  const prixMin = parseFloat(document.getElementById('prixMin').value) || 0;
+  const prixMax = parseFloat(document.getElementById('prixMax').value) || Infinity;
+
   let liste = produits.filter(p => {
-    const matchMarque = marqueActive === 'tous' || p.marque === marqueActive;
-    const matchRecherche = recherche === '' || 
-      p.nom.toLowerCase().includes(recherche) || 
+    const matchMarque   = marqueActive === 'tous' || p.marque === marqueActive;
+    const matchRam      = ramActive === 'tous' || p.ram === ramActive;
+    const matchStockage = stockageActive === 'tous' || p.stockage === stockageActive;
+    const matchReseau   = reseauActive === 'tous' || (p.reseau || '').includes(reseauActive);
+    const matchPrix     = p.prix >= prixMin && p.prix <= prixMax;
+    const matchRecherche= recherche === '' ||
+      p.nom.toLowerCase().includes(recherche) ||
       p.marque.toLowerCase().includes(recherche) ||
       p.specs.toLowerCase().includes(recherche);
-    return matchMarque && matchRecherche;
+    return matchMarque && matchRam && matchStockage && matchReseau && matchPrix && matchRecherche;
   });
 
   // Tri
-  if (tri === 'prix-asc') liste.sort((a, b) => a.prix - b.prix);
-  else if (tri === 'prix-desc') liste.sort((a, b) => b.prix - a.prix);
-  else if (tri === 'nom') liste.sort((a, b) => a.nom.localeCompare(b.nom));
+  if (tri === 'prix-asc')   liste.sort((a,b) => a.prix - b.prix);
+  else if (tri === 'prix-desc')  liste.sort((a,b) => b.prix - a.prix);
+  else if (tri === 'nom')        liste.sort((a,b) => a.nom.localeCompare(b.nom));
+  else if (tri === 'stars-desc') liste.sort((a,b) => b.stars - a.stars);
 
-  const grid = document.getElementById('produitsGrid');
-  const aucun = document.getElementById('aucunResultat');
-  document.getElementById('nbResultats').textContent = `${liste.length} produit${liste.length > 1 ? 's' : ''} trouvé${liste.length > 1 ? 's' : ''}`;
+  const grid   = document.getElementById('produitsGrid');
+  const aucun  = document.getElementById('aucunResultat');
+  const nb     = document.getElementById('nbResultats');
+
+  nb.textContent = `${liste.length} produit${liste.length > 1 ? 's' : ''} trouvé${liste.length > 1 ? 's' : ''}`;
+
+  // Tags actifs
+  mettreAJourTags();
+
+  // Vue liste
+  if (vueMode === 'liste') {
+    grid.classList.add('liste-vue');
+  } else {
+    grid.classList.remove('liste-vue');
+  }
 
   if (liste.length === 0) {
     grid.innerHTML = '';
@@ -244,24 +779,63 @@ function afficherProduits() {
   }
   aucun.style.display = 'none';
 
-  grid.innerHTML = liste.map(p => `
-    <div class="card" onclick="voirFiche('${p.id}', '${p.nom.replace(/'/g,"\\'")}', '${p.prix}', '${p.img}', '${p.marque}', '${p.specs.replace(/'/g,"\\'")}', '${(p.ram||'')}', '${(p.stockage||'')}', '${(p.couleurs||[]).join('|').replace(/'/g,"\\'")}')">
-      ${p.badge ? `<div class="badge ${p.badge === 'Nouveau' ? 'new' : p.badge === 'Promo' ? 'promo' : ''}">${p.badge}</div>` : ''}
-      <img src="image/${p.img}" class="imgg" alt="${p.nom}" onerror="this.src='data:image/svg+xml,<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"185\\" height=\\"200\\"><rect width=\\"185\\" height=\\"200\\" fill=\\"%23f0f0f0\\"/><text x=\\"50%\\" y=\\"50%\\" text-anchor=\\"middle\\" fill=\\"%23aaa\\" dy=\\".35em\\">📱</text></svg>'">
-      <a href="produits.html?marque=${p.marque}" class="mrq" onclick="event.stopPropagation()">${p.marque}</a>
-      <h5>${p.nom}</h5>
+  grid.innerHTML = liste.map(p => {
+    const nomHL = recherche ? surlignerTexte(p.nom, recherche) : p.nom;
+    return `
+    <div class="card" onclick="ouvrirQV('${p.id}')">
+      ${p.badge ? `<div class="badge ${p.badge==='Nouveau'?'new':p.badge==='Promo'?'promo':''}">${p.badge}</div>` : ''}
+      <img src="image/${p.img}" class="imgg" alt="${p.nom}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22185%22 height=%22200%22><rect width=%22185%22 height=%22200%22 fill=%22%23f0f0f0%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23aaa%22 dy=%22.35em%22 font-size=%2240%22>📱</text></svg>'">
+      <div style="display:flex;gap:5px;margin-bottom:4px;flex-wrap:wrap;">
+        <a href="produits.html?marque=${p.marque}" class="mrq" onclick="event.stopPropagation()">${p.marque}</a>
+        <span style="font-size:10px;padding:2px 7px;border-radius:8px;font-weight:700;background:${p.reseau==='5G'?'rgba(31,111,76,.12)':'rgba(140,49,64,.12)'};color:${p.reseau==='5G'?'#1f6f4c':'#8c3140'}">${p.reseau||''}</span>
+      </div>
+      <h5>${nomHL}</h5>
+      <div style="display:flex;gap:8px;font-size:11px;color:#888;margin-bottom:4px;">
+        <span>💾 ${p.ram}</span>
+        <span>📦 ${p.stockage}</span>
+      </div>
       <p class="price">${p.prix.toLocaleString('fr-DZ')} DA</p>
-      <div class="stars">${'⭐'.repeat(Math.floor(p.stars))}${p.stars % 1 ? '½' : ''}</div>
+      <div class="stars">${'⭐'.repeat(Math.floor(p.stars))}${p.stars%1?'½':''}</div>
       <div class="card-actions">
-        <button class="btn btn-buy" onclick="event.stopPropagation(); window.location.href='#'">🛒 Acheter</button>
+        <button class="btn btn-buy" onclick="event.stopPropagation(); ouvrirQV('${p.id}')">👁 Voir détails</button>
         <a href="tel:0542960503" class="btn btn-call" onclick="event.stopPropagation()">📞</a>
       </div>
-    </div>
+    </div>`;
+  }).join('');
+}
+
+function surlignerTexte(texte, terme) {
+  if (!terme) return texte;
+  const regex = new RegExp(`(${terme.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+  return texte.replace(regex, '<mark>$1</mark>');
+}
+
+function mettreAJourTags() {
+  const container = document.getElementById('tagsActifs');
+  const tags = [];
+  if (marqueActive !== 'tous') tags.push({ label: marqueActive, reset: () => { marqueActive='tous'; document.querySelectorAll('.filtre-btn').forEach(b=>b.classList.toggle('active',b.dataset.marque==='tous')); } });
+  if (ramActive !== 'tous') tags.push({ label: 'RAM: '+ramActive, reset: () => { ramActive='tous'; document.querySelector('.filtre-chip[data-type="ram"][data-val="tous"]').classList.add('active'); document.querySelectorAll('.filtre-chip[data-type="ram"]:not([data-val="tous"])').forEach(c=>c.classList.remove('active')); } });
+  if (stockageActive !== 'tous') tags.push({ label: '💾 '+stockageActive, reset: () => { stockageActive='tous'; document.querySelector('.filtre-chip[data-type="stockage"][data-val="tous"]').classList.add('active'); document.querySelectorAll('.filtre-chip[data-type="stockage"]:not([data-val="tous"])').forEach(c=>c.classList.remove('active')); } });
+  if (reseauActive !== 'tous') tags.push({ label: reseauActive, reset: () => { reseauActive='tous'; document.querySelector('.filtre-chip[data-type="reseau"][data-val="tous"]').classList.add('active'); document.querySelectorAll('.filtre-chip[data-type="reseau"]:not([data-val="tous"])').forEach(c=>c.classList.remove('active')); } });
+  if (recherche) tags.push({ label: '🔍 "'+recherche+'"', reset: () => { recherche=''; document.getElementById('searchInput').value=''; } });
+  const prixMin = document.getElementById('prixMin').value;
+  const prixMax = document.getElementById('prixMax').value;
+  if (prixMin) tags.push({ label: 'Min: '+parseInt(prixMin).toLocaleString('fr-DZ')+' DA', reset: () => { document.getElementById('prixMin').value=''; } });
+  if (prixMax) tags.push({ label: 'Max: '+parseInt(prixMax).toLocaleString('fr-DZ')+' DA', reset: () => { document.getElementById('prixMax').value=''; } });
+
+  container.innerHTML = tags.map((t, i) => `
+    <span class="tag-actif">${t.label}<button onclick="clearTag(${i})">✕</button></span>
   `).join('');
+  window._tagsReset = tags.map(t => t.reset);
+}
+
+function clearTag(i) {
+  window._tagsReset[i]();
+  afficherProduits();
 }
 
 function filtrerProduits() {
-  recherche = document.getElementById('searchInput').value.toLowerCase();
+  recherche = document.getElementById('searchInput').value.toLowerCase().trim();
   afficherProduits();
 }
 
@@ -272,15 +846,86 @@ function trierProduits(val) {
 
 function resetFiltres() {
   marqueActive = 'tous';
+  ramActive = 'tous';
+  stockageActive = 'tous';
+  reseauActive = 'tous';
   recherche = '';
   tri = '';
   document.getElementById('searchInput').value = '';
+  document.getElementById('prixMin').value = '';
+  document.getElementById('prixMax').value = '';
   document.querySelectorAll('.filtre-btn').forEach(b => b.classList.toggle('active', b.dataset.marque === 'tous'));
+  document.querySelectorAll('.filtre-chip').forEach(c => c.classList.toggle('active', c.dataset.val === 'tous'));
+  document.querySelector('.tri-select select').value = '';
   afficherProduits();
 }
 
+function setVue(mode) {
+  vueMode = mode;
+  document.getElementById('btnGrille').classList.toggle('active', mode === 'grille');
+  document.getElementById('btnListe').classList.toggle('active', mode === 'liste');
+  afficherProduits();
+}
+
+// ===== QUICK VIEW =====
+function ouvrirQV(id) {
+  const p = produits.find(x => x.id === id);
+  if (!p) { voirFiche(id,'','','','','','','',''); return; }
+
+  const badgeHtml = p.badge ? `<span class="qv-badge ${p.badge==='Nouveau'?'new':p.badge==='Promo'?'promo':'best'}">${p.badge}</span>` : '';
+  const specsItems = p.specs.split(',').map(s => `<li>${s.trim()}</li>`).join('');
+  const couleursHtml = (p.couleurs||[]).map((c,i) => `<span class="couleur-dot${i===0?' selected':''}" onclick="selectCouleur(this)">${c}</span>`).join('');
+
+  document.getElementById('qvBody').innerHTML = `
+    <div class="qv-img">
+      <img src="image/${p.img}" alt="${p.nom}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22240%22><rect width=%22200%22 height=%22240%22 fill=%22%23f0f0f0%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 fill=%22%23aaa%22 dy=%22.35em%22 font-size=%2250%22>📱</text></svg>'">
+    </div>
+    <div class="qv-info">
+      <div class="qv-badges">${badgeHtml}<span class="qv-badge ${p.reseau==='5G'?'new':'promo'}">${p.reseau||''}</span></div>
+      <div class="qv-brand">${p.marque}</div>
+      <div class="qv-nom">${p.nom}</div>
+      <div class="qv-prix">${p.prix.toLocaleString('fr-DZ')} DA</div>
+      <div style="display:flex;gap:12px;font-size:12px;color:#666;margin-bottom:12px;flex-wrap:wrap;">
+        <span>🔧 RAM: <strong>${p.ram}</strong></span>
+        <span>💾 Stockage: <strong>${p.stockage}</strong></span>
+        <span>⭐ ${p.stars}/5</span>
+      </div>
+      <ul class="qv-specs-list">${specsItems}</ul>
+      ${couleursHtml ? `<div class="qv-couleurs"><div class="lbl">Couleurs disponibles</div><div class="qv-couleurs-list">${couleursHtml}</div></div>` : ''}
+      <div class="qv-actions">
+        <button class="qv-btn-acheter" onclick="window.location.href='commande.html'">🛒 Commander maintenant</button>
+        <a href="tel:0542960503" class="qv-btn-appel">📞 Appeler pour commander</a>
+        <button class="qv-btn-appel" onclick="voirFicheDepuisQV('${p.id}')">📋 Voir la fiche complète →</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('qvOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function voirFicheDepuisQV(id) {
+  const p = produits.find(x => x.id === id);
+  if (!p) return;
+  voirFiche(p.id, p.nom, p.prix, p.img, p.marque, p.specs, p.ram||'', p.stockage||'', (p.couleurs||[]).join('|'));
+}
+
+function fermerQV(e) {
+  if (e.target === document.getElementById('qvOverlay')) fermerQVBtn();
+}
+function fermerQVBtn() {
+  document.getElementById('qvOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fermerQVBtn(); });
+
+function selectCouleur(el) {
+  el.closest('.qv-couleurs-list').querySelectorAll('.couleur-dot').forEach(d => d.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
 function voirFiche(id, nom, prix, img, marque, specs, ram, stockage, couleurs) {
-  const params = new URLSearchParams({ id, nom, prix, img, marque, specs, ram: ram||'', stockage: stockage||'', couleurs: couleurs||'' });
+  const params = new URLSearchParams({ id, nom, prix, img, marque, specs, ram:ram||'', stockage:stockage||'', couleurs:couleurs||'' });
   window.location.href = 'fiche-produit.html?' + params.toString();
 }
 

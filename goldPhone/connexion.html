@@ -3,7 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gold Phone - Connexion / Inscription</title>
+<title>Connexion / Inscription — Gold Phone</title>
+<meta name="description" content="Connectez-vous ou créez un compte Gold Phone pour suivre vos commandes et profiter d'offres exclusives sur les smartphones.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta property="og:title" content="Connexion / Inscription — Gold Phone">
+<meta property="og:description" content="Connectez-vous ou créez un compte Gold Phone pour suivre vos commandes et profiter d'offres exclusives sur les smartphones.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta name="theme-color" content="#0b1224">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
 /* ==============================
@@ -11,7 +21,7 @@
 ============================== */
 .auth-section {
   min-height: calc(100vh - 120px);
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+  background: linear-gradient(135deg, var(--noir) 0%, var(--noir-2) 60%, var(--noir-3) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -46,11 +56,11 @@
   letter-spacing: 1px;
 }
 .auth-tab-btn.active {
-  background: #e91e8c;
+  background: var(--or);
   color: white;
 }
 .auth-tab-btn:hover:not(.active) {
-  background: rgba(233,30,140,0.1);
+  background: rgba(var(--or-rgb),0.1);
   color: white;
 }
 
@@ -70,16 +80,16 @@
 .auth-logo .logo-circle {
   width: 72px;
   height: 72px;
-  border: 2px solid #f5c518;
+  border: 2px solid var(--or-clair);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 12px;
-  background: rgba(245,197,24,0.08);
+  background: rgba(var(--or-clair-rgb), .08);
 }
 .auth-logo .logo-circle span {
-  color: #f5c518;
+  color: var(--or-clair);
   font-weight: 900;
   font-size: 14px;
   line-height: 1.2;
@@ -126,9 +136,9 @@
 }
 .field-group input::placeholder { color: #555; }
 .field-group input:focus {
-  border-color: #e91e8c;
-  background: rgba(233,30,140,0.06);
-  box-shadow: 0 0 0 3px rgba(233,30,140,0.12);
+  border-color: var(--or);
+  background: rgba(var(--or-rgb),0.06);
+  box-shadow: 0 0 0 3px rgba(var(--or-rgb),0.12);
 }
 .field-group input.error {
   border-color: #ff5252;
@@ -161,7 +171,7 @@
   padding: 0;
   transition: 0.2s;
 }
-.input-icon-wrap .toggle-pw:hover { color: #e91e8c; }
+.input-icon-wrap .toggle-pw:hover { color: var(--or); }
 
 /* Row 2 cols */
 .field-row {
@@ -187,7 +197,7 @@
 .auth-remember input[type="checkbox"] {
   width: 16px;
   height: 16px;
-  accent-color: #e91e8c;
+  accent-color: var(--or);
   cursor: pointer;
 }
 .auth-remember span {
@@ -195,19 +205,19 @@
   font-size: 13px;
 }
 .auth-forgot {
-  color: #e91e8c;
+  color: var(--or);
   font-size: 13px;
   text-decoration: none;
   font-weight: 600;
   transition: 0.2s;
 }
-.auth-forgot:hover { color: #f5c518; text-decoration: underline; }
+.auth-forgot:hover { color: var(--or-clair); text-decoration: underline; }
 
 /* Buttons */
 .btn-auth-submit {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #e91e8c, #c2185b);
+  background: linear-gradient(135deg, var(--or), var(--or-profond));
   color: white;
   border: none;
   border-radius: 12px;
@@ -216,12 +226,12 @@
   cursor: pointer;
   transition: 0.3s;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 20px rgba(233,30,140,0.35);
+  box-shadow: 0 4px 20px rgba(var(--or-rgb),0.35);
   text-transform: uppercase;
 }
 .btn-auth-submit:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 28px rgba(233,30,140,0.55);
+  box-shadow: 0 6px 28px rgba(var(--or-rgb),0.55);
 }
 .btn-auth-submit:active { transform: translateY(0); }
 
@@ -272,7 +282,7 @@
   margin-top: 18px;
   text-align: center;
 }
-.terms-text a { color: #e91e8c; text-decoration: none; }
+.terms-text a { color: var(--or); text-decoration: none; }
 .terms-text a:hover { text-decoration: underline; }
 
 /* Strength bar */
@@ -326,12 +336,12 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  background: rgba(245,197,24,0.08);
-  border: 1px solid rgba(245,197,24,0.2);
+  background: rgba(var(--or-clair-rgb), .08);
+  border: 1px solid rgba(var(--or-clair-rgb), .2);
   border-radius: 20px;
   padding: 5px 12px;
   font-size: 12px;
-  color: #f5c518;
+  color: var(--or-clair);
 }
 
 /* Responsive */
@@ -349,18 +359,32 @@
 <!-- HEADER -->
 <header>
   <div class="logo-header">
-    <span class="logo-text">Gold<br>Phone</span>
+    <span class="logo-mark">GP</span>
+    <span class="logo-text">Gold<br><b>Phone</b></span>
   </div>
   <div class="search">
     <input type="text" id="searchInput" placeholder="Rechercher un produit, une marque..." onkeyup="rechercherProduit()">
     <span class="search-icon">🔍</span>
   </div>
-  <div class="account-menu">
-    <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
-    <div id="dropdown" class="dropdown">
-      <a href="connexion.html">Créer un compte</a>
-      <a href="connexion.html">Se connecter</a>
+  <div class="header-actions">
+    <div class="account-menu">
+      <button onclick="toggleMenu()">👤 Mon Compte ▾</button>
+      <div id="dropdown" class="dropdown">
+        <a href="connexion.html">Créer un compte</a>
+        <a href="connexion.html">Se connecter</a>
+      </div>
     </div>
+    <a href="panier.html" class="cart-icon-btn" id="cartBtn" aria-label="Mon panier">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <span class="cart-badge" id="cartCount">0</span>
+    </a>
+    <button class="hamburger-btn" onclick="toggleNav()" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -368,9 +392,9 @@
 <nav class="menu">
   <a href="index.html">ACCUEIL</a>
   <a href="produits.html">NOS PRODUITS</a>
-  <a href="#">ACCESSOIRES</a>
+  <a href="produits.html">ACCESSOIRES</a>
   <a href="commande.html">COMMANDE</a>
-  <a href="#">À PROPOS</a>
+  <a href="a-propos.html">À PROPOS</a>
 </nav>
 
 <!-- AUTH SECTION -->
@@ -530,7 +554,7 @@
     <div class="footer-left">
       <div class="logo-footer">Gold<br>Phone</div>
       <a href="tel:0542960503" class="tel">📞 0542 96 05 03</a><br><br>
-      <a href="#" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
+      <a href="mailto:contactGoldPhone@gmail.com" class="tel">📧 contactGoldPhone@gmail.com</a><br><br>
       <p>📍 Tizi Ouzou, Alger, Algérie</p>
     </div>
     <div class="footer-middle">
@@ -539,14 +563,14 @@
         <li><a href="produits.html">Téléphones portables</a></li>
         <li><a href="produits.html?marque=Iphone">iPhone</a></li>
         <li><a href="produits.html?marque=Samsung">Samsung</a></li>
-        <li><a href="#">Accessoires</a></li>
+        <li><a href="produits.html">Accessoires</a></li>
       </ul>
     </div>
     <div class="footer-right">
       <h3>SUIVEZ-NOUS</h3>
       <div class="social-links">
-        <a href="#" class="social-btn fb">f Facebook</a>
-        <a href="#" class="social-btn ig">📷 Instagram</a>
+        <a href="https://www.facebook.com/goldphone" target="_blank" rel="noopener noreferrer" class="social-btn fb">f Facebook</a>
+        <a href="https://www.instagram.com/goldphone" target="_blank" rel="noopener noreferrer" class="social-btn ig">📷 Instagram</a>
         <a href="#" class="social-btn tk">🎵 TikTok</a>
       </div>
     </div>
@@ -589,7 +613,7 @@ function checkStrength(val) {
   if (/[^A-Za-z0-9]/.test(val)) score++;
 
   const levels = [
-    { w: '0%', color: '#e91e8c', text: '' },
+    { w: '0%', color: 'var(--or)', text: '' },
     { w: '25%', color: '#e53935', text: 'Faible' },
     { w: '50%', color: '#ff9800', text: 'Moyen' },
     { w: '75%', color: '#2196f3', text: 'Fort' },
@@ -612,25 +636,39 @@ function showAlert(id, type, msg) {
 }
 
 // ---- Login Handler ----
-function handleLogin() {
+async function handleLogin() {
   const email = document.getElementById('login-email').value.trim();
   const pw = document.getElementById('login-password').value;
   if (!email || !pw) {
     showAlert('login-alert', 'error', '⚠️ Veuillez remplir tous les champs.');
     return;
   }
-  // Simulation succès
-  showAlert('login-alert', 'success', '✅ Connexion réussie ! Redirection en cours...');
-  setTimeout(() => { window.location.href = 'index.html'; }, 1800);
+  try {
+    const res  = await fetch('php/api/auth.php?action=login', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ email, password: pw })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showAlert('login-alert', 'success', '✅ ' + data.message);
+      setTimeout(() => window.location.href = 'index.html', 1500);
+    } else {
+      showAlert('login-alert', 'error', '⚠️ ' + data.message);
+    }
+  } catch(e) {
+    // Fallback offline (GitHub Pages sans PHP)
+    showAlert('login-alert', 'success', '✅ Connexion réussie ! (mode démo)');
+    setTimeout(() => window.location.href = 'index.html', 1500);
+  }
 }
 
 // ---- Register Handler ----
-function handleRegister() {
-  const prenom = document.getElementById('reg-prenom').value.trim();
-  const nom = document.getElementById('reg-nom').value.trim();
-  const email = document.getElementById('reg-email').value.trim();
-  const tel = document.getElementById('reg-tel').value.trim();
-  const pw = document.getElementById('reg-password').value;
+async function handleRegister() {
+  const prenom  = document.getElementById('reg-prenom').value.trim();
+  const nom     = document.getElementById('reg-nom').value.trim();
+  const email   = document.getElementById('reg-email').value.trim();
+  const tel     = document.getElementById('reg-tel').value.trim();
+  const pw      = document.getElementById('reg-password').value;
   const confirm = document.getElementById('reg-confirm').value;
 
   if (!prenom || !nom || !email || !tel || !pw || !confirm) {
@@ -645,9 +683,23 @@ function handleRegister() {
     showAlert('register-alert', 'error', '⚠️ Les mots de passe ne correspondent pas.');
     return;
   }
-  // Simulation succès
-  showAlert('register-alert', 'success', `✅ Compte créé avec succès ! Bienvenue, ${prenom} 🎉`);
-  setTimeout(() => { window.location.href = 'index.html'; }, 2200);
+  try {
+    const res  = await fetch('php/api/auth.php?action=register', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ prenom, nom, email, telephone: tel, password: pw })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showAlert('register-alert', 'success', '✅ ' + data.message);
+      setTimeout(() => window.location.href = 'index.html', 2000);
+    } else {
+      showAlert('register-alert', 'error', '⚠️ ' + data.message);
+    }
+  } catch(e) {
+    // Fallback offline (GitHub Pages sans PHP)
+    showAlert('register-alert', 'success', `✅ Compte créé avec succès ! Bienvenue, ${prenom} 🎉 (mode démo)`);
+    setTimeout(() => window.location.href = 'index.html', 2000);
+  }
 }
 
 // ---- Dropdown ----
